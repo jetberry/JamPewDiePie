@@ -14,12 +14,4 @@ public:
 
 private:
 
-	cpSpace* _space;
-	cpShape* _walls[4];
-	cocos2d::extension::PhysicsDebugNode* _debugLayer;
-
-	void initPhysics();
-
-	//cocos2d::extension::PhysicsSprite;
-
 };
