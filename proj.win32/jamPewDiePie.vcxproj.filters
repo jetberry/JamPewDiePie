@@ -10,28 +10,56 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="scenes">
+      <UniqueIdentifier>{db7b73cc-fbc3-4363-ab31-308a55d9ed04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="airplane">
+      <UniqueIdentifier>{47bd5737-e819-4a93-9c20-c28b8881e9fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\scenes\SceneMenu.cpp" />
-    <ClCompile Include="..\Classes\scenes\SceneFinish.cpp" />
     <ClCompile Include="..\Classes\Helpers.cpp" />
-    <ClCompile Include="..\Classes\Airplane.cpp" />
-    <ClCompile Include="..\Classes\scenes\SceneGame.cpp" />
+    <ClCompile Include="..\Classes\scenes\SceneFinish.cpp">
+      <Filter>scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\scenes\SceneGame.cpp">
+      <Filter>scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\scenes\SceneMenu.cpp">
+      <Filter>scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\airplane\Airplane.cpp">
+      <Filter>airplane</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\airplane\Character.cpp">
+      <Filter>airplane</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h" />
-    <ClInclude Include="..\Classes\scenes\SceneMenu.h" />
-    <ClInclude Include="..\Classes\scenes\SceneFinish.h" />
     <ClInclude Include="..\Classes\Helpers.h" />
-    <ClInclude Include="..\Classes\Airplane.h" />
-    <ClInclude Include="..\Classes\scenes\SceneGame.h" />
+    <ClInclude Include="..\Classes\scenes\SceneMenu.h">
+      <Filter>scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\scenes\SceneFinish.h">
+      <Filter>scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\scenes\SceneGame.h">
+      <Filter>scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\airplane\Airplane.h">
+      <Filter>airplane</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\airplane\Character.h">
+      <Filter>airplane</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

@@ -1,6 +1,6 @@
 #include "SceneGame.h"
 #include "../Helpers.h"
-#include "../Airplane.h"
+#include "airplane/Airplane.h"
 
 USING_NS_CC;
 
