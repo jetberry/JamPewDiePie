@@ -1,5 +1,6 @@
 #include "SceneGame.h"
 #include "../Helpers.h"
+#include "../Airplane.h"
 
 USING_NS_CC;
 
@@ -21,9 +22,8 @@ bool SceneGame::init()
 	auto background = LayerColor::create(Color4B(255, 255, 255, 255));
 	this->addChild(background, 0);
 
-	auto sprite = Sprite::create("airplane/airplane.png");
-	helpers::setOnCenter(sprite);
-	this->addChild(sprite, 0);
+	auto airplane = Airplane::create();
+	this->addChild(airplane, 0);
 
 	return true;
 }
