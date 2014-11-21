@@ -5,10 +5,6 @@
 *.o
 *.obj
 
-# Precompiled Headers
-*.gch
-*.pch
-
 # Compiled Dynamic libraries
 *.so
 *.dylib
@@ -35,3 +31,6 @@
 /proj.win32/*.sdf
 /proj.win32/*.suo
 /proj.win32/*.user
+
+# Intermediate resources
+/Resources/temp
