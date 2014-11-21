@@ -10,4 +10,8 @@ public:
 	virtual bool init();
 
 	CREATE_FUNC(SceneMenu);
+
+private:
+
+	void menuPlayCallback(Ref* pSender);
 };
