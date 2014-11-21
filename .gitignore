@@ -5,6 +5,8 @@
 *.o
 *.obj
 
+/proj.ios_mac/jamPewDiePie.xcodeproj/project.xcworkspace/xcuserdata/
+
 # Compiled Dynamic libraries
 *.so
 *.dylib
