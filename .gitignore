@@ -39,3 +39,9 @@
 
 # Miscelaneous
 /android_debug.bat
+/Resources/hd
+/Resources/sd
+/proj.android/bin
+/proj.android/gen
+/proj.android/obj
+/proj.android/libs

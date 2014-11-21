@@ -35,22 +35,36 @@ bool SceneGame::initWithPhysics()
 	this->addChild(background, 0);
 
 	airplan = Airplane::create();
-	helpers::setOnCenter(airplan);
+//	helpers::setOnCenter(airplan);
+    helpers::setDesignPosEx(airplan, 1366, 0);
 	this->addChild(airplan);
 
-	ui::Button* btnBack = ui::Button::create("menu/play.png");
-	btnBack->setPosition(Vec2(2000, 200));
-	//helpers::setDesignPosEx(btnBack, 2000, 200);
-	btnBack->addTouchEventListener(CC_CALLBACK_2(SceneGame::touchEvent, this));
-	//btnBack->setZoomScale(0.4f);
-	btnBack->setPressedActionEnabled(true);
-	this->addChild(btnBack);
+	ui::Button* btnUp = ui::Button::create("menu/play.png");
+    btnUp->setRotation(-90);
+	btnUp->setPosition(Vec2(1800, 200));
+	btnUp->addTouchEventListener(CC_CALLBACK_2(SceneGame::onUp, this));
+	btnUp->setPressedActionEnabled(true);
+	this->addChild(btnUp);
+    
+    ui::Button* btnDown = ui::Button::create("menu/play.png");
+    btnDown->setRotation(90);
+    btnDown->setPosition(Vec2(2200, 200));
+    btnDown->addTouchEventListener(CC_CALLBACK_2(SceneGame::onDown, this));
+    btnDown->setPressedActionEnabled(true);
+    this->addChild(btnDown);
 
     
 	return true;
 }
 
-void SceneGame::touchEvent(Ref *pSender, ui::Widget::TouchEventType type)
+void SceneGame::onUp(Ref *pSender, ui::Widget::TouchEventType type)
 {
-	airplan->setRotation(airplan->getRotation() + 10);
+    if(airplan->getRotation() > - 15)
+        airplan->setRotation(airplan->getRotation() - 1);
+}
+
+void SceneGame::onDown(Ref *pSender, ui::Widget::TouchEventType type)
+{
+    if(airplan->getRotation() <  15)
+        airplan->setRotation(airplan->getRotation() + 1);
 }

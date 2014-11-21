@@ -39,13 +39,33 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
 
-	director->setContentScaleFactor(1);
+
+
+	Size screenSize = glview->getFrameSize();
+
+	// 540 x 960
+
+	//screenSize.height = 540;
+
+	//CCLOG("glview->getFrameSize(): %f, %f\n", screenSize.width, screenSize.height);
+
+	std::vector<std::string> searchPaths;
+	if (screenSize.height > 1300) {
+		searchPaths.push_back("ipadhd");
+		director->setContentScaleFactor(1.0);
+	} else if (screenSize.height > 480) {
+		searchPaths.push_back("hd");
+		director->setContentScaleFactor(1);
+	} else {
+		searchPaths.push_back("sd");
+		director->setContentScaleFactor(0.25);
+	}
+	FileUtils::getInstance()->setSearchPaths(searchPaths);
+
 	director->getOpenGLView()->setDesignResolutionSize(2732, 1536, ResolutionPolicy::NO_BORDER);
 
-    // create a scene. it's an autorelease object
-	auto scene = SceneGame::createWithPhysics();
 
-    // run
+	auto scene = SceneGame::createWithPhysics();
     director->runWithScene(scene);
 
     return true;

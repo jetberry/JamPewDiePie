@@ -17,5 +17,7 @@ private:
 
 	cocos2d::Node* airplan;
 
-	void touchEvent(Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onUp(Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+    
+    void onDown(Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 };

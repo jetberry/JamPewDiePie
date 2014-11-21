@@ -28,13 +28,13 @@ Character::Character(){
 
 void Character::onEnter(){
     Sprite::onEnter();
-    _target = Vec2(200,- 257);
+    _target = Vec2(600,- 257);
     goToTarget();
     scheduleUpdate();
 }
 
 void Character::createBody(){
-    PhysicsMaterial material(100,0.15f,1.1f);
+    PhysicsMaterial material(100, 0.15f, 0.1f);
     PhysicsBody* body = PhysicsBody::createBox(this->getContentSize(), material);
     this->setPhysicsBody(body);
 }
@@ -43,16 +43,13 @@ void Character::setBottom(cocos2d::PhysicsBody* body){
     body->setContactTestBitmask(0xFFFFFFFF);
     this->getPhysicsBody()->setContactTestBitmask(0xFFFFFFFF);
     auto contactListener = EventListenerPhysicsContactWithBodies::create(this->getPhysicsBody(), body);
-    contactListener->onContactBegin = CC_CALLBACK_1(Character::onContactBegin, this);
-    
-    contactListener->onContactPreSolve = [=](PhysicsContact& contact, PhysicsContactPreSolve& solve)
-    {
-        goToTarget();
-        return true;
-    };
     
     contactListener->onContactPostSolve = [=](PhysicsContact& contact, const PhysicsContactPostSolve& solve)
     {
+        int angle = (int)this->getParent()->getRotation();
+        if((angle > -7 && angle < 7)){
+            goToTarget();
+        }
         _isContactGround = true;
     };
 
@@ -67,29 +64,24 @@ void Character::update(float dt){
     _isContactGround = false;
 }
 
-bool Character::onContactBegin(PhysicsContact& contact){
-    log("onContactBegin");
-    return true;
-}
-
 void Character::setTarget(Vec2 point){
     _target = point;
 }
 
 void Character::goToTarget(){
     Vec2 velocity = this->getPhysicsBody()->getVelocity();
-    
-//    if(velocity.length() < 100){
-//        log("goToTarget");
-//        Vec2 a = this->getPosition();
-//        Vec2 delta = _target - this->getPosition();
-//        delta.normalize();
-//        delta.rotate(Vec2(), CC_DEGREES_TO_RADIANS(-this->getParent()->getRotation()));
-//        velocity += delta * 20;
-//        this->getPhysicsBody()->setVelocity(velocity);
-//    }
-    
-    
+    CCLOG("velocity: %f\n", velocity.x);
+    Vec2 delta = _target - this->getPosition();
+	delta.y = 0;
+
+	float targetSpeed = (delta.x < 1) ? 0 : 300;
+	
+	delta.normalize();
+	delta.rotate(Vec2(), CC_DEGREES_TO_RADIANS(-this->getParent()->getRotation()));
+	targetSpeed *= delta.x;
+	
+	float impulse = targetSpeed - velocity.x;
+	impulse *= this->getPhysicsBody()->getMass();
+	this->getPhysicsBody()->applyImpulse(Vec2(impulse, 0));
+	return;
 };
-
-
