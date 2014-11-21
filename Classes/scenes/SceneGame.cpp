@@ -1,23 +1,42 @@
 #include "SceneGame.h"
 #include "../Helpers.h"
-#include "airplane/Airplane.h"
+#include "../airplane/Airplane.h"
 
 USING_NS_CC;
 
-Scene* SceneGame::createScene()
+SceneGame* SceneGame::createWithPhysics()
 {
-	auto scene = Scene::create();
-	auto layer = SceneGame::create();
-	scene->addChild(layer);
-	return scene;
+	SceneGame *ret = new (std::nothrow) SceneGame();
+	if (ret && ret->initWithPhysics())
+	{
+		ret->autorelease();
+		return ret;
+	}
+	else
+	{
+		CC_SAFE_DELETE(ret);
+		return nullptr;
+	}
 }
 
-bool SceneGame::init()
+bool SceneGame::initWithPhysics()
 {
-	if (!Layer::init())
+	if (!Scene::initWithPhysics())
 	{
 		return false;
 	}
+
+	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	this->getPhysicsWorld()->setGravity(Point::ZERO);
+
+
+	auto innerRect = Rect(369 + 342, 528, 1170, 526);
+
+	// wall
+	auto wall = Node::create();
+	wall->setPhysicsBody(PhysicsBody::createEdgeBox(innerRect.size, PhysicsMaterial(0.1f, 1, 0.0f)));
+	helpers::setOnCenter(wall);
+	this->addChild(wall);
 
 	auto background = LayerColor::create(Color4B(255, 255, 255, 255));
 	this->addChild(background, 0);

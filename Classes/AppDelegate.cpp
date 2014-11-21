@@ -43,7 +43,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	director->getOpenGLView()->setDesignResolutionSize(2732, 1536, ResolutionPolicy::NO_BORDER);
 
     // create a scene. it's an autorelease object
-	auto scene = SceneGame::createScene();
+	auto scene = SceneGame::createWithPhysics();
 
     // run
     director->runWithScene(scene);
