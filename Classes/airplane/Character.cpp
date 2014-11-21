@@ -28,13 +28,13 @@ Character::Character(){
 
 void Character::onEnter(){
     Sprite::onEnter();
-    _target = Vec2(1000,0);
+    _target = Vec2(200,0);
     goToTarget();
     scheduleUpdate();
 }
 
 void Character::createBody(){
-    PhysicsMaterial material(100,0.15f,1.1f);
+    PhysicsMaterial material(100, 0.15f, 0.1f);
     PhysicsBody* body = PhysicsBody::createBox(this->getContentSize(), material);
     this->setPhysicsBody(body);
 }
@@ -71,14 +71,23 @@ void Character::setTarget(Vec2 point){
 }
 
 void Character::goToTarget(){
-//    Vec2 delta = _target - this->getPosition();
-//    delta.normalize();
-//    this->setPosition(this->getPosition() + delta * 3);
-    if(_isContactGround){
-        if()
-        Vec2 velocity = this->getPhysicsBody()->getVelocity() + Vec2(10,0);
-        this->getPhysicsBody()->setVelocity(velocity);
-    }
+
+	Vec2 velocity = this->getPhysicsBody()->getVelocity();
+	CCLOG("velocity: %f\n", velocity.x);
+
+
+	// Направление к цели.
+    Vec2 delta = _target - this->getPosition();
+	delta.y = 0;
+
+	float targetSpeed = (delta.x < 1) ? 0 : 300;
+	
+	delta.normalize();
+	delta.rotate(Vec2(), CC_DEGREES_TO_RADIANS(-this->getParent()->getRotation()));
+	targetSpeed *= delta.x;
+	
+	float impulse = targetSpeed - velocity.x;
+	impulse *= this->getPhysicsBody()->getMass();
+	this->getPhysicsBody()->applyImpulse(Vec2(impulse, 0));
+	return;
 };
-
-
