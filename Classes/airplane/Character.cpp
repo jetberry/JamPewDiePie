@@ -28,7 +28,7 @@ Character::Character(){
 
 void Character::onEnter(){
     Sprite::onEnter();
-    _target = Vec2(1000,0);
+    _target = Vec2(200,- 257);
     goToTarget();
     scheduleUpdate();
 }
@@ -44,6 +44,13 @@ void Character::setBottom(cocos2d::PhysicsBody* body){
     this->getPhysicsBody()->setContactTestBitmask(0xFFFFFFFF);
     auto contactListener = EventListenerPhysicsContactWithBodies::create(this->getPhysicsBody(), body);
     contactListener->onContactBegin = CC_CALLBACK_1(Character::onContactBegin, this);
+    
+    contactListener->onContactPreSolve = [=](PhysicsContact& contact, PhysicsContactPreSolve& solve)
+    {
+        goToTarget();
+        return true;
+    };
+    
     contactListener->onContactPostSolve = [=](PhysicsContact& contact, const PhysicsContactPostSolve& solve)
     {
         _isContactGround = true;
@@ -57,7 +64,6 @@ void Character::update(float dt){
         setColor(Color3B(255,0,0));
     else
         setColor(Color3B(255,255,255));
-    goToTarget();
     _isContactGround = false;
 }
 
@@ -71,14 +77,19 @@ void Character::setTarget(Vec2 point){
 }
 
 void Character::goToTarget(){
-//    Vec2 delta = _target - this->getPosition();
-//    delta.normalize();
-//    this->setPosition(this->getPosition() + delta * 3);
-    if(_isContactGround){
-        if()
-        Vec2 velocity = this->getPhysicsBody()->getVelocity() + Vec2(10,0);
-        this->getPhysicsBody()->setVelocity(velocity);
-    }
+    Vec2 velocity = this->getPhysicsBody()->getVelocity();
+    
+//    if(velocity.length() < 100){
+//        log("goToTarget");
+//        Vec2 a = this->getPosition();
+//        Vec2 delta = _target - this->getPosition();
+//        delta.normalize();
+//        delta.rotate(Vec2(), CC_DEGREES_TO_RADIANS(-this->getParent()->getRotation()));
+//        velocity += delta * 20;
+//        this->getPhysicsBody()->setVelocity(velocity);
+//    }
+    
+    
 };
 
 
