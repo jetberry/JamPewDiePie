@@ -36,3 +36,6 @@ proj.ios_mac/jamPewDiePie.xcodeproj/project.xcworkspace/xcuserdata/
 
 # Intermediate resources
 /Resources/temp
+
+# Miscelaneous
+/android_debug.bat

@@ -16,20 +16,22 @@
       <Filter>win32</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\scenes\SceneMenu.cpp" />
     <ClCompile Include="..\Classes\scenes\SceneFinish.cpp" />
     <ClCompile Include="..\Classes\Helpers.cpp" />
+    <ClCompile Include="..\Classes\Airplane.cpp" />
+    <ClCompile Include="..\Classes\scenes\SceneGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h" />
-    <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\scenes\SceneMenu.h" />
     <ClInclude Include="..\Classes\scenes\SceneFinish.h" />
     <ClInclude Include="..\Classes\Helpers.h" />
+    <ClInclude Include="..\Classes\Airplane.h" />
+    <ClInclude Include="..\Classes\scenes\SceneGame.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

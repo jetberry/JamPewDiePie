@@ -1,5 +1,7 @@
 #include "AppDelegate.h"
 #include "scenes/SceneMenu.h"
+#include "scenes/SceneFinish.h"
+#include "scenes/SceneGame.h"
 
 USING_NS_CC;
 
@@ -41,7 +43,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	director->getOpenGLView()->setDesignResolutionSize(2732, 1536, ResolutionPolicy::NO_BORDER);
 
     // create a scene. it's an autorelease object
-    auto scene = SceneMenu::createScene();
+	auto scene = SceneGame::createScene();
 
     // run
     director->runWithScene(scene);
