@@ -1,6 +1,7 @@
 #include "SceneGame.h"
 #include "../Helpers.h"
 #include "../airplane/Airplane.h"
+#include "../airplane/Character.h"
 
 USING_NS_CC;
 
@@ -27,8 +28,9 @@ bool SceneGame::initWithPhysics()
 	}
 
 	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
-	this->getPhysicsWorld()->setGravity(Point::ZERO);
+	this->getPhysicsWorld()->setGravity(Point::UNIT_Y * -10);
 
+    this->getPhysicsWorld()->setAutoStep(true);
 
 	auto innerRect = Rect(369 + 342, 528, 1170, 526);
 
@@ -43,6 +45,11 @@ bool SceneGame::initWithPhysics()
 
 	auto airplane = Airplane::create();
 	this->addChild(airplane, 0);
-
+    
+    
+    Character* character = Character::create("airplane/passenger_01.png");
+    character->setPosition(900, 750);
+    this->addChild(character);
+    
 	return true;
 }
