@@ -28,28 +28,29 @@ bool SceneGame::initWithPhysics()
 	}
 
 	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
-	this->getPhysicsWorld()->setGravity(Point::UNIT_Y * -10);
-
+	this->getPhysicsWorld()->setGravity(Point::UNIT_Y * -1000);
     this->getPhysicsWorld()->setAutoStep(true);
 
-	auto innerRect = Rect(369 + 342, 528, 1170, 526);
-
-	// wall
-	auto wall = Node::create();
-	wall->setPhysicsBody(PhysicsBody::createEdgeBox(innerRect.size, PhysicsMaterial(0.1f, 1, 0.0f)));
-	helpers::setOnCenter(wall);
-	this->addChild(wall);
-
-	auto background = LayerColor::create(Color4B(255, 255, 255, 255));
+	auto background = LayerColor::create(Color4B(100, 100, 255, 255));
 	this->addChild(background, 0);
 
-	auto airplane = Airplane::create();
-	this->addChild(airplane, 0);
-    
-    
-    Character* character = Character::create("airplane/passenger_01.png");
-    character->setPosition(900, 750);
-    this->addChild(character);
+	airplan = Airplane::create();
+	helpers::setOnCenter(airplan);
+	this->addChild(airplan);
+
+	ui::Button* btnBack = ui::Button::create("menu/play.png");
+	btnBack->setPosition(Vec2(2000, 200));
+	//helpers::setDesignPosEx(btnBack, 2000, 200);
+	btnBack->addTouchEventListener(CC_CALLBACK_2(SceneGame::touchEvent, this));
+	//btnBack->setZoomScale(0.4f);
+	btnBack->setPressedActionEnabled(true);
+	this->addChild(btnBack);
+
     
 	return true;
+}
+
+void SceneGame::touchEvent(Ref *pSender, ui::Widget::TouchEventType type)
+{
+	airplan->setRotation(airplan->getRotation() + 10);
 }

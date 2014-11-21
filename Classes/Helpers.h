@@ -5,5 +5,6 @@
 namespace helpers {
 
 	void setDesignPos(cocos2d::Node* node, int x, int y);
+	void setDesignPosEx(cocos2d::Node* node, int x, int y);
 	void setOnCenter(cocos2d::Node* node);
 }
