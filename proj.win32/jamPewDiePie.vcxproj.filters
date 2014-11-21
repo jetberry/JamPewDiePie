@@ -19,6 +19,8 @@
     <ClCompile Include="..\Classes\scenes\SceneMenu.cpp" />
     <ClCompile Include="..\Classes\scenes\SceneFinish.cpp" />
     <ClCompile Include="..\Classes\Helpers.cpp" />
+    <ClCompile Include="..\Classes\Airplane.cpp" />
+    <ClCompile Include="..\Classes\scenes\SceneGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -28,6 +30,8 @@
     <ClInclude Include="..\Classes\scenes\SceneMenu.h" />
     <ClInclude Include="..\Classes\scenes\SceneFinish.h" />
     <ClInclude Include="..\Classes\Helpers.h" />
+    <ClInclude Include="..\Classes\Airplane.h" />
+    <ClInclude Include="..\Classes\scenes\SceneGame.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
