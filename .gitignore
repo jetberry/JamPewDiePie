@@ -38,3 +38,6 @@
 
 # Intermediate resources
 /Resources/temp
+
+# Miscelaneous
+/android_debug.bat

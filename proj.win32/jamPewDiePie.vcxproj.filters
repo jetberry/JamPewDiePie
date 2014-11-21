@@ -16,7 +16,6 @@
       <Filter>win32</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\scenes\SceneMenu.cpp" />
     <ClCompile Include="..\Classes\scenes\SceneFinish.cpp" />
     <ClCompile Include="..\Classes\Helpers.cpp" />
@@ -26,7 +25,6 @@
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h" />
-    <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\scenes\SceneMenu.h" />
     <ClInclude Include="..\Classes\scenes\SceneFinish.h" />
     <ClInclude Include="..\Classes\Helpers.h" />
