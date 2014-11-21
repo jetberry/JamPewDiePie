@@ -22,7 +22,23 @@ public:
     
     virtual void onEnter();
     
+    void setTarget(cocos2d::Vec2 point);
+    
+    void setBottom(cocos2d::PhysicsBody* body);
+    
+    void createBody();
+    
 private:
+
+    bool onContactBegin(cocos2d::PhysicsContact& contact);
+    
+    cocos2d::Vec2 _target;
+    
+    bool _isContactGround = true;
+    
+    void update(float dt);
+    
+    void goToTarget();
     
 };
 
