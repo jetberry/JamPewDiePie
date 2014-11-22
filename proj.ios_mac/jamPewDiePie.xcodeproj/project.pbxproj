@@ -74,6 +74,8 @@
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
 		F04EB7E51A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */; };
 		F04EB7E61A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */; };
+		F04EB7EA1A20D8AF008EC8B6 /* Passenger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F04EB7E81A20D8AF008EC8B6 /* Passenger.cpp */; };
+		F04EB7EB1A20D8AF008EC8B6 /* Passenger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F04EB7E81A20D8AF008EC8B6 /* Passenger.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,6 +176,8 @@
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeue-Bold.ttf"; sourceTree = "<group>"; };
+		F04EB7E81A20D8AF008EC8B6 /* Passenger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Passenger.cpp; sourceTree = "<group>"; };
+		F04EB7E91A20D8AF008EC8B6 /* Passenger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Passenger.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,6 +336,7 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F04EB7E71A20D8AF008EC8B6 /* passenger */,
 				45D15AE01A2062E60024FDBE /* sky */,
 				45C7949C1A1F3C8F00E97905 /* airplane */,
 				45D80FB61A1F25CB00864B2C /* Helpers.cpp */,
@@ -390,6 +395,15 @@
 			name = Icons;
 			path = ios;
 			sourceTree = SOURCE_ROOT;
+		};
+		F04EB7E71A20D8AF008EC8B6 /* passenger */ = {
+			isa = PBXGroup;
+			children = (
+				F04EB7E81A20D8AF008EC8B6 /* Passenger.cpp */,
+				F04EB7E91A20D8AF008EC8B6 /* Passenger.h */,
+			);
+			path = passenger;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -539,6 +553,7 @@
 				45C794A31A1F3CF400E97905 /* Character.cpp in Sources */,
 				45C794851A1F396000E97905 /* SceneFinish.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
+				F04EB7EA1A20D8AF008EC8B6 /* Passenger.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				45D80FB81A1F25CB00864B2C /* Helpers.cpp in Sources */,
@@ -551,6 +566,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F04EB7EB1A20D8AF008EC8B6 /* Passenger.cpp in Sources */,
 				45D15AE41A2062E60024FDBE /* Sky.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				45C794A01A1F3C8F00E97905 /* Airplane.cpp in Sources */,
