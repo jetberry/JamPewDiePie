@@ -79,6 +79,7 @@ void SceneGame::onDown(Ref *pSender, ui::Widget::TouchEventType type)
 
 void SceneGame::update(float dt)
 {
+    Scene::update(dt);
 	Vec2 airplaneVector = Vec2::forAngle(CC_DEGREES_TO_RADIANS(airplan->getRotation()));
 	airplaneVector.x = -airplaneVector.x;
 	airplaneVector *= 30;
