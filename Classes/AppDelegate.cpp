@@ -65,7 +65,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	director->getOpenGLView()->setDesignResolutionSize(2732, 1536, ResolutionPolicy::NO_BORDER);
 
 
-	auto scene = SceneGame::createWithPhysics();
+    auto scene = SceneGame::createWithPhysics();
+//    auto scene = SceneMenu::createScene();
     director->runWithScene(scene);
 
     return true;
