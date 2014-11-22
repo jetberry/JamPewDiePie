@@ -32,6 +32,7 @@ bool SceneGame::initWithPhysics()
 	this->getPhysicsWorld()->setGravity(Point::UNIT_Y * -1000);
     this->getPhysicsWorld()->setAutoStep(true);
 
+	// Blue background (sky).
 	auto background = LayerColor::create(Color4B(100, 100, 255, 255));
 	this->addChild(background, 0);
 
@@ -79,6 +80,8 @@ void SceneGame::onDown(Ref *pSender, ui::Widget::TouchEventType type)
 
 void SceneGame::update(float dt)
 {
+	Scene::update(dt);
+
 	Vec2 airplaneVector = Vec2::forAngle(CC_DEGREES_TO_RADIANS(airplan->getRotation()));
 	airplaneVector.x = -airplaneVector.x;
 	airplaneVector *= 30;

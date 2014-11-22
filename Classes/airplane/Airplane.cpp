@@ -1,6 +1,7 @@
 #include "Airplane.h"
 #include "Helpers.h"
 #include "Character.h"
+#include "json/document.h"
 
 USING_NS_CC;
 
@@ -34,5 +35,33 @@ bool Airplane::init()
     character->createBody();
     character->setBottom(bottom->getPhysicsBody());
 
+	loadBaggage();
+
 	return true;
+}
+
+void Airplane::loadBaggage()
+{
+	std::string content = FileUtils::getInstance()->getStringFromFile("json/luggage.json");
+
+	rapidjson::Document doc;
+	doc.Parse<0>(content.c_str());
+	if (doc.HasParseError())
+		return;
+
+	const rapidjson::Value& luggage = doc["luggage"];
+	for (rapidjson::Value::ConstValueIterator i = luggage.onBegin(); i != luggage.onEnd(); ++i)
+	{
+		double x = (*i)["x"].GetDouble();
+		double y = (*i)["y"].GetDouble();
+		std::string file = (*i)["file"].GetString();
+
+		CCLOG("create luggage: %f, %f, %s", x, y, file.c_str());
+		auto l = Sprite::create(file);
+		PhysicsMaterial material(100, 0.15f, 0.1f);
+		PhysicsBody* body = PhysicsBody::createBox(l->getContentSize(), material);
+		l->setPhysicsBody(body);
+		l->setPosition(x, y);
+		this->addChild(l);
+	}
 }

@@ -14,4 +14,6 @@ public:
 
 private:
 
+	void loadBaggage();
+
 };

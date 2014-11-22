@@ -1,0 +1,14 @@
+{
+	"luggage": [ 
+		{
+			"x": 200,
+			"y": 180,
+			"file": "airplane/luggage/box0000.png"
+		},
+		{
+			"x": 500,
+			"y": 180,
+			"file": "airplane/luggage/box0001.png"
+		}
+	]
+}
