@@ -18,6 +18,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 				   ../../Classes/scenes/SceneFinish.cpp \
 				   ../../Classes/scenes/SceneMenu.cpp \
 				   ../../Classes/scenes/SceneGame.cpp \
+				   ../../Classes/passenger/Passenger.cpp \
 				   ../../Classes/sky/Sky.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
