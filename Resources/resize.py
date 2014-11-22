@@ -2,6 +2,15 @@
 # -*- coding: utf-8 -*-
 import os, shutil, Image
 
+'''
+"IOError: decoder zip not available" workaround for osx Yosemite:
+sudo pip uninstall PIL
+brew install zlib
+brew link --force zlib
+sudo pip install PIL --allow-external PIL --allow-unverified PIL
+sudo pip install pillow
+'''
+
 RES_100 = 'ipadhd'
 RES_50 = 'hd'
 RES_25 = 'sd'
