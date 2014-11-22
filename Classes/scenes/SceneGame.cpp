@@ -3,6 +3,7 @@
 #include "../airplane/Airplane.h"
 #include "../airplane/Character.h"
 
+
 USING_NS_CC;
 
 SceneGame* SceneGame::createWithPhysics()
@@ -34,10 +35,15 @@ bool SceneGame::initWithPhysics()
 	auto background = LayerColor::create(Color4B(100, 100, 255, 255));
 	this->addChild(background, 0);
 
+	sky = Sky::create();
+	this->addChild(sky);
+
 	airplan = Airplane::create();
 //	helpers::setOnCenter(airplan);
     helpers::setDesignPosEx(airplan, 1366, 0);
 	this->addChild(airplan);
+
+
 
 	ui::Button* btnUp = ui::Button::create("menu/play.png");
     btnUp->setRotation(-90);
@@ -53,6 +59,8 @@ bool SceneGame::initWithPhysics()
     btnDown->setPressedActionEnabled(true);
     this->addChild(btnDown);
 
+
+	scheduleUpdate();
     
 	return true;
 }
@@ -68,3 +76,12 @@ void SceneGame::onDown(Ref *pSender, ui::Widget::TouchEventType type)
     if(airplan->getRotation() <  15)
         airplan->setRotation(airplan->getRotation() + 1);
 }
+
+void SceneGame::update(float dt)
+{
+	Vec2 airplaneVector = Vec2::forAngle(CC_DEGREES_TO_RADIANS(airplan->getRotation()));
+	airplaneVector.x = -airplaneVector.x;
+	airplaneVector *= 30;
+	sky->setVector(airplaneVector);
+}
+
