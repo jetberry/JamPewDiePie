@@ -55,7 +55,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 		director->setContentScaleFactor(1.0);
 	} else if (screenSize.height > 480) {
 		searchPaths.push_back("hd");
-		director->setContentScaleFactor(1);
+		director->setContentScaleFactor(0.5);
 	} else {
 		searchPaths.push_back("sd");
 		director->setContentScaleFactor(0.25);

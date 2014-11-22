@@ -16,6 +16,9 @@
     <Filter Include="airplane">
       <UniqueIdentifier>{47bd5737-e819-4a93-9c20-c28b8881e9fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sky">
+      <UniqueIdentifier>{201d4a52-44af-489e-b96b-0938a7fa6a4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -38,6 +41,9 @@
     <ClCompile Include="..\Classes\airplane\Character.cpp">
       <Filter>airplane</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\sky\Sky.cpp">
+      <Filter>sky</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -59,6 +65,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\airplane\Character.h">
       <Filter>airplane</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\sky\Sky.h">
+      <Filter>sky</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
