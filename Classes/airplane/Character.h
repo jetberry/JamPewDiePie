@@ -24,14 +24,18 @@ public:
     
     virtual void onEnter();
     
+    // стартовая позиция объекта, например где сидит пассажир
     void setStartPosition(cocos2d::Vec2 point);
     
+    // прердается пол, что бы подписаться на события связанные с ним
     void setBottom(cocos2d::PhysicsBody* body);
     
     void createBody();
     
+    // позиция к которой движется объект
     void setTargetPoition(cocos2d::Vec2 point);
     
+    // есть ли в данный момент контакт с полом
     bool isContactcWithGround();
     
 private:

@@ -46,6 +46,7 @@ void Character::setBottom(cocos2d::PhysicsBody* body){
     
     contactListener->onContactPostSolve = [=](PhysicsContact& contact, const PhysicsContactPostSolve& solve)
     {
+        // костыль, что бы объекты начинали падать при определенном угле
         int angle = (int)this->getParent()->getRotation();
         if((angle > -7 && angle < 7)){
             goToTarget();
