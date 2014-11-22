@@ -1,6 +1,7 @@
 #include "Airplane.h"
 #include "Helpers.h"
 #include "Character.h"
+#include "../passenger/Passenger.h"
 #include "json/document.h"
 
 USING_NS_CC;
@@ -29,11 +30,19 @@ bool Airplane::init()
 //	sprite->setPosition(Vec2());
 	this->addChild(sprite, 0);
 
-	Character* character = Character::create("airplane/passenger_01.png");
-	helpers::setDesignPosEx(character, 1500, 750);
-	this->addChild(character);
-    character->createBody();
-    character->setBottom(bottom->getPhysicsBody());
+	//Character* character = Character::create("airplane/passenger_01.png");
+	//helpers::setDesignPosEx(character, 1500, 750);
+	//this->addChild(character);
+ //   character->createBody();
+ //   character->setBottom(bottom->getPhysicsBody());
+
+	Passenger* passenger = Passenger::create();
+	passenger->setSeatPosition(Vec2(1042, -8));
+	this->addChild(passenger);
+
+	auto* part0 = Sprite::create("airplane/passengers/part.png");
+	part0->setPosition(Vec2(1042, -28));
+	this->addChild(part0);
 
 	loadBaggage();
 
@@ -58,7 +67,7 @@ void Airplane::loadBaggage()
 
 		CCLOG("create luggage: %f, %f, %s", x, y, file.c_str());
 		auto l = Sprite::create(file);
-		PhysicsMaterial material(100, 0.15f, 0.1f);
+		PhysicsMaterial material(0.1, 0.15f, 0.1f);
 		PhysicsBody* body = PhysicsBody::createBox(l->getContentSize(), material);
 		l->setPhysicsBody(body);
 		l->setPosition(x, y);
