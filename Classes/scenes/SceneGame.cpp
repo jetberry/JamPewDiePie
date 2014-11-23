@@ -135,7 +135,19 @@ bool SceneGame::initWithPhysics()
     addChild(m_menu);
 //    showPlane();
     
+    auto dispatcher = Director::getInstance()->getEventDispatcher();
+    auto listener_key = EventListenerKeyboard::create();
+    listener_key->onKeyReleased = CC_CALLBACK_2(SceneGame::onKeyReleased, this);
+    dispatcher->addEventListenerWithSceneGraphPriority(listener_key, this);
+    
 	return true;
+}
+
+void SceneGame::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
+    CCLOG("keyCode = %d", keyCode);
+    if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) {
+        CCDirector::getInstance()->end();
+    }
 }
 
 void SceneGame::createPopins() {
@@ -256,14 +268,14 @@ void SceneGame::checkActions() {
             planeMoves.at(planeMoves.size() - 3)->getValue() == 2 &&
             planeMoves.at(planeMoves.size() - 4)->getValue() == 1) {
             airplan->dropMasks();
-            _power += 20;
+            _power += 10;
             onChangePower(nullptr);
         } else if (planeMoves.at(planeMoves.size() - 1)->getValue() == 1 && // попинс
                    planeMoves.at(planeMoves.size() - 2)->getValue() == 1 &&
                    planeMoves.at(planeMoves.size() - 3)->getValue() == 2 &&
                    planeMoves.at(planeMoves.size() - 4)->getValue() == 2) {
             runFewPopins(2);
-            _power += 20;
+            _power += 10;
             onChangePower(nullptr);
         } else if (planeMoves.at(planeMoves.size() - 1)->getValue() == 3 && // куча попинсов
                    planeMoves.at(planeMoves.size() - 2)->getValue() == 2 &&
@@ -481,17 +493,17 @@ void SceneGame::showPlane() {
     {
         MoveTo* move = MoveTo::create(0.25, Vec2(btnUp->getPositionX(), btnUp->getContentSize().height / 2));
         EaseBackOut* back = EaseBackOut::create(move);
-        btnUp->runAction(Sequence::create(DelayTime::create(0.3), back, nullptr));
+        btnUp->runAction(Sequence::create(DelayTime::create(1.0), back, nullptr));
     }
     {
         MoveTo* move = MoveTo::create(0.25, Vec2(btnDown->getPositionX(), btnDown->getContentSize().height / 2));
         EaseBackOut* back = EaseBackOut::create(move);
-        btnDown->runAction(Sequence::create(DelayTime::create(0.15), back, nullptr));
+        btnDown->runAction(Sequence::create(DelayTime::create(0.9), back, nullptr));
     }
     {
         MoveTo* move = MoveTo::create(0.25, Vec2(btnShake->getPositionX(), btnShake->getContentSize().height / 2));
         EaseBackOut* back = EaseBackOut::create(move);
-        btnShake->runAction(back);
+        btnShake->runAction(Sequence::create(DelayTime::create(0.8), back, nullptr));
     }
     
     setState(AirplaneStateNone);

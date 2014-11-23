@@ -15,9 +15,9 @@
 USING_NS_CC;
 
 Airplane::~Airplane() {
-    m_arrBananas->release();
-    m_arrBoobliks->release();
-    m_arrMasks->release();
+    if (m_arrBananas) m_arrBananas->release();
+    if (m_arrBoobliks) m_arrBoobliks->release();
+    if (m_arrMasks) m_arrMasks->release();
 }
 
 bool Airplane::init()
