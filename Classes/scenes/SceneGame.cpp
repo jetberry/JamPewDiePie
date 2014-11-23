@@ -27,7 +27,7 @@ bool SceneGame::initWithPhysics()
 	{
 		return false;
 	}
-    
+    airplan = nullptr;
     NotificationCenter::getInstance()->addObserver(this, CC_CALLFUNCO_SELECTOR(SceneGame::onAddScore), "MSG_UPDATE_SCORE", nullptr);
     
     _airplaneState = AirplaneStateNone;
@@ -44,36 +44,34 @@ bool SceneGame::initWithPhysics()
     
 	sky = Sky::create();
 	this->addChild(sky);
-
-	airplan = Airplane::create();
-	this->addChild(airplan);
-    helpers::setDesignPosEx(airplan, 1650, 0);
-    _airplanePosition = airplan->getPosition();
-    airplan->makeChain();
-    
-    airplan->setPositionX(-3000);
     
     btnShake = ui::Button::create("gamebuttons/button_shake.png", "gamebuttons/button_shake_h.png");
-    btnShake->setPosition(Vec2(Director::getInstance()->getWinSize().width - btnShake->getContentSize().width, 200));
+    btnShake->setPosition(Vec2(Director::getInstance()->getWinSize().width - btnShake->getContentSize().width,
+                               btnShake->getContentSize().height / 2));
     btnShake->addTouchEventListener(CC_CALLBACK_2(SceneGame::onShake, this));
     btnShake->setPressedActionEnabled(true);
     btnShake->setZoomScale(false);
+    btnShake->setZOrder(1);
     this->addChild(btnShake);
 
     btnDown = ui::Button::create("gamebuttons/button_up.png", "gamebuttons/button_up_h.png");
-    btnDown->setPosition(Vec2(btnShake->getPositionX() - btnShake->getContentSize().width, 200));
+    btnDown->setPosition(Vec2(btnShake->getPositionX() - btnShake->getContentSize().width,
+                              btnDown->getContentSize().height / 2));
     btnDown->addTouchEventListener(CC_CALLBACK_2(SceneGame::onDown, this));
     btnDown->setPressedActionEnabled(true);
     btnDown->setZoomScale(false);
+    btnDown->setZOrder(1);
     this->addChild(btnDown);
     btnDown->setFlippedY(true);
     
 	btnUp = ui::Button::create("gamebuttons/button_up.png", "gamebuttons/button_up_h.png");
-	btnUp->setPosition(Vec2(btnDown->getPositionX() - btnShake->getContentSize().width, 200));
+	btnUp->setPosition(Vec2(btnDown->getPositionX() - btnShake->getContentSize().width,
+                            btnUp->getContentSize().height / 2));
 	btnUp->addTouchEventListener(CC_CALLBACK_2(SceneGame::onUp, this));
 	btnUp->setPressedActionEnabled(true);
     btnUp->setZoomScale(false);
-	this->addChild(btnUp);
+	btnUp->setZOrder(1);
+    this->addChild(btnUp);
     
     btnUp->setPositionY(-500);
     btnShake->setPositionY(-500);
@@ -185,24 +183,32 @@ void SceneGame::onAddScore(Ref* obj){
 
 void SceneGame::update(float dt)
 {
-    if(_airplaneState == AirplaneStateUp){
-        if(airplan->getRotation() > - 15)
-            airplan->setRotation(airplan->getRotation() - 0.5f);
-    }else if(_airplaneState == AirplaneStateDown){
-        if(airplan->getRotation() <  15)
-            airplan->setRotation(airplan->getRotation() + 0.5f);
-    }else if(_airplaneState == AirplaneStateShake){
+    Scene::update(dt);
+    if (airplan) {
+        if(_airplaneState == AirplaneStateUp){
+            if(airplan->getRotation() > - 15)
+                airplan->setRotation(airplan->getRotation() - 0.5f);
+        }else if(_airplaneState == AirplaneStateDown){
+            if(airplan->getRotation() <  15)
+                airplan->setRotation(airplan->getRotation() + 0.5f);
+        }else if(_airplaneState == AirplaneStateShake){
+            
+        }
         
+        Vec2 airplaneVector = Vec2::forAngle(CC_DEGREES_TO_RADIANS(airplan->getRotation()));
+        airplaneVector.x = -airplaneVector.x;
+        airplaneVector *= 30;
+        sky->setVector(airplaneVector);
     }
-	Scene::update(dt);
-
-	Vec2 airplaneVector = Vec2::forAngle(CC_DEGREES_TO_RADIANS(airplan->getRotation()));
-	airplaneVector.x = -airplaneVector.x;
-	airplaneVector *= 30;
-	sky->setVector(airplaneVector);
 }
 
 void SceneGame::showPlane() {
+    airplan = Airplane::create();
+    this->addChild(airplan);
+    helpers::setDesignPosEx(airplan, 1650, 0);
+    _airplanePosition = airplan->getPosition();
+    airplan->makeChain();
+    
     _labelScore->runAction(FadeTo::create(0.2, 255));
     Vec2 pos = helpers::setDesignPosEx(airplan, 1650, 0);
     airplan->setPositionX(-3000);
@@ -211,17 +217,17 @@ void SceneGame::showPlane() {
     airplan->runAction(move);
     
     {
-        MoveTo* move = MoveTo::create(0.25, Vec2(btnUp->getPositionX(), 200));
+        MoveTo* move = MoveTo::create(0.25, Vec2(btnUp->getPositionX(), btnUp->getContentSize().height / 2));
         EaseBackOut* back = EaseBackOut::create(move);
         btnUp->runAction(Sequence::create(DelayTime::create(0.3), back, nullptr));
     }
     {
-        MoveTo* move = MoveTo::create(0.25, Vec2(btnDown->getPositionX(), 200));
+        MoveTo* move = MoveTo::create(0.25, Vec2(btnDown->getPositionX(), btnDown->getContentSize().height / 2));
         EaseBackOut* back = EaseBackOut::create(move);
         btnDown->runAction(Sequence::create(DelayTime::create(0.15), back, nullptr));
     }
     {
-        MoveTo* move = MoveTo::create(0.25, Vec2(btnShake->getPositionX(), 200));
+        MoveTo* move = MoveTo::create(0.25, Vec2(btnShake->getPositionX(), btnShake->getContentSize().height / 2));
         EaseBackOut* back = EaseBackOut::create(move);
         btnShake->runAction(back);
     }

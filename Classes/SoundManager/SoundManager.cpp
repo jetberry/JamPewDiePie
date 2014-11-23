@@ -20,7 +20,7 @@ SoundManager *SoundManager::getInstance() {
 SoundManager::SoundManager() {
     m_audioProfile.name = "AudioProfileTest";
     m_audioProfile.maxInstances = SOUND_COUNT;
-    m_audioProfile.minDelay = 1.0;
+    m_audioProfile.minDelay = 0.0;
     
     m_soundsIds = __Array::create();
     m_soundsIds->retain();

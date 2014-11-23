@@ -183,10 +183,15 @@ void Airplane::makeChain() {
 void Airplane::dropSomething() {
     PhysicsJointLimit* joint = nullptr;
     if (rand() % 2 == 0) { // уронить баранку
-        joint = (PhysicsJointLimit*)m_arrBoobliks->getLastObject();
+        if (m_arrBoobliks->count() > 0) {
+            joint = (PhysicsJointLimit*)m_arrBoobliks->getLastObject();
+            m_arrBoobliks->removeLastObject();
+        }
     } else { // уронить банан
-        joint = (PhysicsJointLimit*)m_arrBananas->getLastObject();
-
+        if (m_arrBananas->count() > 0) {
+            joint = (PhysicsJointLimit*)m_arrBananas->getLastObject();
+            m_arrBananas->removeLastObject();
+        }
     }
     if (joint) {
         SceneGame* game = static_cast<SceneGame*>(getParent());
