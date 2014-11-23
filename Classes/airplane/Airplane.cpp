@@ -116,6 +116,7 @@ bool Airplane::init()
 	alarm->runAction(RepeatForever::create(rotateBy));
 
 	loadBaggage();
+    creatHandLuggageSpaces();
     
 	return true;
 }
@@ -283,5 +284,15 @@ void Airplane::removeJoints() {
                 game->getPhysicsWorld()->removeJoint(joint);
             }
         }
+    }
+}
+
+
+void Airplane::creatHandLuggageSpaces(){
+    for (int i = 0; i < 4; i++)
+    {
+        Sprite* handLuggageSpace = Sprite::create("airplane/hand_luggage_spaces.png");
+        handLuggageSpace->setPosition(Vec2(350 + i * 225, 200 ));
+        this->addChild(handLuggageSpace);
     }
 }

@@ -22,7 +22,8 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 				   ../../Classes/passenger/Passenger.cpp \
 				   ../../Classes/passenger/Man.cpp \
 				   ../../Classes/passenger/Steward.cpp \
-				   ../../Classes/passenger/Trolley.cpp \
+                   ../../Classes/passenger/Trolley.cpp \
+                   ../../Classes/passenger/Pilot.cpp \
 				   ../../Classes/UserGameData.cpp \
 				   ../../Classes/SoundManager/SoundManager.cpp \
 				   ../../Classes/sky/Sky.cpp

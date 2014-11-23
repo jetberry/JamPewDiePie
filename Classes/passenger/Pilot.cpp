@@ -7,6 +7,9 @@
 //
 
 #include "Pilot.h"
+#include "../SoundManager/SoundManager.h"
+
+using namespace cocos2d;
 
 bool Pilot::init()
 {
@@ -18,6 +21,12 @@ bool Pilot::init()
     state = ANIMATION;
     
     _frequencyAnimation = 5;
+    
+    EventListenerTouchOneByOne* touchListener = EventListenerTouchOneByOne::create();
+    CC_SAFE_RETAIN(touchListener);
+    touchListener->setSwallowTouches(true);
+    touchListener->onTouchBegan = CC_CALLBACK_2(Pilot::onTouchBegan, this);
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
     
     return true;
 }
@@ -47,4 +56,23 @@ void Pilot::updateAnim(){
 				_isAnimation = false;
 		}
 	}
+}
+
+bool Pilot::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unusedEvent){
+    if(hitTest(touch->getLocation())){
+        SoundManager::getInstance()->playSound(sound_monkey, false, 0.5);
+    }
+    return false;
+}
+
+bool Pilot::hitTest(const Vec2 &pt)
+{
+    Vec2 nsp = convertToNodeSpace(pt);
+    Rect bb;
+    bb.size = _contentSize;
+    if (bb.containsPoint(nsp))
+    {
+        return true;
+    }
+    return false;
 }

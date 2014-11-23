@@ -89,6 +89,12 @@ bool SceneGame::initWithPhysics()
     _labelScore->setOpacity(0);
     this->addChild(_labelScore);
 
+    _spriteEnergy = Sprite::create("energy.png");
+    addChild(_spriteEnergy);
+    _spriteEnergy->setPosition(Vec2(300, 1436));
+    _spriteEnergy->setOpacity(0);
+    _spriteEnergy->setScale(0.5);
+    
     _labelPower = Label::createWithTTF("hello", "HelveticaNeue-Bold.ttf", 100);
     _labelPower->setPosition(Vec2(500, 1436));
     _labelPower->setTextColor(Color4B::BLACK);
@@ -295,6 +301,7 @@ void SceneGame::onChangePower(Ref* obj){
         
         // скрыть топливо
         _labelPower->runAction(FadeTo::create(3.0, 0));
+        _spriteEnergy->runAction(FadeTo::create(3.0, 0));
         
         // выкатить в центр очки
         _labelScore->runAction(Sequence::create(MoveTo::create(2.5, Vec2(Director::getInstance()->getWinSize().width / 2,
@@ -403,7 +410,7 @@ void SceneGame::showPlane() {
     
     _labelScore->runAction(FadeTo::create(0.2, 255));
     _labelPower->runAction(FadeTo::create(0.2, 255));
-    
+    _spriteEnergy->runAction(FadeTo::create(0.2, 255));
     
     Vec2 pos = helpers::setDesignPosEx(airplan, 1650, 0);
     airplan->setPositionX(-3000);
