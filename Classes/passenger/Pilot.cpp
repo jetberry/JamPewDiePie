@@ -35,16 +35,16 @@ void Pilot::setAraplaneIsMoved(bool flag){
 }
 
 void Pilot::updateAnim(){
-    if(_isAnimation){
-    if (!(getUpdateCounter() % _frequencyAnimation)){
-        int currentFrame = _frameCounter;
-        if(currentFrame >= 10)
-            currentFrame = currentFrame - (currentFrame % 10) * 2 - 1;
-        setPicture("airplane/people/pilot", currentFrame);
-        
-        _frameCounter++;
-        if(_frameCounter >= 20)
-            _isAnimation = false;
-    }
-    
+	if (_isAnimation){
+		if (!(getUpdateCounter() % _frequencyAnimation)){
+			int currentFrame = _frameCounter;
+			if (currentFrame >= 10)
+				currentFrame = currentFrame - (currentFrame % 10) * 2 - 1;
+			setPicture("airplane/people/pilot", currentFrame);
+
+			_frameCounter++;
+			if (_frameCounter >= 20)
+				_isAnimation = false;
+		}
+	}
 }
