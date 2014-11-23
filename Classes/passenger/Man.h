@@ -10,6 +10,13 @@ public:
 
 protected:
 
+	enum Direction
+	{
+		DIRECTION_UNKNOW,
+		DIRECTION_LEFT,
+		DIRECTION_RIGHT
+	};
+
 	enum Const
 	{
 		TOILET_POS = 100,
@@ -26,6 +33,7 @@ protected:
 	bool isOnTarget() const;
 	void movingToTarget();
 	int getUpdateCounter() const;
+	Direction getDirection() const;
 
 private:
 

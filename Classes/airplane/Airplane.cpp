@@ -47,6 +47,7 @@ bool Airplane::init()
 
 	Trolley* trolley = Trolley::create();
 	this->addChild(trolley);
+	steward->assignTrolley(trolley);
 
 
 	auto* part0 = Sprite::create("airplane/passengers/part.png");

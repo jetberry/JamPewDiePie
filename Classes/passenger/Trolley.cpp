@@ -1,4 +1,4 @@
-#include "Trolley.h"
+﻿#include "Trolley.h"
 #include "Helpers.h"
 #include <iomanip>
 
@@ -12,7 +12,7 @@ bool Trolley::init()
 	scheduleUpdate();
 
 	this->setTexture("airplane/trolley.png");
-	this->setPosition(Vec2(300, -60));
+	this->setPosition(Vec2(-300, -60));
 
 	return true;
 }
