@@ -145,6 +145,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\Helpers.cpp" />
     <ClCompile Include="..\Classes\passenger\Man.cpp" />
     <ClCompile Include="..\Classes\passenger\Passenger.cpp" />
+    <ClCompile Include="..\Classes\passenger\Pilot.cpp" />
     <ClCompile Include="..\Classes\passenger\Steward.cpp" />
     <ClCompile Include="..\Classes\passenger\Trolley.cpp" />
     <ClCompile Include="..\Classes\scenes\SceneFinish.cpp" />
@@ -163,6 +164,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\Helpers.h" />
     <ClInclude Include="..\Classes\passenger\Man.h" />
     <ClInclude Include="..\Classes\passenger\Passenger.h" />
+    <ClInclude Include="..\Classes\passenger\Pilot.h" />
     <ClInclude Include="..\Classes\passenger\Steward.h" />
     <ClInclude Include="..\Classes\passenger\Trolley.h" />
     <ClInclude Include="..\Classes\scenes\SceneFinish.h" />

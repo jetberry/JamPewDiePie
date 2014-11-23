@@ -6,7 +6,7 @@
 #include "../passenger/Trolley.h"
 #include "Toilet.h"
 #include "json/document.h"
-#include "SceneGame.h"
+#include "../scenes/SceneGame.h"
 #include <iomanip>
 
 USING_NS_CC;
@@ -48,11 +48,29 @@ bool Airplane::init()
     }
     { // толстый потолок
         auto bottom = Node::create();
-        PhysicsBody* bodyBottom = PhysicsBody::createBox(Size(1334, 410), PhysicsMaterial(0.1f, 1, 0.0f));
+        PhysicsBody* bodyBottom = PhysicsBody::createBox(Size(604, 410), PhysicsMaterial(0.1f, 1, 0.0f));
         bodyBottom->setDynamic(false);
         bottom->setPhysicsBody(bodyBottom);
-        bottom->setPositionX(x);
+        bottom->setPositionX(x + 30);
+        bottom->setPositionY(y - 800);
+        this->addChild(bottom);
+    }
+    { // толстый пол
+        auto bottom = Node::create();
+        PhysicsBody* bodyBottom = PhysicsBody::createBox(Size(1204, 410), PhysicsMaterial(0.1f, 1, 0.0f));
+        bodyBottom->setDynamic(false);
+        bottom->setPhysicsBody(bodyBottom);
+        bottom->setPositionX(x + 100);
         bottom->setPositionY(y);
+        this->addChild(bottom);
+    }
+    { // толстая левая стенка пилота
+        auto bottom = Node::create();
+        PhysicsBody* bodyBottom = PhysicsBody::createBox(Size(50, 480), PhysicsMaterial(0.1f, 1, 0.0f));
+        bodyBottom->setDynamic(false);
+        bottom->setPhysicsBody(bodyBottom);
+        bottom->setPositionX(x - 280);
+        bottom->setPositionY(y - 400);
         this->addChild(bottom);
     }
 	auto sprite = Sprite::create("airplane/airplane.png");
@@ -67,14 +85,6 @@ bool Airplane::init()
     _sensor->setScaleX(1.1f);
     addChild(_sensor);
     
-	for (int i = 0; i < 4; i++)
-	{
-		Passenger* passenger = Passenger::create();
-		passenger->setSeatPosition(Vec2(350 + i * 230, 4));
-		passenger->assignToilet(toilet);
-		this->addChild(passenger);
-        creatChair(passenger->getPosition());
-	}
 
 	Steward* steward = Steward::create();
 	this->addChild(steward);
@@ -82,6 +92,16 @@ bool Airplane::init()
 	Trolley* trolley = Trolley::create();
 	this->addChild(trolley);
 	steward->assignTrolley(trolley);
+
+	for (int i = 0; i < 4; i++)
+	{
+		Passenger* passenger = Passenger::create();
+		passenger->setSeatPosition(Vec2(350 + i * 230, 4));
+		passenger->assignToilet(toilet);
+		passenger->assignTrolley(trolley);
+		this->addChild(passenger);
+        creatChair(passenger->getPosition());
+	}
 
     _pilot = Pilot::create();
     _pilot->setPosition(1440, 50);

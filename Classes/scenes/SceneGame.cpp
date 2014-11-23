@@ -21,6 +21,13 @@ SceneGame* SceneGame::createWithPhysics()
 	}
 }
 
+SceneGame::~SceneGame() {
+    if (!airplan) return;
+    airplan->removeJoints();
+    airplan->removeFromParent();
+    airplan = nullptr;
+}
+
 bool SceneGame::initWithPhysics()
 {
 	if (!Scene::initWithPhysics())
@@ -91,7 +98,49 @@ bool SceneGame::initWithPhysics()
     
     setState(AirplaneStateNone);
     
+    m_popins = __Array::create();
+    m_popins->retain();
+
+    char str[100] = {0};
+    for(int i = 1; i < 15; i++) {
+        sprintf(str, "popins/popins_%d.png", i);
+        auto frame = SpriteFrame::create(str, Rect(0, 0, 340, 340)); //we assume that the sprites' dimentions are 40*40 rectangles.
+        animFrames.pushBack(frame);
+    }
+    
+    for (int i = 0; i < 10; i++) {
+        runAction(Sequence::create(DelayTime::create(CCRANDOM_0_1() * 5), CallFunc::create(CC_CALLBACK_0(SceneGame::createPopins, this)), NULL));
+    }
 	return true;
+}
+
+void SceneGame::createPopins() {
+    Sprite* pop = Sprite::create("popins/popins_1.png");
+    auto animation = Animation::createWithSpriteFrames(animFrames, 0.05f);
+    auto animate = Animate::create(animation);
+    pop->runAction(RepeatForever::create(animate));
+    pop->setPosition(Vec2(0, Director::getInstance()->getWinSize().height * 2));
+    addChild(pop);
+    m_popins->addObject(pop);
+}
+
+void SceneGame::runFewPopins(int count) {
+    for (int i = 0; i < m_popins->count() && count > 0; i++) {
+        Sprite* pop = static_cast<Sprite*>(m_popins->getObjectAtIndex(i));
+        if (pop->getPositionY() <= -pop->getContentSize().height ||
+            pop->getPositionY() > Director::getInstance()->getWinSize().height + pop->getContentSize().height) { // тогда можно трогать
+            
+            pop->setPositionX(Director::getInstance()->getWinSize().width / 2 + rand() % (int)(Director::getInstance()->getWinSize().width / 2));
+            pop->setPositionY(Director::getInstance()->getWinSize().height + pop->getContentSize().height * 1.5);
+            
+            MoveTo* move = MoveTo::create(5.0, Vec2(Director::getInstance()->getWinSize().width / 2 -
+                                                        rand() % (int)(Director::getInstance()->getWinSize().width / 2),
+                                                    -pop->getContentSize().height * 2));
+            
+            pop->runAction(Sequence::create(DelayTime::create(CCRANDOM_0_1() * 10), move, nullptr));
+            count--;
+        }
+    }
 }
 
 void SceneGame::onUp(Ref *pSender, ui::Widget::TouchEventType type)
@@ -120,6 +169,8 @@ void SceneGame::onDown(Ref *pSender, ui::Widget::TouchEventType type)
 
 void SceneGame::onShake(Ref *pSender, ui::Widget::TouchEventType type)
 {
+    runFewPopins(6); // запустить 6 зонтов
+    return;
 //    // code for RESTART !!!!!!!!!!!!!!!!!!!!!!!
 //    if (!airplan) return;
 //    airplan->removeJoints();
@@ -255,6 +306,12 @@ void SceneGame::update(float dt)
 }
 
 void SceneGame::showPlane() {
+    if (airplan) {
+        airplan->removeJoints();
+        airplan->removeFromParent();
+        airplan = nullptr;
+    }
+    
     airplan = Airplane::create();
     this->addChild(airplan);
     helpers::setDesignPosEx(airplan, 1650, 0);
