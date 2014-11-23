@@ -6,6 +6,8 @@
 
 USING_NS_CC;
 
+#define TOTAL_POWER 150
+
 SceneGame* SceneGame::createWithPhysics()
 {
 	SceneGame *ret = new (std::nothrow) SceneGame();
@@ -44,8 +46,6 @@ bool SceneGame::initWithPhysics()
 	// Blue background (sky).
 	background = LayerColor::create(Color4B(223, 247, 248, 255));
 	this->addChild(background, 0);
-    tintDelay = 7.0;
-    runTint();
     
 	sky = Sky::create();
 	this->addChild(sky);
@@ -88,15 +88,15 @@ bool SceneGame::initWithPhysics()
     onAddScore(nullptr);
     _labelScore->setOpacity(0);
     this->addChild(_labelScore);
-    
-//    m_menu = SceneMenu::create();
-//    m_menu->setDelegate(this);
-//    addChild(m_menu);
-    showPlane();
+
+    _labelPower = Label::createWithTTF("hello", "HelveticaNeue-Bold.ttf", 100);
+    _labelPower->setPosition(Vec2(500, 1436));
+    _labelPower->setTextColor(Color4B::BLACK);
+    _labelPower->setOpacity(0);
+    this->addChild(_labelPower);
     
 	scheduleUpdate();
     
-    setState(AirplaneStateNone);
     
     m_popins = __Array::create();
     m_popins->retain();
@@ -111,6 +111,24 @@ bool SceneGame::initWithPhysics()
     for (int i = 0; i < 10; i++) {
         runAction(Sequence::create(DelayTime::create(CCRANDOM_0_1() * 5), CallFunc::create(CC_CALLBACK_0(SceneGame::createPopins, this)), NULL));
     }
+    
+    // кнопка рестарт
+    ui::Scale9Sprite* scale = ui::Scale9Sprite::create("menu/main_play.png");
+    m_buttonRestart = ControlButton::create(scale);
+    m_buttonRestart->addTargetWithActionForControlEvents(this, cccontrol_selector(SceneGame::restart), cocos2d::extension::Control::EventType::TOUCH_DOWN);
+    m_buttonRestart->setPreferredSize(Size(766 / 2, 402 / 2));
+    m_buttonRestart->setAnchorPoint(Vec2(0.5,0.5));
+    m_buttonRestart->setPosition(Vec2(Director::getInstance()->getWinSize().width / 2,
+                                   Director::getInstance()->getWinSize().height / 4));
+    m_buttonRestart->setZoomOnTouchDown(false);
+    m_buttonRestart->setPositionY(-500);
+    addChild(m_buttonRestart);
+    
+    m_menu = SceneMenu::create();
+    m_menu->setDelegate(this);
+    addChild(m_menu);
+//    showPlane();
+    
 	return true;
 }
 
@@ -124,6 +142,12 @@ void SceneGame::createPopins() {
     m_popins->addObject(pop);
 }
 
+void SceneGame::restart(Ref * sender, Control::EventType controlEvent) {
+    // code for RESTART !!!!!!!!!!!!!!!!!!!!!!!
+    if (airplan) return;
+    showPlane();
+}
+
 void SceneGame::runFewPopins(int count) {
     for (int i = 0; i < m_popins->count() && count > 0; i++) {
         Sprite* pop = static_cast<Sprite*>(m_popins->getObjectAtIndex(i));
@@ -133,9 +157,9 @@ void SceneGame::runFewPopins(int count) {
             pop->setPositionX(Director::getInstance()->getWinSize().width / 2 + rand() % (int)(Director::getInstance()->getWinSize().width / 2));
             pop->setPositionY(Director::getInstance()->getWinSize().height + pop->getContentSize().height * 1.5);
             
-            MoveTo* move = MoveTo::create(5.0, Vec2(Director::getInstance()->getWinSize().width / 2 -
+            MoveTo* move = MoveTo::create(6.0, Vec2(Director::getInstance()->getWinSize().width / 2 -
                                                         rand() % (int)(Director::getInstance()->getWinSize().width / 2),
-                                                    -pop->getContentSize().height * 2));
+                                                    -pop->getContentSize().height));
             
             pop->runAction(Sequence::create(DelayTime::create(CCRANDOM_0_1() * 10), move, nullptr));
             count--;
@@ -148,11 +172,14 @@ void SceneGame::onUp(Ref *pSender, ui::Widget::TouchEventType type)
     if(type == ui::Widget::TouchEventType::BEGAN){
         setState(AirplaneStateUp);
         SoundManager::getInstance()->playSound(sound_power_up, false, 0.5);
+        _power -= 2;
     }else if(type ==  ui::Widget::TouchEventType::ENDED ||
              type ==  ui::Widget::TouchEventType::CANCELED){
         setState(AirplaneStateNone);
         SoundManager::getInstance()->pauseSound(sound_power_up);
+        _power -= 2;
     }
+    onChangePower(nullptr);
 }
 
 void SceneGame::onDown(Ref *pSender, ui::Widget::TouchEventType type)
@@ -160,25 +187,19 @@ void SceneGame::onDown(Ref *pSender, ui::Widget::TouchEventType type)
     if(type == ui::Widget::TouchEventType::BEGAN){
         setState(AirplaneStateDown);
         SoundManager::getInstance()->playSound(sound_power_down, false, 0.5);
+        _power -= 2;
     }else if(type ==  ui::Widget::TouchEventType::ENDED||
              type ==  ui::Widget::TouchEventType::CANCELED){
         setState(AirplaneStateNone);
         SoundManager::getInstance()->pauseSound(sound_power_down);
+        _power -= 2;
     }
+    onChangePower(nullptr);
 }
 
-void SceneGame::onShake(Ref *pSender, ui::Widget::TouchEventType type)
-{
-    runFewPopins(6); // запустить 6 зонтов
-    return;
-//    // code for RESTART !!!!!!!!!!!!!!!!!!!!!!!
-//    if (!airplan) return;
-//    airplan->removeJoints();
-//    airplan->removeFromParent();
-//    airplan = nullptr;
-//    auto scene = SceneGame::createWithPhysics();
-//    Director::getInstance()->replaceScene(scene);
-//    return;
+void SceneGame::onShake(Ref *pSender, ui::Widget::TouchEventType type) {
+    _power -= 15;
+    onChangePower(nullptr);
     
     if(type == ui::Widget::TouchEventType::BEGAN){
         UserGameData::getInstance()->addScore(500);
@@ -186,7 +207,7 @@ void SceneGame::onShake(Ref *pSender, ui::Widget::TouchEventType type)
         SoundManager::getInstance()->pauseSound(sound_best_loop);
         SoundManager::getInstance()->playSound(sound_harkem_shake, false, 0.8);
         
-        airplan->stopAllActions();
+//        airplan->stopAllActions();
         airplan->setPosition(_airplanePosition);
         float _time = 0.09f;
         
@@ -245,57 +266,113 @@ void SceneGame::onAddScore(Ref* obj){
     _labelScore->setString(__String::createWithFormat("%d",score)->getCString());
 }
 
+void SceneGame::onChangePower(Ref* obj){
+    if (_power < 0) _power = 0;
+    
+    _labelPower->setString(__String::createWithFormat("%d",_power)->getCString());
+    if (_power <= 0 && !_isGameOver) {
+        _isGameOver = true;
+        // скрыть кнопки
+        {
+            MoveTo* move = MoveTo::create(0.25, Vec2(btnUp->getPositionX(), -500));
+            EaseBackOut* back = EaseBackOut::create(move);
+            btnUp->runAction(Sequence::create(DelayTime::create(0.3), back, nullptr));
+        }
+        {
+            MoveTo* move = MoveTo::create(0.25, Vec2(btnDown->getPositionX(), -500));
+            EaseBackOut* back = EaseBackOut::create(move);
+            btnDown->runAction(Sequence::create(DelayTime::create(0.15), back, nullptr));
+        }
+        {
+            MoveTo* move = MoveTo::create(0.25, Vec2(btnShake->getPositionX(), -500));
+            EaseBackOut* back = EaseBackOut::create(move);
+            btnShake->runAction(back);
+        }
+        
+        // скрыть топливо
+        _labelPower->runAction(FadeTo::create(3.0, 0));
+        
+        // выкатить в центр очки
+        _labelScore->runAction(Sequence::create(MoveTo::create(2.5, Vec2(Director::getInstance()->getWinSize().width / 2,
+                                                                         _labelScore->getPositionY())),
+                                                MoveTo::create(2.5, Vec2(Director::getInstance()->getWinSize().width / 2,
+                                                                         Director::getInstance()->getWinSize().height / 2)),
+                                                ScaleTo::create(0.5, 2.5),
+                                                NULL));
+        // направить самолёт вниз
+        RotateTo* rotate = RotateTo::create(5.0, 45);
+        airplan->runAction(rotate);
+        
+        // начать двигать самолёт вниз
+        MoveTo* move = MoveTo::create(7.0, Vec2(airplan->getPositionX() - 300, -400));
+        airplan->runAction(move);
+        runAction(Sequence::create(DelayTime::create(5.0), CallFunc::create(CC_CALLBACK_0(SceneGame::showFinish, this)), nullptr));
+        
+        // проиграть звук быдыщ
+        SoundManager::getInstance()->playSound(sound_plane_crash, false, 1.0);
+    }
+}
+
+void SceneGame::showFinish() {
+    if (airplan) {
+        airplan->removeJoints();
+        airplan->removeFromParent();
+        airplan = nullptr;
+    }
+    
+    {
+        MoveTo* move = MoveTo::create(0.25, Vec2(m_buttonRestart->getPositionX(), 200));
+        EaseBackOut* back = EaseBackOut::create(move);
+        m_buttonRestart->stopAllActions();
+        m_buttonRestart->runAction(back);
+    }
+}
+
 void SceneGame::update(float dt)
 {
-    if(_airplaneState == AirplaneStateUp){
-        if(airplan->getRotation() > - 15){
-            airplan->stopActionByTag(10);
-            airplan->setRotation(airplan->getRotation() - 0.5f);
-        }else{
-            setState(AirplaneStateNone);
-        }
-    }else if(_airplaneState == AirplaneStateDown){
-        if(airplan->getRotation() <  15){
-            airplan->stopActionByTag(10);
-            airplan->setRotation(airplan->getRotation() + 0.5f);
-        }else{
-            setState(AirplaneStateNone);
-        }
-    }else if(_airplaneState == AirplaneStateShake){
-        
-    }else{
-        if(!(_countUpdate % 25)){
-        _tumbler = !_tumbler;
-        if(_tumbler){
-            RotateBy* action = RotateBy::create(0.4, 0.5);
-            action->setTag(10);
-            airplan->runAction(action);
-        }else{
-            RotateBy* action = RotateBy::create(0.4, -0.5);
-            action->setTag(10);
-            airplan->runAction(action);
-        }
-        }
-    }
     _countUpdate++;
-    airplan->updateAirplane(dt);
-	Scene::update(dt);
+    Scene::update(dt);
+    
+    if (_isGameOver) return;
 
-	Vec2 airplaneVector = Vec2::forAngle(CC_DEGREES_TO_RADIANS(airplan->getRotation()));
-	airplaneVector.x = -airplaneVector.x;
-	airplaneVector *= 30;
-	sky->setVector(airplaneVector);
+//	Vec2 airplaneVector = Vec2::forAngle(CC_DEGREES_TO_RADIANS(airplan->getRotation()));
+//	airplaneVector.x = -airplaneVector.x;
+//	airplaneVector *= 30;
+//	sky->setVector(airplaneVector);
 
     Scene::update(dt);
+    
     if (airplan) {
+        airplan->updateAirplane(dt);
         if(_airplaneState == AirplaneStateUp){
-            if(airplan->getRotation() > - 15)
+            if(airplan->getRotation() > - 15){
+                airplan->stopActionByTag(10);
                 airplan->setRotation(airplan->getRotation() - 0.5f);
+            }else{
+                setState(AirplaneStateNone);
+            }
         }else if(_airplaneState == AirplaneStateDown){
-            if(airplan->getRotation() <  15)
+            if(airplan->getRotation() <  15){
+                airplan->stopActionByTag(10);
                 airplan->setRotation(airplan->getRotation() + 0.5f);
+            }else{
+                setState(AirplaneStateNone);
+            }
         }else if(_airplaneState == AirplaneStateShake){
             
+        }else{
+            if(!(_countUpdate % 25)){
+                _tumbler = !_tumbler;
+                if(_tumbler){
+                    RotateBy* action = RotateBy::create(0.4, 0.5);
+                    action->setTag(10);
+                    airplan->runAction(action);
+                }else{
+                    RotateBy* action = RotateBy::create(0.4, -0.5);
+                    action->setTag(10);
+                    airplan->runAction(action);
+                }
+            }
         }
         
         Vec2 airplaneVector = Vec2::forAngle(CC_DEGREES_TO_RADIANS(airplan->getRotation()));
@@ -312,6 +389,12 @@ void SceneGame::showPlane() {
         airplan = nullptr;
     }
     
+    _isGameOver = false;
+    UserGameData::getInstance()->resetData();
+    _power = TOTAL_POWER;
+    onAddScore(nullptr);
+    onChangePower(nullptr);
+    
     airplan = Airplane::create();
     this->addChild(airplan);
     helpers::setDesignPosEx(airplan, 1650, 0);
@@ -319,12 +402,22 @@ void SceneGame::showPlane() {
     airplan->makeChain();
     
     _labelScore->runAction(FadeTo::create(0.2, 255));
+    _labelPower->runAction(FadeTo::create(0.2, 255));
+    
+    
     Vec2 pos = helpers::setDesignPosEx(airplan, 1650, 0);
     airplan->setPositionX(-3000);
     
     MoveTo* move = MoveTo::create(2.0, pos);
     airplan->runAction(move);
     
+    _labelScore->runAction(MoveTo::create(0.5, Vec2(2200, 1436)));
+    _labelScore->runAction(ScaleTo::create(0.5, 1.0));
+    {
+        MoveTo* move = MoveTo::create(0.25, Vec2(m_buttonRestart->getPositionX(), -500));
+        EaseBackOut* back = EaseBackOut::create(move);
+        m_buttonRestart->runAction(back);
+    }
     {
         MoveTo* move = MoveTo::create(0.25, Vec2(btnUp->getPositionX(), btnUp->getContentSize().height / 2));
         EaseBackOut* back = EaseBackOut::create(move);
@@ -340,6 +433,10 @@ void SceneGame::showPlane() {
         EaseBackOut* back = EaseBackOut::create(move);
         btnShake->runAction(back);
     }
+    
+    setState(AirplaneStateNone);
+    tintDelay = 7.0;
+    runTint();
 }
 
 void SceneGame::setState(AirplaneState state){
