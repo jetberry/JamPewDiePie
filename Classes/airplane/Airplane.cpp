@@ -41,6 +41,35 @@ bool Airplane::init()
     bottom->setPositionY(-300/2 + 10);
     this->addChild(bottom);
 
+    {
+        Vec2 start_banan = Vec2(1330, 190);
+        auto sprite = Sprite::create("bottle_1.png");
+        PhysicsMaterial material(0.1f, 0.15f, 0.1f);
+        PhysicsBody* body = PhysicsBody::createBox(sprite->getContentSize(), material);
+        sprite->setPhysicsBody(body);
+        this->addChild(sprite);
+        sprite->setPosition(start_banan);
+    }
+    {
+        Vec2 start_banan = Vec2(750, 170);
+        auto sprite = Sprite::create("bottle_2.png");
+        PhysicsMaterial material(0.1f, 0.15f, 0.1f);
+        PhysicsBody* body = PhysicsBody::createBox(sprite->getContentSize(), material);
+        sprite->setPhysicsBody(body);
+        this->addChild(sprite);
+        sprite->setPosition(start_banan);
+        sprite->setZOrder(1000);
+    }
+    {
+        Vec2 start_banan = Vec2(1300, 220);
+        auto sprite = Sprite::create("bottle_3.png");
+        PhysicsMaterial material(0.1f, 0.15f, 0.1f);
+        PhysicsBody* body = PhysicsBody::createBox(sprite->getContentSize(), material);
+        sprite->setPhysicsBody(body);
+        this->addChild(sprite);
+        sprite->setPosition(start_banan);
+    }
+    
     float x = 0;
     float y = 0;
     { // кабина пилота
