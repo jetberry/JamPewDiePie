@@ -21,6 +21,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 				   ../../Classes/scenes/SceneMenu.cpp \
 				   ../../Classes/scenes/SceneGame.cpp \
 				   ../../Classes/passenger/Passenger.cpp \
+				   ../../Classes/passenger/Nerd.cpp \
 				   ../../Classes/passenger/Man.cpp \
 				   ../../Classes/passenger/Steward.cpp \
                    ../../Classes/passenger/Trolley.cpp \

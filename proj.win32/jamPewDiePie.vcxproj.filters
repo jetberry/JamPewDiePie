@@ -72,6 +72,9 @@
     <ClCompile Include="..\Classes\airplane\HandLuggageSpaces.cpp">
       <Filter>airplane</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\passenger\Nerd.cpp">
+      <Filter>passenger</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\airplane\HandLuggageSpaces.h">
       <Filter>airplane</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\passenger\Nerd.h">
+      <Filter>passenger</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,7 @@
 #include "../passenger/Passenger.h"
 #include "../passenger/Steward.h"
 #include "../passenger/Trolley.h"
+#include "../passenger/Nerd.h"
 #include "Toilet.h"
 #include "json/document.h"
 #include "../scenes/SceneGame.h"
@@ -129,7 +130,7 @@ bool Airplane::init()
 	this->addChild(trolley);
 	steward->assignTrolley(trolley);
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 1; i < 4; i++)
 	{
 		std::stringstream ss;
 		ss << "airplane/people/passengers/" << std::setfill('0') << std::setw(4) << (i % 3) << "/";
@@ -140,6 +141,8 @@ bool Airplane::init()
 		this->addChild(passenger);
         createChair(passenger->getPosition() + Vec2(25, -75));
 	}
+
+	addChild(Nerd::create());
 
     _pilot = Pilot::create();
     _pilot->setPosition(1440, 50);
