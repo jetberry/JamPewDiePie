@@ -15,7 +15,7 @@ bool Sky::init()
 		float y = rand() % static_cast< int >(designResolution.height);
 		float scale = ((rand() % 8) + 2) / 10.0;
 
-		auto sprite0 = Sprite::create("sky_2.png");
+		auto sprite0 = Sprite::create("sky_1.png");
 		sprite0->setPosition(Vec2(x, y));
 		sprite0->setScale(scale);
 		plane->addChild(sprite0, 0);
@@ -34,6 +34,7 @@ bool Sky::init()
 		sprite3->setPosition(Vec2(x + designResolution.width, y + designResolution.height));
 		sprite3->setScale(scale);
 		plane->addChild(sprite3, 0);
+        
 	}
 
 	this->addChild(plane);

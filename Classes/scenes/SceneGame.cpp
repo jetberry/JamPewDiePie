@@ -37,9 +37,20 @@ bool SceneGame::initWithPhysics()
     this->getPhysicsWorld()->setAutoStep(true);
 
 	// Blue background (sky).
-	auto background = LayerColor::create(Color4B(100, 100, 255, 255));
+	auto background = LayerColor::create(Color4B(223, 247, 248, 255));
 	this->addChild(background, 0);
-
+    float time = 7.0;
+    TintTo* tint_1 = TintTo::create(time, 123, 126, 241);
+    TintTo* tint_2 = TintTo::create(time, 42, 44, 111);
+    TintTo* tint_3 = TintTo::create(time, 66, 218, 245);
+    TintTo* tint_4 = TintTo::create(time, 245, 176, 55);
+    TintTo* tint_5 = TintTo::create(time, 223, 247, 248);
+    TintTo* tint_6 = TintTo::create(time, 50, 236, 98);
+    TintTo* tint_7 = TintTo::create(time, 243, 54, 241);
+    TintTo* tint_8 = TintTo::create(time, 22, 22, 100);
+    
+    background->runAction(RepeatForever::create(Sequence::create(tint_1, tint_2, tint_3, tint_4, tint_5, tint_6, tint_7, tint_8, NULL)));
+    
 	sky = Sky::create();
 	this->addChild(sky);
 
