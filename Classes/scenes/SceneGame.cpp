@@ -449,7 +449,7 @@ void SceneGame::showPlane() {
     auto glview = pDirector->getOpenGLView();
     Size screenSize = glview->getFrameSize();
     int width = screenSize.width / CC_CONTENT_SCALE_FACTOR();
-    int delta = width - 2048;
+    int delta = (width - 2048) / 2;
     Vec2 pos = helpers::setDesignPosEx(airplan, 1650 - delta, 0);
     _airplanePosition = pos;
     airplan->setPositionX(-3000);

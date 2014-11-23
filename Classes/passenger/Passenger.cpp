@@ -99,7 +99,7 @@ void Passenger::moveToSeat()
 
 void Passenger::seatDown()
 {
-    setZOrder(-5);
+    setZOrder(2);
 	setPicture(pictureDir + "sitting/0000.png");
 	state = SEAT;
 	nextActionTime = getUpdateCounter() + (((rand() % 10) + 5) * 60);
