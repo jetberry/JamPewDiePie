@@ -8,6 +8,7 @@
 
 #include "Pilot.h"
 #include "../SoundManager/SoundManager.h"
+#include "../UserGameData.h"
 
 using namespace cocos2d;
 
@@ -16,6 +17,7 @@ bool Pilot::init()
     if (!Man::init())
         return false;
     
+    count_tap = 5;
     setPicture("airplane/people/pilot/0001.png");
     createBody();
     state = ANIMATION;
@@ -61,6 +63,8 @@ void Pilot::updateAnim(){
 bool Pilot::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unusedEvent){
     if(hitTest(touch->getLocation())){
         SoundManager::getInstance()->playSound(sound_monkey, false, 0.5);
+        if (count_tap > 0) UserGameData::getInstance()->addScore(10);
+        count_tap--;
     }
     return false;
 }

@@ -12,9 +12,12 @@ public:
 
 	void assignToilet(Toilet* toilet);
 	void assignTrolley(Trolley* trolley);
-
+    
 private:
-
+    
+    virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unusedEvent);
+    bool hitTest(const cocos2d::Vec2 &pt);
+    
 	enum Const
 	{
 		MOVING_SPEED = 6
@@ -40,7 +43,8 @@ private:
 	bool dirty;
 
 	int nextActionTime;
-
+    int count_tap;
+    
 	virtual bool init() override;
 	virtual void update(float dt) override;
 

@@ -9,6 +9,7 @@
 #include "../scenes/SceneGame.h"
 #include <iomanip>
 #include "HandLuggageSpaces.h"
+#include "../UserGameData.h"
 
 USING_NS_CC;
 
@@ -283,6 +284,7 @@ void Airplane::dropSomething() {
     if (joint) {
         SceneGame* game = static_cast<SceneGame*>(getParent());
         game->getPhysicsWorld()->removeJoint(joint);
+        UserGameData::getInstance()->addScore(10);        
     }
 }
 
@@ -339,6 +341,8 @@ void Airplane::creatHandLuggageSpaces(){
 
 void Airplane::dropMasks() {
     if (isMasks) return;
+
+    UserGameData::getInstance()->addScore(100);
     isMasks = true;
     m_arrMasks = __Array::create();
     m_arrMasks->retain();

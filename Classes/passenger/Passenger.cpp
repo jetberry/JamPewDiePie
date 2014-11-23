@@ -1,6 +1,7 @@
 ﻿#include "Passenger.h"
 #include "Helpers.h"
 #include "../SoundManager/SoundManager.h"
+#include "../UserGameData.h"
 
 USING_NS_CC;
 
@@ -28,6 +29,7 @@ bool Passenger::init()
 	if (!Man::init())
 		return false;
 	
+    count_tap = 5;
 	createBody();
 	toilet = nullptr;
 	trolley = nullptr;
@@ -38,6 +40,12 @@ bool Passenger::init()
 	dirty = false;
 	setAngry(true);
 
+    EventListenerTouchOneByOne* touchListener = EventListenerTouchOneByOne::create();
+    CC_SAFE_RETAIN(touchListener);
+    touchListener->setSwallowTouches(true);
+    touchListener->onTouchBegan = CC_CALLBACK_2(Passenger::onTouchBegan, this);
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
+    
 	return true;
 }
 
@@ -243,6 +251,9 @@ void Passenger::updateToiletExiting(float dt)
 void Passenger::setAngry(bool value)
 {
 	angryFlag = value;
+    if (angryFlag) {
+        UserGameData::getInstance()->addScore(1);
+    }
 }
 
 void Passenger::doBarf()
@@ -253,6 +264,10 @@ void Passenger::doBarf()
 	dirty = true;
 	state = BARF;
 	nextActionTime = getUpdateCounter() + 120;
+    
+    SoundManager::getInstance()->playSound(sound_raaalph, false, 1.0);
+    
+    UserGameData::getInstance()->addScore(10);
 }
 
 void Passenger::checkTrolleyCollision()
@@ -277,4 +292,32 @@ void Passenger::checkTrolleyCollision()
 	else
 		setPositionX(trolleyPos + trolleyWidth);
 
+}
+
+bool Passenger::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unusedEvent){
+    if(hitTest(touch->getLocation())){
+        int r = rand() % 3;
+        if (r == 2) {
+            SoundManager::getInstance()->playSound(sound_ouch_3, false, 0.7);
+        } else if (r == 1) {
+            SoundManager::getInstance()->playSound(sound_ouch_2, false, 0.7);
+        } else {
+            SoundManager::getInstance()->playSound(sound_ouch_1, false, 0.7);
+        }
+        if (count_tap > 0) UserGameData::getInstance()->addScore(10);
+        count_tap--;
+    }
+    return false;
+}
+
+bool Passenger::hitTest(const Vec2 &pt)
+{
+    Vec2 nsp = convertToNodeSpace(pt);
+    Rect bb;
+    bb.size = _contentSize;
+    if (bb.containsPoint(nsp))
+    {
+        return true;
+    }
+    return false;
 }

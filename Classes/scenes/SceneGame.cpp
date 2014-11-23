@@ -39,7 +39,7 @@ bool SceneGame::initWithPhysics()
     airplan = nullptr;
     NotificationCenter::getInstance()->addObserver(this, CC_CALLFUNCO_SELECTOR(SceneGame::onAddScore), "MSG_UPDATE_SCORE", nullptr);
 
-	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+//	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Point::UNIT_Y * -1000);
     this->getPhysicsWorld()->setAutoStep(true);
 
@@ -154,6 +154,7 @@ void SceneGame::restart(Ref * sender, Control::EventType controlEvent) {
 }
 
 void SceneGame::runFewPopins(int count) {
+    UserGameData::getInstance()->addScore(10 * count);
     for (int i = 0; i < m_popins->count() && count > 0; i++) {
         Sprite* pop = static_cast<Sprite*>(m_popins->getObjectAtIndex(i));
         int actions = pop->getNumberOfRunningActions();
@@ -218,7 +219,7 @@ void SceneGame::onShake(Ref *pSender, ui::Widget::TouchEventType type) {
         checkActions();
         setState(AirplaneStateShake);
         
-        UserGameData::getInstance()->addScore(500);
+        UserGameData::getInstance()->addScore(30);
         
         SoundManager::getInstance()->pauseSound(sound_best_loop);
         SoundManager::getInstance()->playSound(sound_harkem_shake, false, 0.8);
@@ -289,6 +290,7 @@ void SceneGame::gravityShakeOff(){
     airplan->dropSomething();
     airplan->deattachOneMask();
     
+    SoundManager::getInstance()->playSound(sound_drop_item, false, 1.0);
 	NotificationCenter::getInstance()->postNotification("shake-off");
 }
 

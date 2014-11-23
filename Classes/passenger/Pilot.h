@@ -45,6 +45,8 @@ private:
     int _frequencyAnimation;
     
     States state;
+    
+    int count_tap;
 };
 
 

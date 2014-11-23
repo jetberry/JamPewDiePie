@@ -92,6 +92,7 @@
 		F05F97D91A228A4A00D28F07 /* UpheavalPro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F05F97D71A228A4A00D28F07 /* UpheavalPro.ttf */; };
 		F05F97DD1A228C3600D28F07 /* HandLuggageSpaces.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97DB1A228C3600D28F07 /* HandLuggageSpaces.cpp */; };
 		F05F97DE1A228C3600D28F07 /* HandLuggageSpaces.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97DB1A228C3600D28F07 /* HandLuggageSpaces.cpp */; };
+		F05F97E01A229A9200D28F07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F05F97DF1A229A9200D28F07 /* Images.xcassets */; };
 		F0783EEE1A21EA6700CA6F7D /* sound in Resources */ = {isa = PBXBuildFile; fileRef = F0783EED1A21EA6700CA6F7D /* sound */; };
 		F0783EEF1A21EA6700CA6F7D /* sound in Resources */ = {isa = PBXBuildFile; fileRef = F0783EED1A21EA6700CA6F7D /* sound */; };
 		F0783EF31A21ECF700CA6F7D /* SoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0783EF11A21ECF700CA6F7D /* SoundManager.cpp */; };
@@ -214,6 +215,7 @@
 		F05F97D71A228A4A00D28F07 /* UpheavalPro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = UpheavalPro.ttf; sourceTree = "<group>"; };
 		F05F97DB1A228C3600D28F07 /* HandLuggageSpaces.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HandLuggageSpaces.cpp; sourceTree = "<group>"; };
 		F05F97DC1A228C3600D28F07 /* HandLuggageSpaces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandLuggageSpaces.h; sourceTree = "<group>"; };
+		F05F97DF1A229A9200D28F07 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "jamPewDiePie Mac/Images.xcassets"; sourceTree = SOURCE_ROOT; };
 		F0783EED1A21EA6700CA6F7D /* sound */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sound; sourceTree = "<group>"; };
 		F0783EF11A21ECF700CA6F7D /* SoundManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundManager.cpp; sourceTree = "<group>"; };
 		F0783EF21A21ECF700CA6F7D /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManager.h; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F05F97DF1A229A9200D28F07 /* Images.xcassets */,
 				F05F97D71A228A4A00D28F07 /* UpheavalPro.ttf */,
 				F0783EED1A21EA6700CA6F7D /* sound */,
 				4598924C1A21C499002972C0 /* json */,
@@ -603,6 +606,7 @@
 			files = (
 				F0783EEF1A21EA6700CA6F7D /* sound in Resources */,
 				4598924E1A21C499002972C0 /* json in Resources */,
+				F05F97E01A229A9200D28F07 /* Images.xcassets in Resources */,
 				F05F97D91A228A4A00D28F07 /* UpheavalPro.ttf in Resources */,
 				45C794B81A1FE17800E97905 /* ipadhd in Resources */,
 				45C794B61A1FE17800E97905 /* hd in Resources */,
@@ -750,6 +754,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -779,6 +784,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
