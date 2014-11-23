@@ -36,6 +36,8 @@ private:
     
 	void update(float dt);
     
+    void runTint();
+    
     Airplane* airplan;
     Sky* sky;
     
@@ -52,4 +54,7 @@ private:
     ui::Button* btnUp;
     ui::Button* btnDown;
     ui::Button* btnShake;
+    
+    LayerColor* background;
+    float tintDelay;
 };
