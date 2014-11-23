@@ -18,6 +18,8 @@ public:
 	CREATE_FUNC(SceneMenu);
 
     void setDelegate(SceneGame* delegate);
+    
+    void showTitle(bool is_show);
 private:
     void menuPlayCallback(Ref * sender, Control::EventType controlEvent);
     void changeTutorialText();
@@ -29,5 +31,6 @@ private:
     SceneGame* m_delegate;
     
     Sprite* m_spriteTitle;
+    
 };
 
