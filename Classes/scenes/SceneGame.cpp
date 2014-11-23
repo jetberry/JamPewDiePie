@@ -29,7 +29,7 @@ bool SceneGame::initWithPhysics()
     
     _airplaneState = AirplaneStateNone;
 
-//	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Point::UNIT_Y * -1000);
     this->getPhysicsWorld()->setAutoStep(true);
 

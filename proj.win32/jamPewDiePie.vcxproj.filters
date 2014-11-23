@@ -56,6 +56,9 @@
     <ClCompile Include="..\Classes\passenger\Trolley.cpp">
       <Filter>passenger</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\airplane\Toilet.cpp">
+      <Filter>airplane</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -92,6 +95,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\passenger\Trolley.h">
       <Filter>passenger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\airplane\Toilet.h">
+      <Filter>airplane</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
