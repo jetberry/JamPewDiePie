@@ -210,6 +210,8 @@ void SceneGame::onShake(Ref *pSender, ui::Widget::TouchEventType type) {
     onChangePower(nullptr);
     
     if(type == ui::Widget::TouchEventType::BEGAN){
+        setState(AirplaneStateShake);
+        
         UserGameData::getInstance()->addScore(500);
         
         SoundManager::getInstance()->pauseSound(sound_best_loop);

@@ -8,6 +8,7 @@
 #include "json/document.h"
 #include "../scenes/SceneGame.h"
 #include <iomanip>
+#include "HandLuggageSpaces.h"
 
 USING_NS_CC;
 
@@ -289,10 +290,7 @@ void Airplane::removeJoints() {
 
 
 void Airplane::creatHandLuggageSpaces(){
-    for (int i = 0; i < 4; i++)
-    {
-        Sprite* handLuggageSpace = Sprite::create("airplane/hand_luggage_spaces.png");
-        handLuggageSpace->setPosition(Vec2(350 + i * 225, 200 ));
-        this->addChild(handLuggageSpace);
-    }
+    HandLuggageSpaces* handLuggageSpace = HandLuggageSpaces::create();
+    handLuggageSpace->setPosition(Vec2(350, 200 ));
+    this->addChild(handLuggageSpace);
 }
