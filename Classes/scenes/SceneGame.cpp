@@ -458,7 +458,8 @@ void SceneGame::showPlane() {
     Size screenSize = glview->getFrameSize();
     float sf = pDirector->getContentScaleFactor();
     int width = screenSize.width / sf;
-    int delta = (2732 - width) / 2;
+    float sc = 1536 / (screenSize.height / sf);
+    int delta = (2732 - width * sc) / 2;
     helpers::setOnCenter(airplan);
     Vec2 pos = airplan->getPosition();
     pos.x = delta;
