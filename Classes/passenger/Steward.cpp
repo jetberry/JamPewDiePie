@@ -17,9 +17,12 @@ bool Steward::init()
 	if (!Man::init())
 		return false;
 
-	setPosition(Vec2(RIGHT_POS, 0));
+	setPosition(Vec2(RIGHT_POS, 1));
 	goKitchen();
 	handleTrolley = false;
+
+	setPicture("airplane/people/steward", 0);
+	createBody();
 
 	return true;
 }
@@ -35,6 +38,8 @@ void Steward::updateTrolley()
 
 void Steward::update(float dt)
 {
+	//setPicture("airplane/people/steward", 0);
+	//return;
 	switch (state)
 	{
 	case MOVING_TO_LEFT:

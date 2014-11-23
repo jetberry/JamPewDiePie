@@ -1,7 +1,7 @@
 #include "SceneMenu.h"
 #include "../Helpers.h"
 #include "SceneGame.h"
-#include "SoundManager.h"
+#include "../SoundManager/SoundManager.h"
 
 USING_NS_CC;
 

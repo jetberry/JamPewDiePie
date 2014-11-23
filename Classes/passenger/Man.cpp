@@ -13,8 +13,17 @@ bool Man::init()
 
 	currentPicture.clear();
 	updateCounter = 0;
+	setZOrder(10);
 
 	return true;
+}
+
+void Man::createBody()
+{
+	return;
+	PhysicsMaterial material(100, 0.15f, 0.1f);
+	PhysicsBody* body = PhysicsBody::createBox(this->getContentSize(), material);
+	this->setPhysicsBody(body);
 }
 
 void Man::update(float dt)

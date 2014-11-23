@@ -10,9 +10,10 @@ bool Trolley::init()
 		return false;
 
 	scheduleUpdate();
+	setZOrder(10);
 
 	this->setTexture("airplane/trolley.png");
-	this->setPosition(Vec2(-300, -60));
+	this->setPosition(Vec2(-300, -20));
 
 	return true;
 }

@@ -1,4 +1,4 @@
-#include "Passenger.h"
+﻿#include "Passenger.h"
 #include "Helpers.h"
 
 USING_NS_CC;
@@ -8,6 +8,10 @@ bool Passenger::init()
 	if (!Man::init())
 		return false;
 	
+	setPicture("airplane/passengers/stand0.png");
+	createBody();
+	toilet = nullptr;
+	nextActionTime = 0;
 	seatDown();
 
 	return true;
@@ -26,9 +30,25 @@ void Passenger::update(float dt)
 	case MOVING_TO_SEAT:
 		updateMovingToSeat(dt);
 		break;
+	case ENTER_TO_TOILET:
+		updateEnterToToilet(dt);
+		break;
+	case TOILET_SEATING:
+		updateToiletSeating(dt);
+		break;
+	case TOILET_EXITING:
+		updateToiletExiting(dt);
+		break;
 	}
 
 	Man::update(dt);
+}
+
+void Passenger::enterToToilet()
+{
+	state = ENTER_TO_TOILET;
+	toilet->occupy();
+	toilet->openDoor();
 }
 
 void Passenger::moveToToilet()
@@ -47,13 +67,13 @@ void Passenger::seatDown()
 {
 	setPicture("airplane/passengers/seat.png");
 	state = SEAT;
-	seatTime = getUpdateCounter();
+	nextActionTime = getUpdateCounter() + (((rand() % 10) + 5) * 60);
 	this->setFlippedX(false);
 }
 
 void Passenger::updateSeat(float dt)
 {
-	if (getUpdateCounter() - seatTime < 60)
+	if (getUpdateCounter() < nextActionTime)
 		return;
 
 	if (!(rand() % 60))
@@ -78,6 +98,13 @@ void Passenger::updateMovingToToilet(float dt)
 		updateMovingAnim();
 		return;
 	}
+
+	// Дошел до туалета. Если закрыто, идем назад.
+	if (toilet && toilet->isFree())
+	{
+		enterToToilet();
+		return;
+	}
 	
 	moveToSeat();
 }
@@ -94,9 +121,53 @@ void Passenger::updateMovingToSeat(float dt)
 	seatDown();
 }
 
+void Passenger::updateEnterToToilet(float dt)
+{
+	// Ждем пока дверь откроется.
+	if (!toilet->isOpen())
+		return;
+
+	// Переходим в туалет.
+
+	setZOrder(8);
+	toilet->closeDoor();
+	state = TOILET_SEATING;
+	nextActionTime = getUpdateCounter() + 120;
+
+	//moveToSeat();
+}
+
 void Passenger::setSeatPosition(cocos2d::Vec2 pos)
 {
 	setPosition(pos);
 	this->seatPos = pos;
 	state = SEAT;
+}
+
+void Passenger::assignToilet(Toilet* toilet)
+{
+	this->toilet = toilet;
+}
+
+void Passenger::updateToiletSeating(float dt)
+{
+	// Пока посидим, попердим.
+	if (getUpdateCounter() < nextActionTime)
+		return;
+
+	// Выходим из туалета.
+	toilet->openDoor();
+	state = TOILET_EXITING;
+}
+
+void Passenger::updateToiletExiting(float dt)
+{
+	// Ждем пока дверь откроется.
+	if (!toilet->isOpen())
+		return;
+
+	setZOrder(10);
+	toilet->closeDoor();
+	toilet->free();
+	moveToSeat();
 }

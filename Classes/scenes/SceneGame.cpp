@@ -1,7 +1,7 @@
 #include "SceneGame.h"
 #include "../Helpers.h"
 #include "../airplane/Character.h"
-#include "SoundManager.h"
+#include "../SoundManager/SoundManager.h"
 #include "UserGameData.h"
 
 USING_NS_CC;
@@ -32,7 +32,7 @@ bool SceneGame::initWithPhysics()
     
     _airplaneState = AirplaneStateNone;
 
-//	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Point::UNIT_Y * -1000);
     this->getPhysicsWorld()->setAutoStep(true);
 

@@ -15,10 +15,16 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/Helpers.cpp \
 				   ../../Classes/airplane/Airplane.cpp \
 				   ../../Classes/airplane/Character.cpp \
+				   ../../Classes/airplane/Toilet.cpp \
 				   ../../Classes/scenes/SceneFinish.cpp \
 				   ../../Classes/scenes/SceneMenu.cpp \
 				   ../../Classes/scenes/SceneGame.cpp \
 				   ../../Classes/passenger/Passenger.cpp \
+				   ../../Classes/passenger/Man.cpp \
+				   ../../Classes/passenger/Steward.cpp \
+				   ../../Classes/passenger/Trolley.cpp \
+				   ../../Classes/UserGameData.cpp \
+				   ../../Classes/SoundManager/SoundManager.cpp \
 				   ../../Classes/sky/Sky.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes

@@ -27,6 +27,7 @@ protected:
 	virtual bool init() override;
 	virtual void update(float dt) override;
 
+	void createBody();
 	void setPicture(const std::string& fileName);
 	void setPicture(const std::string& dirName, int index);
 	void setTarget(float target);

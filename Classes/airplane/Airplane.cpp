@@ -4,6 +4,7 @@
 #include "../passenger/Passenger.h"
 #include "../passenger/Steward.h"
 #include "../passenger/Trolley.h"
+#include "Toilet.h"
 #include "json/document.h"
 #include "SceneGame.h"
 USING_NS_CC;
@@ -51,9 +52,16 @@ bool Airplane::init()
 	sprite->setPosition(Vec2(888,0));
 	this->addChild(sprite, 0);
 
-	Passenger* passenger = Passenger::create();
-	passenger->setSeatPosition(Vec2(1042, 4));
-	this->addChild(passenger);
+	auto toilet = Toilet::create();
+	addChild(toilet);
+
+	for (int i = 0; i < 4; i++)
+	{
+		Passenger* passenger = Passenger::create();
+		passenger->setSeatPosition(Vec2(350 + i * 230, 4));
+		passenger->assignToilet(toilet);
+		this->addChild(passenger);
+	}
 
 	Steward* steward = Steward::create();
 	this->addChild(steward);
