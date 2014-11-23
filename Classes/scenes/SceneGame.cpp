@@ -215,6 +215,7 @@ void SceneGame::update(float dt)
         }
     }
     _countUpdate++;
+    airplan->updateAirplane(dt);
 	Scene::update(dt);
 
 	Vec2 airplaneVector = Vec2::forAngle(CC_DEGREES_TO_RADIANS(airplan->getRotation()));

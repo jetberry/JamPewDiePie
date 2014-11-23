@@ -7,6 +7,8 @@
 #include "Toilet.h"
 #include "json/document.h"
 #include "SceneGame.h"
+#include <iomanip>
+
 USING_NS_CC;
 
 bool Airplane::init()
@@ -54,7 +56,12 @@ bool Airplane::init()
 
 	auto toilet = Toilet::create();
 	addChild(toilet);
-
+    
+    _sensor = Sprite::create("airplane/sensor/0.png");
+    _sensor->setPosition(1307, -210);
+    _sensor->setScaleX(1.1f);
+    addChild(_sensor);
+    
 	for (int i = 0; i < 4; i++)
 	{
 		Passenger* passenger = Passenger::create();
@@ -207,5 +214,20 @@ void Airplane::dropSomething() {
         SceneGame* game = static_cast<SceneGame*>(getParent());
         game->getPhysicsWorld()->removeJoint(joint);
     }
+}
+
+void Airplane::updateAirplane(float dt){
+    updateSensor();
+}
+
+void Airplane::updateSensor(){
+    if(!(_coutnUpdate % 5)){
+        std::string dirName = "airplane/sensor";
+        std::stringstream ss;
+        int index = (_coutnUpdate / 5) % 3;
+        ss << dirName << "/"  << index << ".png";
+        _sensor->setTexture(ss.str());
+    }
+    _coutnUpdate++;
 }
 

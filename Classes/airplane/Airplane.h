@@ -16,13 +16,20 @@ public:
     void makeChain();
     
     void dropSomething();
+    
+    void updateAirplane(float delta);
 
 private:
 
 	void loadBaggage();
     
     void creatChair(cocos2d::Vec2 position);
+    
+    void updateSensor();
 
+    cocos2d::Sprite* _sensor;
+    
+    int _coutnUpdate;
 
     Pilot* _pilot;
 
