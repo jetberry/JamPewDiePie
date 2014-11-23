@@ -27,5 +27,7 @@ private:
     Label* m_labelTutorial;
     
     SceneGame* m_delegate;
+    
+    Sprite* m_spriteTitle;
 };
 

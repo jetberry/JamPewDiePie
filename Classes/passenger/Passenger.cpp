@@ -1,5 +1,6 @@
 ﻿#include "Passenger.h"
 #include "Helpers.h"
+#include "SoundManager.h"
 
 USING_NS_CC;
 
@@ -69,13 +70,13 @@ void Passenger::seatDown()
     setZOrder(-5);
 	setPicture("airplane/passengers/seat.png");
 	state = SEAT;
-	seatTime = getUpdateCounter();
+	nextActionTime = getUpdateCounter() + (((rand() % 10) + 5) * 60);
 	this->setFlippedX(false);
 }
 
 void Passenger::updateSeat(float dt)
 {
-	if (getUpdateCounter() - seatTime < 60)
+	if (getUpdateCounter() < nextActionTime)
 		return;
 
 	if (!(rand() % 60))
@@ -125,6 +126,8 @@ void Passenger::updateMovingToSeat(float dt)
 
 void Passenger::updateEnterToToilet(float dt)
 {
+    SoundManager::getInstance()->playSound(sound_toilet_open, false, 14.0);
+    
 	// Ждем пока дверь откроется.
 	if (!toilet->isOpen())
 		return;
@@ -134,8 +137,9 @@ void Passenger::updateEnterToToilet(float dt)
 	setZOrder(8);
 	toilet->closeDoor();
 	state = TOILET_SEATING;
-	nextActionTime = getUpdateCounter() + 120;
-
+	nextActionTime = getUpdateCounter() + 140;
+    
+    SoundManager::getInstance()->playSound(sound_toilet, false, 0.4);
 	//moveToSeat();
 }
 

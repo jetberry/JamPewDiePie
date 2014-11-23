@@ -1,7 +1,7 @@
 #include "SceneMenu.h"
 #include "../Helpers.h"
 #include "SceneGame.h"
-#include "SoundManager.h"
+#include "../SoundManager/SoundManager.h"
 
 USING_NS_CC;
 
@@ -27,16 +27,20 @@ bool SceneMenu::init()
 //	helpers::setDesignPos(sprite, 766, 49);
 //	this->addChild(sprite, 0);
 
+    m_spriteTitle = Sprite::create("title.png");
+    m_spriteTitle->setPosition(Director::getInstance()->getWinSize().width / 2,
+                               Director::getInstance()->getWinSize().height - m_spriteTitle->getContentSize().height / 3 * 2);
+    addChild(m_spriteTitle);
     
     m_labelTutorial = Label::createWithTTF("hello", "HelveticaNeue-Bold.ttf", 50);
     m_labelTutorial->setPosition(Vec2(200, 200));
     m_labelTutorial->setColor(Color3B::BLACK);
     addChild(m_labelTutorial);
     
-    ui::Scale9Sprite* scale = ui::Scale9Sprite::create("menu/play.png");
+    ui::Scale9Sprite* scale = ui::Scale9Sprite::create("menu/main_play.png");
     m_buttonPlay = ControlButton::create(scale);
     m_buttonPlay->addTargetWithActionForControlEvents(this, cccontrol_selector(SceneMenu::menuPlayCallback), cocos2d::extension::Control::EventType::TOUCH_DOWN);
-    m_buttonPlay->setPreferredSize(Size(300, 300));
+    m_buttonPlay->setPreferredSize(Size(766 / 2, 402 / 2));
     m_buttonPlay->setAnchorPoint(Vec2(0,0));
     m_buttonPlay->setPosition(Vec2(Director::getInstance()->getWinSize().width / 2 - m_buttonPlay->getContentSize().width / 2,
                                    Director::getInstance()->getWinSize().height / 4));
@@ -141,6 +145,7 @@ void SceneMenu::menuPlayCallback(Ref * sender, Control::EventType controlEvent)
                 m_buttonPlay->runAction(back);
             }
             m_labelTutorial->runAction(FadeTo::create(0.1, 0));
+            m_spriteTitle->runAction(FadeTo::create(0.1, 0));
             m_delegate->showPlane();
             SoundManager::getInstance()->playSound(sound_noise_loop, true, 0.4);
             break;

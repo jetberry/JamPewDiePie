@@ -1,7 +1,7 @@
 #include "SceneGame.h"
 #include "../Helpers.h"
 #include "../airplane/Character.h"
-#include "SoundManager.h"
+#include "../SoundManager/SoundManager.h"
 #include "UserGameData.h"
 
 USING_NS_CC;
@@ -27,7 +27,7 @@ bool SceneGame::initWithPhysics()
 	{
 		return false;
 	}
-    
+    airplan = nullptr;
     NotificationCenter::getInstance()->addObserver(this, CC_CALLFUNCO_SELECTOR(SceneGame::onAddScore), "MSG_UPDATE_SCORE", nullptr);
 
 	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
@@ -42,44 +42,44 @@ bool SceneGame::initWithPhysics()
     
 	sky = Sky::create();
 	this->addChild(sky);
-
-	airplan = Airplane::create();
-	this->addChild(airplan);
-    helpers::setDesignPosEx(airplan, 1650, 0);
-    _airplanePosition = airplan->getPosition();
     
-    airplan->setPositionX(-3000);
-    
-	btnUp = ui::Button::create("menu/play.png");
-    btnUp->setRotation(-90);
-	btnUp->setPosition(Vec2(1800, 200));
-	btnUp->addTouchEventListener(CC_CALLBACK_2(SceneGame::onUp, this));
-	btnUp->setPressedActionEnabled(true);
-	this->addChild(btnUp);
-    
-    btnDown = ui::Button::create("menu/play.png");
-    btnDown->setRotation(90);
-    btnDown->setPosition(Vec2(2200, 200));
-    btnDown->addTouchEventListener(CC_CALLBACK_2(SceneGame::onDown, this));
-    btnDown->setPressedActionEnabled(true);
-    this->addChild(btnDown);
-    
-    btnShake = ui::Button::create("menu/shake.png");
-    btnShake->setPosition(Vec2(1400, 200));
+    btnShake = ui::Button::create("gamebuttons/button_shake.png", "gamebuttons/button_shake_h.png");
+    btnShake->setPosition(Vec2(Director::getInstance()->getWinSize().width - btnShake->getContentSize().width,
+                               btnShake->getContentSize().height / 2));
     btnShake->addTouchEventListener(CC_CALLBACK_2(SceneGame::onShake, this));
     btnShake->setPressedActionEnabled(true);
+    btnShake->setZoomScale(false);
+    btnShake->setZOrder(1);
     this->addChild(btnShake);
+
+    btnDown = ui::Button::create("gamebuttons/button_up.png", "gamebuttons/button_up_h.png");
+    btnDown->setPosition(Vec2(btnShake->getPositionX() - btnShake->getContentSize().width,
+                              btnDown->getContentSize().height / 2));
+    btnDown->addTouchEventListener(CC_CALLBACK_2(SceneGame::onDown, this));
+    btnDown->setPressedActionEnabled(true);
+    btnDown->setZoomScale(false);
+    btnDown->setZOrder(1);
+    this->addChild(btnDown);
+    btnDown->setFlippedY(true);
+    
+	btnUp = ui::Button::create("gamebuttons/button_up.png", "gamebuttons/button_up_h.png");
+	btnUp->setPosition(Vec2(btnDown->getPositionX() - btnShake->getContentSize().width,
+                            btnUp->getContentSize().height / 2));
+	btnUp->addTouchEventListener(CC_CALLBACK_2(SceneGame::onUp, this));
+	btnUp->setPressedActionEnabled(true);
+    btnUp->setZoomScale(false);
+	btnUp->setZOrder(1);
+    this->addChild(btnUp);
     
     btnUp->setPositionY(-500);
     btnShake->setPositionY(-500);
     btnDown->setPositionY(-500);
-
-    _labelScore = Label::create();
+    
+    _labelScore = Label::createWithTTF("hello", "HelveticaNeue-Bold.ttf", 100);
     _labelScore->setPosition(Vec2(2200, 1436));
     _labelScore->setTextColor(Color4B::BLACK);
-    _labelScore->setSystemFontSize(100);
     onAddScore(nullptr);
-    
+    _labelScore->setOpacity(0);
     this->addChild(_labelScore);
     
 //    m_menu = SceneMenu::create();
@@ -144,9 +144,10 @@ void SceneGame::onShake(Ref *pSender, ui::Widget::TouchEventType type)
         Sequence* squenceAll = Sequence::create(DelayTime::create(2.2), repeat,moveTo,chageGravityOff,NULL);
 
         airplan->runAction(squenceAll);
-        
+
         tintDelay = 0.1;
-        runAction(Sequence::create(DelayTime::create(2.0), CallFunc::create(CC_CALLBACK_0(SceneGame::runTint, this)), nullptr));
+        airplan->runAction(Sequence::create(DelayTime::create(2.0), CallFunc::create(CC_CALLBACK_0(SceneGame::runTint, this)), nullptr));
+        airplan->runAction(Sequence::create(DelayTime::create(2.2), CallFunc::create(CC_CALLBACK_0(SceneGame::playScream, this)), nullptr));
     }
 }
 
@@ -160,9 +161,20 @@ void SceneGame::gravityShakeDown(){
 
 void SceneGame::gravityShakeOff(){
     this->getPhysicsWorld()->setGravity(Point::UNIT_Y * -1000);
+    SoundManager::getInstance()->pauseSound(sound_scream_1);
+    SoundManager::getInstance()->pauseSound(sound_scream_2);
     SoundManager::getInstance()->resumeSound(sound_best_loop);
     tintDelay = 7.0;
     runTint();
+    airplan->dropSomething();
+}
+
+void SceneGame::playScream() {
+    if (rand() % 2 == 0) {
+        SoundManager::getInstance()->playSound(sound_scream_1, false, 1.0);
+    } else {
+        SoundManager::getInstance()->playSound(sound_scream_2, false, 1.0);
+    }
 }
 
 void SceneGame::onAddScore(Ref* obj){
@@ -209,9 +221,34 @@ void SceneGame::update(float dt)
 	airplaneVector.x = -airplaneVector.x;
 	airplaneVector *= 30;
 	sky->setVector(airplaneVector);
+
+    Scene::update(dt);
+    if (airplan) {
+        if(_airplaneState == AirplaneStateUp){
+            if(airplan->getRotation() > - 15)
+                airplan->setRotation(airplan->getRotation() - 0.5f);
+        }else if(_airplaneState == AirplaneStateDown){
+            if(airplan->getRotation() <  15)
+                airplan->setRotation(airplan->getRotation() + 0.5f);
+        }else if(_airplaneState == AirplaneStateShake){
+            
+        }
+        
+        Vec2 airplaneVector = Vec2::forAngle(CC_DEGREES_TO_RADIANS(airplan->getRotation()));
+        airplaneVector.x = -airplaneVector.x;
+        airplaneVector *= 30;
+        sky->setVector(airplaneVector);
+    }
 }
 
 void SceneGame::showPlane() {
+    airplan = Airplane::create();
+    this->addChild(airplan);
+    helpers::setDesignPosEx(airplan, 1650, 0);
+    _airplanePosition = airplan->getPosition();
+    airplan->makeChain();
+    
+    _labelScore->runAction(FadeTo::create(0.2, 255));
     Vec2 pos = helpers::setDesignPosEx(airplan, 1650, 0);
     airplan->setPositionX(-3000);
     
@@ -219,17 +256,17 @@ void SceneGame::showPlane() {
     airplan->runAction(move);
     
     {
-        MoveTo* move = MoveTo::create(0.25, Vec2(1800, 200));
+        MoveTo* move = MoveTo::create(0.25, Vec2(btnUp->getPositionX(), btnUp->getContentSize().height / 2));
         EaseBackOut* back = EaseBackOut::create(move);
-        btnUp->runAction(Sequence::create(DelayTime::create(0.1), back, nullptr));
+        btnUp->runAction(Sequence::create(DelayTime::create(0.3), back, nullptr));
     }
     {
-        MoveTo* move = MoveTo::create(0.25, Vec2(2200, 200));
+        MoveTo* move = MoveTo::create(0.25, Vec2(btnDown->getPositionX(), btnDown->getContentSize().height / 2));
         EaseBackOut* back = EaseBackOut::create(move);
-        btnDown->runAction(Sequence::create(DelayTime::create(0.2), back, nullptr));
+        btnDown->runAction(Sequence::create(DelayTime::create(0.15), back, nullptr));
     }
     {
-        MoveTo* move = MoveTo::create(0.25, Vec2(1400, 200));
+        MoveTo* move = MoveTo::create(0.25, Vec2(btnShake->getPositionX(), btnShake->getContentSize().height / 2));
         EaseBackOut* back = EaseBackOut::create(move);
         btnShake->runAction(back);
     }
@@ -258,3 +295,7 @@ void SceneGame::runTint() {
     background->stopAllActions();
     background->runAction(RepeatForever::create(Sequence::create(tint_1, tint_2, tint_3, tint_4, tint_5, tint_6, tint_7, tint_8, NULL)));
 }
+
+
+
+

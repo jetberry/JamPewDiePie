@@ -39,6 +39,7 @@ private:
 	void update(float dt);
     
     void runTint();
+    void playScream();
     
     Airplane* airplan;
     Sky* sky;
