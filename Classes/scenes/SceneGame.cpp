@@ -379,8 +379,6 @@ void SceneGame::update(float dt)
     _countUpdate++;
     Scene::update(dt);
     
-    if (_isGameOver) return;
-    
     if (airplan) {
         airplan->updateAirplane(dt);
         if(_airplaneState == AirplaneStateUp){
@@ -413,12 +411,15 @@ void SceneGame::update(float dt)
                 }
             }
         }
-        
-        Vec2 airplaneVector = Vec2::forAngle(CC_DEGREES_TO_RADIANS(airplan->getRotation()));
-        airplaneVector.x = -airplaneVector.x;
-        airplaneVector *= 30;
-        sky->setVector(airplaneVector);
     }
+    
+//    if (_isGameOver) return;
+    
+    Vec2 airplaneVector = Vec2(1, 0);
+    if (airplan) airplaneVector = Vec2::forAngle(CC_DEGREES_TO_RADIANS(airplan->getRotation()));
+    airplaneVector.x = -airplaneVector.x;
+    airplaneVector *= 30;
+    sky->setVector(airplaneVector);
 }
 
 void SceneGame::showPlane() {
