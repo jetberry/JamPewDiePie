@@ -29,8 +29,6 @@ bool SceneGame::initWithPhysics()
 	}
     airplan = nullptr;
     NotificationCenter::getInstance()->addObserver(this, CC_CALLFUNCO_SELECTOR(SceneGame::onAddScore), "MSG_UPDATE_SCORE", nullptr);
-    
-    _airplaneState = AirplaneStateNone;
 
 	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Point::UNIT_Y * -1000);
@@ -46,7 +44,7 @@ bool SceneGame::initWithPhysics()
 	this->addChild(sky);
     
     btnShake = ui::Button::create("gamebuttons/button_shake.png", "gamebuttons/button_shake_h.png");
-    btnShake->setPosition(Vec2(Director::getInstance()->getWinSize().width - btnShake->getContentSize().width,
+    btnShake->setPosition(Vec2(Director::getInstance()->getOpenGLView()->getDesignResolutionSize().width - btnShake->getContentSize().width - 50,
                                btnShake->getContentSize().height / 2));
     btnShake->addTouchEventListener(CC_CALLBACK_2(SceneGame::onShake, this));
     btnShake->setPressedActionEnabled(true);
@@ -84,11 +82,14 @@ bool SceneGame::initWithPhysics()
     _labelScore->setOpacity(0);
     this->addChild(_labelScore);
     
-    m_menu = SceneMenu::create();
-    m_menu->setDelegate(this);
-    addChild(m_menu);
+//    m_menu = SceneMenu::create();
+//    m_menu->setDelegate(this);
+//    addChild(m_menu);
+    showPlane();
     
 	scheduleUpdate();
+    
+    setState(AirplaneStateNone);
     
 	return true;
 }
@@ -96,11 +97,11 @@ bool SceneGame::initWithPhysics()
 void SceneGame::onUp(Ref *pSender, ui::Widget::TouchEventType type)
 {
     if(type == ui::Widget::TouchEventType::BEGAN){
-        _airplaneState = AirplaneStateUp;
+        setState(AirplaneStateUp);
         SoundManager::getInstance()->playSound(sound_power_up, false, 0.5);
     }else if(type ==  ui::Widget::TouchEventType::ENDED ||
              type ==  ui::Widget::TouchEventType::CANCELED){
-        _airplaneState = AirplaneStateNone;
+        setState(AirplaneStateNone);
         SoundManager::getInstance()->pauseSound(sound_power_up);
     }
 }
@@ -108,17 +109,26 @@ void SceneGame::onUp(Ref *pSender, ui::Widget::TouchEventType type)
 void SceneGame::onDown(Ref *pSender, ui::Widget::TouchEventType type)
 {
     if(type == ui::Widget::TouchEventType::BEGAN){
-        _airplaneState = AirplaneStateDown;
+        setState(AirplaneStateDown);
         SoundManager::getInstance()->playSound(sound_power_down, false, 0.5);
     }else if(type ==  ui::Widget::TouchEventType::ENDED||
              type ==  ui::Widget::TouchEventType::CANCELED){
-        _airplaneState = AirplaneStateNone;
+        setState(AirplaneStateNone);
         SoundManager::getInstance()->pauseSound(sound_power_down);
     }
 }
 
 void SceneGame::onShake(Ref *pSender, ui::Widget::TouchEventType type)
 {
+//    // code for RESTART !!!!!!!!!!!!!!!!!!!!!!!
+//    if (!airplan) return;
+//    airplan->removeJoints();
+//    airplan->removeFromParent();
+//    airplan = nullptr;
+//    auto scene = SceneGame::createWithPhysics();
+//    Director::getInstance()->replaceScene(scene);
+//    return;
+    
     if(type == ui::Widget::TouchEventType::BEGAN){
         UserGameData::getInstance()->addScore(500);
         
@@ -163,16 +173,19 @@ void SceneGame::gravityShakeOff(){
     SoundManager::getInstance()->pauseSound(sound_scream_1);
     SoundManager::getInstance()->pauseSound(sound_scream_2);
     SoundManager::getInstance()->resumeSound(sound_best_loop);
-    tintDelay = 7.0;
+    tintDelay = 8.0;
     runTint();
     airplan->dropSomething();
 }
 
 void SceneGame::playScream() {
-    if (rand() % 2 == 0) {
+    int t = rand() % 3;
+    if (t == 0) {
         SoundManager::getInstance()->playSound(sound_scream_1, false, 1.0);
-    } else {
+    } else if (t == 1) {
         SoundManager::getInstance()->playSound(sound_scream_2, false, 1.0);
+    } else {
+        SoundManager::getInstance()->playSound(sound_haha, false, 1.0);
     }
 }
 
@@ -183,6 +196,44 @@ void SceneGame::onAddScore(Ref* obj){
 
 void SceneGame::update(float dt)
 {
+    if(_airplaneState == AirplaneStateUp){
+        if(airplan->getRotation() > - 15){
+            airplan->stopActionByTag(10);
+            airplan->setRotation(airplan->getRotation() - 0.5f);
+        }else{
+            setState(AirplaneStateNone);
+        }
+    }else if(_airplaneState == AirplaneStateDown){
+        if(airplan->getRotation() <  15){
+            airplan->stopActionByTag(10);
+            airplan->setRotation(airplan->getRotation() + 0.5f);
+        }else{
+            setState(AirplaneStateNone);
+        }
+    }else if(_airplaneState == AirplaneStateShake){
+        
+    }else{
+        if(!(_countUpdate % 25)){
+        _tumbler = !_tumbler;
+        if(_tumbler){
+            RotateBy* action = RotateBy::create(0.4, 0.5);
+            action->setTag(10);
+            airplan->runAction(action);
+        }else{
+            RotateBy* action = RotateBy::create(0.4, -0.5);
+            action->setTag(10);
+            airplan->runAction(action);
+        }
+        }
+    }
+    _countUpdate++;
+	Scene::update(dt);
+
+	Vec2 airplaneVector = Vec2::forAngle(CC_DEGREES_TO_RADIANS(airplan->getRotation()));
+	airplaneVector.x = -airplaneVector.x;
+	airplaneVector *= 30;
+	sky->setVector(airplaneVector);
+
     Scene::update(dt);
     if (airplan) {
         if(_airplaneState == AirplaneStateUp){
@@ -231,6 +282,15 @@ void SceneGame::showPlane() {
         EaseBackOut* back = EaseBackOut::create(move);
         btnShake->runAction(back);
     }
+}
+
+void SceneGame::setState(AirplaneState state){
+    if(state == AirplaneStateNone){
+        airplan->setAraplaneIsMoved(false);
+    }else{
+        airplan->setAraplaneIsMoved(true);
+    }
+    _airplaneState = state;
 }
 
 void SceneGame::runTint() {

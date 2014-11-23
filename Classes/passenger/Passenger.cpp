@@ -54,6 +54,7 @@ void Passenger::enterToToilet()
 
 void Passenger::moveToToilet()
 {
+    setZOrder(10);
 	state = MOVING_TO_TOILET;
 	setTarget(TOILET_POS);
 }
@@ -66,6 +67,7 @@ void Passenger::moveToSeat()
 
 void Passenger::seatDown()
 {
+    setZOrder(-5);
 	setPicture("airplane/passengers/seat.png");
 	state = SEAT;
 	nextActionTime = getUpdateCounter() + (((rand() % 10) + 5) * 60);

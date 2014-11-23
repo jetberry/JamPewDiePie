@@ -9,6 +9,11 @@
 #include "../scenes/SceneGame.h"
 USING_NS_CC;
 
+Airplane::~Airplane() {
+    m_arrBananas->release();
+    m_arrBoobliks->release();
+}
+
 bool Airplane::init()
 {
 	// wall
@@ -50,7 +55,7 @@ bool Airplane::init()
     }
 	auto sprite = Sprite::create("airplane/airplane.png");
 	sprite->setPosition(Vec2(888,0));
-	this->addChild(sprite, 0);
+	this->addChild(sprite, -10);
 
 	auto toilet = Toilet::create();
 	addChild(toilet);
@@ -61,6 +66,7 @@ bool Airplane::init()
 		passenger->setSeatPosition(Vec2(350 + i * 230, 4));
 		passenger->assignToilet(toilet);
 		this->addChild(passenger);
+        creatChair(passenger->getPosition());
 	}
 
 	Steward* steward = Steward::create();
@@ -70,18 +76,15 @@ bool Airplane::init()
 	this->addChild(trolley);
 	steward->assignTrolley(trolley);
 
-
-	auto* part0 = Sprite::create("airplane/passengers/part.png");
-	part0->setPosition(Vec2(1042, -28));
-	this->addChild(part0);
-
+    _pilot = Pilot::create();
+    _pilot->setPosition(1440, 50);
+    addChild(_pilot);
 
 	auto* alarm = Sprite::create("airplane/alarm.png");
 	alarm->setPosition(Vec2(1250, 150));
 	this->addChild(alarm);
 	RotateBy* rotateBy = RotateBy::create(0.5, 360);
 	alarm->runAction(RepeatForever::create(rotateBy));
-
 
 	loadBaggage();
     
@@ -114,6 +117,18 @@ void Airplane::loadBaggage()
 	}
 }
 
+
+void Airplane::setAraplaneIsMoved(bool flag){
+    _pilot->setAraplaneIsMoved(flag);
+}
+
+void Airplane::creatChair(Vec2 passengetPosition){
+    auto* chair = Sprite::create("airplane/chair.png");
+    passengetPosition.y -= 28;
+    chair->setPosition(passengetPosition);
+    this->addChild(chair,1);
+}
+    
 void Airplane::makeChain() {
     
     {
@@ -175,7 +190,7 @@ void Airplane::makeChain() {
             prev_body = body;
             this->addChild(sprite);
             sprite->setPosition(start_banan.x, start_banan.y - 10 * i);
-            m_arrBananas->addObject((Ref*)joint);
+            m_arrBoobliks->addObject((Ref*)joint);
         }
     }
 }
@@ -183,12 +198,12 @@ void Airplane::makeChain() {
 void Airplane::dropSomething() {
     PhysicsJointLimit* joint = nullptr;
     if (rand() % 2 == 0) { // уронить баранку
-        if (m_arrBoobliks->count() > 0) {
+        if (m_arrBoobliks && m_arrBoobliks->count() > 0) {
             joint = (PhysicsJointLimit*)m_arrBoobliks->getLastObject();
             m_arrBoobliks->removeLastObject();
         }
     } else { // уронить банан
-        if (m_arrBananas->count() > 0) {
+        if (m_arrBananas && m_arrBananas->count() > 0) {
             joint = (PhysicsJointLimit*)m_arrBananas->getLastObject();
             m_arrBananas->removeLastObject();
         }
@@ -199,3 +214,8 @@ void Airplane::dropSomething() {
     }
 }
 
+void Airplane::removeJoints() {
+    for (int i = 0; i < 15; i++) {
+        dropSomething();
+    }
+}
