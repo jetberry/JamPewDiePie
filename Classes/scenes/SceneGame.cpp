@@ -39,7 +39,7 @@ bool SceneGame::initWithPhysics()
     airplan = nullptr;
     NotificationCenter::getInstance()->addObserver(this, CC_CALLFUNCO_SELECTOR(SceneGame::onAddScore), "MSG_UPDATE_SCORE", nullptr);
 
-	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+//	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Point::UNIT_Y * -1000);
     this->getPhysicsWorld()->setAutoStep(true);
 
@@ -154,6 +154,7 @@ void SceneGame::restart(Ref * sender, Control::EventType controlEvent) {
 }
 
 void SceneGame::runFewPopins(int count) {
+    UserGameData::getInstance()->addScore(10 * count);
     for (int i = 0; i < m_popins->count() && count > 0; i++) {
         Sprite* pop = static_cast<Sprite*>(m_popins->getObjectAtIndex(i));
         int actions = pop->getNumberOfRunningActions();
@@ -218,7 +219,7 @@ void SceneGame::onShake(Ref *pSender, ui::Widget::TouchEventType type) {
         checkActions();
         setState(AirplaneStateShake);
         
-        UserGameData::getInstance()->addScore(500);
+        UserGameData::getInstance()->addScore(30);
         
         SoundManager::getInstance()->pauseSound(sound_best_loop);
         SoundManager::getInstance()->playSound(sound_harkem_shake, false, 0.8);
@@ -255,16 +256,22 @@ void SceneGame::checkActions() {
             planeMoves.at(planeMoves.size() - 3)->getValue() == 2 &&
             planeMoves.at(planeMoves.size() - 4)->getValue() == 1) {
             airplan->dropMasks();
+            _power += 20;
+            onChangePower(nullptr);
         } else if (planeMoves.at(planeMoves.size() - 1)->getValue() == 1 && // попинс
                    planeMoves.at(planeMoves.size() - 2)->getValue() == 1 &&
                    planeMoves.at(planeMoves.size() - 3)->getValue() == 2 &&
                    planeMoves.at(planeMoves.size() - 4)->getValue() == 2) {
             runFewPopins(2);
+            _power += 20;
+            onChangePower(nullptr);
         } else if (planeMoves.at(planeMoves.size() - 1)->getValue() == 3 && // куча попинсов
                    planeMoves.at(planeMoves.size() - 2)->getValue() == 2 &&
                    planeMoves.at(planeMoves.size() - 3)->getValue() == 2 &&
                    planeMoves.at(planeMoves.size() - 4)->getValue() == 1) {
             runFewPopins(8);
+            _power += 100;
+            onChangePower(nullptr);
         } else {
             
         }
@@ -289,6 +296,7 @@ void SceneGame::gravityShakeOff(){
     airplan->dropSomething();
     airplan->deattachOneMask();
     
+    SoundManager::getInstance()->playSound(sound_drop_item, false, 1.0);
 	NotificationCenter::getInstance()->postNotification("shake-off");
 }
 
@@ -379,8 +387,6 @@ void SceneGame::update(float dt)
     _countUpdate++;
     Scene::update(dt);
     
-    if (_isGameOver) return;
-    
     if (airplan) {
         airplan->updateAirplane(dt);
         if(_airplaneState == AirplaneStateUp){
@@ -413,12 +419,15 @@ void SceneGame::update(float dt)
                 }
             }
         }
-        
-        Vec2 airplaneVector = Vec2::forAngle(CC_DEGREES_TO_RADIANS(airplan->getRotation()));
-        airplaneVector.x = -airplaneVector.x;
-        airplaneVector *= 30;
-        sky->setVector(airplaneVector);
     }
+    
+//    if (_isGameOver) return;
+    
+    Vec2 airplaneVector = Vec2(1, 0);
+    if (airplan) airplaneVector = Vec2::forAngle(CC_DEGREES_TO_RADIANS(airplan->getRotation()));
+    airplaneVector.x = -airplaneVector.x;
+    airplaneVector *= 30;
+    sky->setVector(airplaneVector);
 }
 
 void SceneGame::showPlane() {

@@ -4,11 +4,13 @@
 #include "../passenger/Passenger.h"
 #include "../passenger/Steward.h"
 #include "../passenger/Trolley.h"
+#include "../passenger/Nerd.h"
 #include "Toilet.h"
 #include "json/document.h"
 #include "../scenes/SceneGame.h"
 #include <iomanip>
 #include "HandLuggageSpaces.h"
+#include "../UserGameData.h"
 
 USING_NS_CC;
 
@@ -40,6 +42,35 @@ bool Airplane::init()
     bottom->setPositionY(-300/2 + 10);
     this->addChild(bottom);
 
+    {
+        Vec2 start_banan = Vec2(1330, 190);
+        auto sprite = Sprite::create("bottle_1.png");
+        PhysicsMaterial material(0.1f, 0.15f, 0.1f);
+        PhysicsBody* body = PhysicsBody::createBox(sprite->getContentSize(), material);
+        sprite->setPhysicsBody(body);
+        this->addChild(sprite);
+        sprite->setPosition(start_banan);
+    }
+    {
+        Vec2 start_banan = Vec2(750, 170);
+        auto sprite = Sprite::create("bottle_2.png");
+        PhysicsMaterial material(0.1f, 0.15f, 0.1f);
+        PhysicsBody* body = PhysicsBody::createBox(sprite->getContentSize(), material);
+        sprite->setPhysicsBody(body);
+        this->addChild(sprite);
+        sprite->setPosition(start_banan);
+        sprite->setZOrder(1000);
+    }
+    {
+        Vec2 start_banan = Vec2(1300, 220);
+        auto sprite = Sprite::create("bottle_3.png");
+        PhysicsMaterial material(0.1f, 0.15f, 0.1f);
+        PhysicsBody* body = PhysicsBody::createBox(sprite->getContentSize(), material);
+        sprite->setPhysicsBody(body);
+        this->addChild(sprite);
+        sprite->setPosition(start_banan);
+    }
+    
     float x = 0;
     float y = 0;
     { // кабина пилота
@@ -99,7 +130,7 @@ bool Airplane::init()
 	this->addChild(trolley);
 	steward->assignTrolley(trolley);
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 1; i < 4; i++)
 	{
 		std::stringstream ss;
 		ss << "airplane/people/passengers/" << std::setfill('0') << std::setw(4) << (i % 3) << "/";
@@ -110,6 +141,8 @@ bool Airplane::init()
 		this->addChild(passenger);
         createChair(passenger->getPosition() + Vec2(25, -75));
 	}
+
+	addChild(Nerd::create());
 
     _pilot = Pilot::create();
     _pilot->setPosition(1440, 50);
@@ -254,6 +287,7 @@ void Airplane::dropSomething() {
     if (joint) {
         SceneGame* game = static_cast<SceneGame*>(getParent());
         game->getPhysicsWorld()->removeJoint(joint);
+        UserGameData::getInstance()->addScore(10);        
     }
 }
 
@@ -310,6 +344,8 @@ void Airplane::creatHandLuggageSpaces(){
 
 void Airplane::dropMasks() {
     if (isMasks) return;
+
+    UserGameData::getInstance()->addScore(100);
     isMasks = true;
     m_arrMasks = __Array::create();
     m_arrMasks->retain();
