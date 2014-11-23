@@ -30,6 +30,8 @@ private:
     
     void onAddScore(Ref* obj);
     
+    void setState(AirplaneState state);
+    
     void gravityShakeUp();
     void gravityShakeDown();
     void gravityShakeOff();
@@ -48,6 +50,9 @@ private:
     cocos2d::Label* _labelScore;
     
     cocos2d::Vec2 _airplanePosition;
+    
+    bool _tumbler;
+    int _countUpdate;
 
     SceneMenu* m_menu;
     
