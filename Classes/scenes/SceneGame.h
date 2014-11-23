@@ -48,6 +48,8 @@ private:
     void restart(Ref * sender, Control::EventType controlEvent);
     
     void showFinish();
+    
+    void checkActions();
     Airplane* airplan;
     Sky* sky;
     
@@ -80,4 +82,5 @@ private:
     
     __Array* m_popins;
     Vector<SpriteFrame*> animFrames;
+    Vector<__Integer*> planeMoves;
 };

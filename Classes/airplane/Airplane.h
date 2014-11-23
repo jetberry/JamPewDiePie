@@ -43,4 +43,6 @@ private:
     cocos2d::__Array* m_arrBananas;
     cocos2d::__Array* m_arrBoobliks;
     cocos2d::__Array* m_arrMasks;
+    
+    bool isMasks;
 };
