@@ -23,7 +23,7 @@ bool Steward::init()
 	stayAtKitchen();
 	handleTrolley = false;
 
-	setPicture("airplane/people/steward", 0);
+	setPicture("airplane/people/steward/go", 0);
 	createBody();
 
 	return true;
@@ -110,7 +110,7 @@ void Steward::updateMovingToRight(float dt)
 
 void Steward::updateMovingAnim()
 {
-	setPicture("airplane/people/steward", getUpdateCounter() % 14);
+	setPicture("airplane/people/steward/go", getUpdateCounter() % 15);
 	this->setFlippedX(getDirection() == DIRECTION_RIGHT);
 }
 

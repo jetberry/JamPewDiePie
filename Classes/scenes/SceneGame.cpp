@@ -30,7 +30,7 @@ bool SceneGame::initWithPhysics()
     airplan = nullptr;
     NotificationCenter::getInstance()->addObserver(this, CC_CALLFUNCO_SELECTOR(SceneGame::onAddScore), "MSG_UPDATE_SCORE", nullptr);
 
-	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+//	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Point::UNIT_Y * -1000);
     this->getPhysicsWorld()->setAutoStep(true);
 
@@ -227,6 +227,7 @@ void SceneGame::update(float dt)
         }
     }
     _countUpdate++;
+    airplan->updateAirplane(dt);
 	Scene::update(dt);
 
 	Vec2 airplaneVector = Vec2::forAngle(CC_DEGREES_TO_RADIANS(airplan->getRotation()));

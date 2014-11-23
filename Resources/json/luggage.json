@@ -3,22 +3,27 @@
 		{
 			"x": 200,
 			"y": -180,
+			"file": "airplane/luggage/box0001.png"
+		},
+		{
+			"x": 400,
+			"y": -180,
 			"file": "airplane/luggage/box0000.png"
 		},
 		{
 			"x": 500,
 			"y": -180,
-			"file": "airplane/luggage/box0001.png"
+			"file": "airplane/luggage/box0002.png"
 		},
 		{
-			"x": 500,
-			"y": 180,
-			"file": "airplane/luggage/box0001.png"
-		},
-		{
-			"x": 500,
-			"y": 180,
-			"file": "airplane/luggage/box0001.png"
-		}
+			"x": 600,
+			"y": -180,
+			"file": "airplane/luggage/box0003.png"
+        },
+        {
+            "x": 100,
+            "y": -180,
+            "file": "airplane/luggage/box0000.png"
+        }
 	]
 }

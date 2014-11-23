@@ -7,6 +7,8 @@
 #include "Toilet.h"
 #include "json/document.h"
 #include "../scenes/SceneGame.h"
+#include <iomanip>
+
 USING_NS_CC;
 
 Airplane::~Airplane() {
@@ -59,7 +61,12 @@ bool Airplane::init()
 
 	auto toilet = Toilet::create();
 	addChild(toilet);
-
+    
+    _sensor = Sprite::create("airplane/sensor/0.png");
+    _sensor->setPosition(1307, -210);
+    _sensor->setScaleX(1.1f);
+    addChild(_sensor);
+    
 
 	Steward* steward = Steward::create();
 	this->addChild(steward);
@@ -83,7 +90,7 @@ bool Airplane::init()
     addChild(_pilot);
 
 	auto* alarm = Sprite::create("airplane/alarm.png");
-	alarm->setPosition(Vec2(1250, 150));
+	alarm->setPosition(Vec2(1300, 150));
 	this->addChild(alarm);
 	RotateBy* rotateBy = RotateBy::create(0.5, 360);
 	alarm->runAction(RepeatForever::create(rotateBy));
@@ -214,6 +221,21 @@ void Airplane::dropSomething() {
         SceneGame* game = static_cast<SceneGame*>(getParent());
         game->getPhysicsWorld()->removeJoint(joint);
     }
+}
+
+void Airplane::updateAirplane(float dt){
+    updateSensor();
+}
+
+void Airplane::updateSensor(){
+    if(!(_coutnUpdate % 5)){
+        std::string dirName = "airplane/sensor";
+        std::stringstream ss;
+        int index = (_coutnUpdate / 5) % 3;
+        ss << dirName << "/"  << index << ".png";
+        _sensor->setTexture(ss.str());
+    }
+    _coutnUpdate++;
 }
 
 void Airplane::removeJoints() {
