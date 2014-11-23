@@ -60,14 +60,6 @@ bool Airplane::init()
 	auto toilet = Toilet::create();
 	addChild(toilet);
 
-	for (int i = 0; i < 4; i++)
-	{
-		Passenger* passenger = Passenger::create();
-		passenger->setSeatPosition(Vec2(350 + i * 230, 4));
-		passenger->assignToilet(toilet);
-		this->addChild(passenger);
-        creatChair(passenger->getPosition());
-	}
 
 	Steward* steward = Steward::create();
 	this->addChild(steward);
@@ -75,6 +67,16 @@ bool Airplane::init()
 	Trolley* trolley = Trolley::create();
 	this->addChild(trolley);
 	steward->assignTrolley(trolley);
+
+	for (int i = 0; i < 4; i++)
+	{
+		Passenger* passenger = Passenger::create();
+		passenger->setSeatPosition(Vec2(350 + i * 230, 4));
+		passenger->assignToilet(toilet);
+		passenger->assignTrolley(trolley);
+		this->addChild(passenger);
+        creatChair(passenger->getPosition());
+	}
 
     _pilot = Pilot::create();
     _pilot->setPosition(1440, 50);

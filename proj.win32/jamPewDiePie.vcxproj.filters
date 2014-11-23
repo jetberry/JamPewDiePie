@@ -66,6 +66,9 @@
       <Filter>SoundManager</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\UserGameData.cpp" />
+    <ClCompile Include="..\Classes\passenger\Pilot.cpp">
+      <Filter>passenger</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -110,6 +113,9 @@
       <Filter>SoundManager</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\UserGameData.h" />
+    <ClInclude Include="..\Classes\passenger\Pilot.h">
+      <Filter>passenger</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

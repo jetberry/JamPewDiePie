@@ -12,8 +12,10 @@ bool Passenger::init()
 	setPicture("airplane/passengers/stand0.png");
 	createBody();
 	toilet = nullptr;
+	trolley = nullptr;
 	nextActionTime = 0;
 	seatDown();
+	movingSpeed = MOVING_SPEED;
 
 	return true;
 }
@@ -43,6 +45,11 @@ void Passenger::update(float dt)
 	}
 
 	Man::update(dt);
+}
+
+void Passenger::assignTrolley(Trolley* trolley)
+{
+	this->trolley = trolley;
 }
 
 void Passenger::enterToToilet()
@@ -98,6 +105,7 @@ void Passenger::updateMovingToToilet(float dt)
 	if (!isOnTarget())
 	{
 		movingToTarget();
+		checkTrolleyCollision();
 		updateMovingAnim();
 		return;
 	}
@@ -117,6 +125,7 @@ void Passenger::updateMovingToSeat(float dt)
 	if (!isOnTarget())
 	{
 		movingToTarget();
+		checkTrolleyCollision();
 		updateMovingAnim();
 		return;
 	}
@@ -176,4 +185,25 @@ void Passenger::updateToiletExiting(float dt)
 	toilet->closeDoor();
 	toilet->free();
 	moveToSeat();
+}
+
+void Passenger::checkTrolleyCollision()
+{
+	if (!trolley)
+		return;
+
+	float trolleyPos = trolley->getPositionX();
+	float trolleyWidth = trolley->getContentSize().width;
+
+	float delta = trolleyPos - getPositionX();
+	float distance = abs(delta);
+
+	if (distance > trolleyWidth)
+		return;
+
+	if (delta > 0)
+		setPositionX(trolleyPos - trolleyWidth);
+	else
+		setPositionX(trolleyPos + trolleyWidth);
+
 }

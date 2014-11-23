@@ -1,7 +1,7 @@
 #pragma once
 
 #include "cocos2d.h"
-#include "Pilot.h"
+#include "../Passenger/Pilot.h"
 
 class Airplane : public cocos2d::Node
 {

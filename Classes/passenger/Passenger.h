@@ -2,6 +2,7 @@
 
 #include "Man.h"
 #include "../airplane/Toilet.h"
+#include "Trolley.h"
 
 class Passenger : public Man
 {
@@ -11,8 +12,14 @@ public:
 
 	void setSeatPosition(cocos2d::Vec2 pos);
 	void assignToilet(Toilet* toilet);
+	void assignTrolley(Trolley* trolley);
 
 private:
+
+	enum Const
+	{
+		MOVING_SPEED = 6
+	};
 
 	enum States
 	{
@@ -27,11 +34,15 @@ private:
 	cocos2d::Vec2 seatPos;
 	States state;
 	Toilet* toilet;
+	Trolley* trolley;
 
 	int nextActionTime;
 
 	virtual bool init() override;
 	virtual void update(float dt) override;
+
+
+	void checkTrolleyCollision();
 
 	void enterToToilet();
 	void moveToToilet();

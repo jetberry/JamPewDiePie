@@ -13,6 +13,7 @@ bool Man::init()
 
 	currentPicture.clear();
 	updateCounter = 0;
+	movingSpeed = DEFAULT_MOVING_SPEED;
 	setZOrder(10);
 
 	return true;
@@ -68,10 +69,10 @@ void Man::movingToTarget()
 
 	this->setFlippedX(direction < 0);
 
-	if (abs(delta) < MOVING_SPEED)
+	if (abs(delta) < movingSpeed)
 		x = target;
 	else
-		x += direction * MOVING_SPEED;
+		x += direction * movingSpeed;
 
 	this->setPositionX(x);
 }
@@ -87,7 +88,7 @@ Man::Direction Man::getDirection() const
 	float delta = target - x;
 	float direction = helpers::sgn(delta);
 
-	if (abs(delta) < MOVING_SPEED)
+	if (abs(delta) < movingSpeed)
 		return DIRECTION_UNKNOW;
 
 	if (direction < 0)
