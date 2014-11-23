@@ -206,6 +206,8 @@ void SceneGame::onDown(Ref *pSender, ui::Widget::TouchEventType type)
 }
 
 void SceneGame::onShake(Ref *pSender, ui::Widget::TouchEventType type) {
+    airplan->dropMasks();
+    return;
     _power -= 15;
     onChangePower(nullptr);
     
