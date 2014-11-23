@@ -67,13 +67,13 @@ void Passenger::seatDown()
 {
 	setPicture("airplane/passengers/seat.png");
 	state = SEAT;
-	seatTime = getUpdateCounter();
+	nextActionTime = getUpdateCounter() + (((rand() % 10) + 5) * 60);
 	this->setFlippedX(false);
 }
 
 void Passenger::updateSeat(float dt)
 {
-	if (getUpdateCounter() - seatTime < 60)
+	if (getUpdateCounter() < nextActionTime)
 		return;
 
 	if (!(rand() % 60))

@@ -19,6 +19,9 @@
     <Filter Include="passenger">
       <UniqueIdentifier>{0e7176fa-d40d-4870-b727-16ea57230f93}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SoundManager">
+      <UniqueIdentifier>{4e69710b-7d1a-4ff1-8eeb-f75be92d16fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -59,6 +62,10 @@
     <ClCompile Include="..\Classes\airplane\Toilet.cpp">
       <Filter>airplane</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\SoundManager\SoundManager.cpp">
+      <Filter>SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UserGameData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -99,6 +106,10 @@
     <ClInclude Include="..\Classes\airplane\Toilet.h">
       <Filter>airplane</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\SoundManager\SoundManager.h">
+      <Filter>SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UserGameData.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

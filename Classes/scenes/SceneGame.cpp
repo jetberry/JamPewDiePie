@@ -1,7 +1,7 @@
 #include "SceneGame.h"
 #include "../Helpers.h"
 #include "../airplane/Character.h"
-#include "SoundManager.h"
+#include "../SoundManager/SoundManager.h"
 #include "UserGameData.h"
 
 USING_NS_CC;

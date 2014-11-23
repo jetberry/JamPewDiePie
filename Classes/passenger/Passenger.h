@@ -28,7 +28,6 @@ private:
 	States state;
 	Toilet* toilet;
 
-	int seatTime;
 	int nextActionTime;
 
 	virtual bool init() override;
