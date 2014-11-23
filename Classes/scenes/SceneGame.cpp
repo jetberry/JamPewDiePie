@@ -143,7 +143,6 @@ void SceneGame::createPopins() {
 }
 
 void SceneGame::restart(Ref * sender, Control::EventType controlEvent) {
-    // code for RESTART !!!!!!!!!!!!!!!!!!!!!!!
     if (airplan) return;
     showPlane();
 }
@@ -151,6 +150,9 @@ void SceneGame::restart(Ref * sender, Control::EventType controlEvent) {
 void SceneGame::runFewPopins(int count) {
     for (int i = 0; i < m_popins->count() && count > 0; i++) {
         Sprite* pop = static_cast<Sprite*>(m_popins->getObjectAtIndex(i));
+        int actions = pop->getNumberOfRunningActions();
+        if (actions > 1) continue;
+        
         if (pop->getPositionY() <= -pop->getContentSize().height ||
             pop->getPositionY() > Director::getInstance()->getWinSize().height + pop->getContentSize().height) { // тогда можно трогать
             
@@ -311,6 +313,7 @@ void SceneGame::onChangePower(Ref* obj){
         m_menu->showTitle(true);
         
         // проиграть звук быдыщ
+        SoundManager::getInstance()->pauseSound(sound_best_loop);
         SoundManager::getInstance()->playSound(sound_plane_crash, false, 1.0);
     }
 }
@@ -336,13 +339,6 @@ void SceneGame::update(float dt)
     Scene::update(dt);
     
     if (_isGameOver) return;
-
-//	Vec2 airplaneVector = Vec2::forAngle(CC_DEGREES_TO_RADIANS(airplan->getRotation()));
-//	airplaneVector.x = -airplaneVector.x;
-//	airplaneVector *= 30;
-//	sky->setVector(airplaneVector);
-
-    Scene::update(dt);
     
     if (airplan) {
         airplan->updateAirplane(dt);
@@ -441,6 +437,8 @@ void SceneGame::showPlane() {
     runTint();
     
     m_menu->showTitle(false);
+    
+    SoundManager::getInstance()->resumeSound(sound_best_loop);
 }
 
 void SceneGame::setState(AirplaneState state){
