@@ -2,6 +2,7 @@
 #include "scenes/SceneMenu.h"
 #include "scenes/SceneFinish.h"
 #include "scenes/SceneGame.h"
+#include "SoundManager.h"
 
 USING_NS_CC;
 
@@ -72,6 +73,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 void AppDelegate::applicationDidEnterBackground() {
     Director::getInstance()->stopAnimation();
 
+    cocos2d::experimental::AudioEngine::pauseAll();
     // if you use SimpleAudioEngine, it must be pause
     // SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 }
@@ -80,6 +82,8 @@ void AppDelegate::applicationDidEnterBackground() {
 void AppDelegate::applicationWillEnterForeground() {
     Director::getInstance()->startAnimation();
 
+    cocos2d::experimental::AudioEngine::resume(sound_best_loop);
+    cocos2d::experimental::AudioEngine::resume(sound_noise_loop);
     // if you use SimpleAudioEngine, it must resume here
     // SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
 }
