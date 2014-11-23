@@ -2,6 +2,7 @@
 #include "../Helpers.h"
 #include "../airplane/Character.h"
 #include "SoundManager.h"
+#include "UserGameData.h"
 
 USING_NS_CC;
 
@@ -26,6 +27,8 @@ bool SceneGame::initWithPhysics()
 	{
 		return false;
 	}
+    
+    NotificationCenter::getInstance()->addObserver(this, CC_CALLFUNCO_SELECTOR(SceneGame::onAddScore), "MSG_UPDATE_SCORE", nullptr);
     
     _airplaneState = AirplaneStateNone;
 
@@ -67,6 +70,15 @@ bool SceneGame::initWithPhysics()
     btnShake->setPressedActionEnabled(true);
     this->addChild(btnShake);
 
+
+    _labelScore = Label::create();
+    _labelScore->setPosition(Vec2(2200, 1436));
+    _labelScore->setTextColor(Color4B::BLACK);
+    _labelScore->setSystemFontSize(100);
+    onAddScore(nullptr);
+    
+    this->addChild(_labelScore);
+    
     m_menu = SceneMenu::create();
     m_menu->setDelegate(this);
     addChild(m_menu);
@@ -103,7 +115,10 @@ void SceneGame::onDown(Ref *pSender, ui::Widget::TouchEventType type)
 void SceneGame::onShake(Ref *pSender, ui::Widget::TouchEventType type)
 {
     if(type == ui::Widget::TouchEventType::BEGAN){
+        UserGameData::getInstance()->addScore(500);
+        
         airplan->stopAllActions();
+        airplan->setPosition(_airplanePosition);
         float _time = 0.08f;
         
         MoveBy* moveUp = MoveBy::create(_time, Vec2(0,200));
@@ -135,6 +150,10 @@ void SceneGame::gravityShakeOff(){
     this->getPhysicsWorld()->setGravity(Point::UNIT_Y * -1000);
 }
 
+void SceneGame::onAddScore(Ref* obj){
+    int score = UserGameData::getInstance()->getScore();
+    _labelScore->setString(__String::createWithFormat("%d",score)->getCString());
+}
 
 void SceneGame::update(float dt)
 {
