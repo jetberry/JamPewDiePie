@@ -29,19 +29,24 @@ void Pilot::update(float dt){
 }
 
 void Pilot::setAraplaneIsMoved(bool flag){
-    if(flag)
-        _frequencyAnimation = 1;
-    else
-        _frequencyAnimation = 6;
+    if(_isAnimation)
+        return;
+    _isAnimation = flag;
+    _frameCounter = 0;
 }
 
 void Pilot::updateAnim(){
+    if(_isAnimation){
     if (!(getUpdateCounter() % _frequencyAnimation)){
-        int currentFrame = (getUpdateCounter() / _frequencyAnimation) % 20;
+        int currentFrame = _frameCounter;
         if(currentFrame >= 10)
             currentFrame = currentFrame - (currentFrame % 10) * 2 - 1;
         setPicture("airplane/people/pilot", currentFrame);
+        
+        _frameCounter++;
+        if(_frameCounter >= 20)
+            _isAnimation = false;
     }
-    
+    }
     this->setFlippedX(getDirection() == DIRECTION_LEFT);
 }
