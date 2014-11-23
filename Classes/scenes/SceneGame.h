@@ -23,7 +23,8 @@ private:
         AirplaneStateDown,
         AirplaneStateShake,
     };
-
+    void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);
+    
 	void onUp(Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
     void onDown(Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
     void onShake(Ref *pSender, cocos2d::ui::Widget::TouchEventType type);

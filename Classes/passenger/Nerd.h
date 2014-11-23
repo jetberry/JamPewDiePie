@@ -13,7 +13,7 @@ protected:
 	virtual bool init() override;
 	virtual void update(float dt) override;
 
-	int timeToDead;
+	float timeToDead;
 
     bool isDead;
 };
