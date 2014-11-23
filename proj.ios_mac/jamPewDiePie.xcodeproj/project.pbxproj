@@ -76,6 +76,12 @@
 		F04EB7E61A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */; };
 		F04EB7EA1A20D8AF008EC8B6 /* Passenger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F04EB7E81A20D8AF008EC8B6 /* Passenger.cpp */; };
 		F04EB7EB1A20D8AF008EC8B6 /* Passenger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F04EB7E81A20D8AF008EC8B6 /* Passenger.cpp */; };
+		F0783EE61A21CD4600CA6F7D /* Man.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0783EE01A21CD4600CA6F7D /* Man.cpp */; };
+		F0783EE71A21CD4600CA6F7D /* Man.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0783EE01A21CD4600CA6F7D /* Man.cpp */; };
+		F0783EE81A21CD4600CA6F7D /* Steward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0783EE21A21CD4600CA6F7D /* Steward.cpp */; };
+		F0783EE91A21CD4600CA6F7D /* Steward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0783EE21A21CD4600CA6F7D /* Steward.cpp */; };
+		F0783EEA1A21CD4600CA6F7D /* Trolley.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0783EE41A21CD4600CA6F7D /* Trolley.cpp */; };
+		F0783EEB1A21CD4600CA6F7D /* Trolley.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0783EE41A21CD4600CA6F7D /* Trolley.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +184,12 @@
 		F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeue-Bold.ttf"; sourceTree = "<group>"; };
 		F04EB7E81A20D8AF008EC8B6 /* Passenger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Passenger.cpp; sourceTree = "<group>"; };
 		F04EB7E91A20D8AF008EC8B6 /* Passenger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Passenger.h; sourceTree = "<group>"; };
+		F0783EE01A21CD4600CA6F7D /* Man.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Man.cpp; sourceTree = "<group>"; };
+		F0783EE11A21CD4600CA6F7D /* Man.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Man.h; sourceTree = "<group>"; };
+		F0783EE21A21CD4600CA6F7D /* Steward.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Steward.cpp; sourceTree = "<group>"; };
+		F0783EE31A21CD4600CA6F7D /* Steward.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Steward.h; sourceTree = "<group>"; };
+		F0783EE41A21CD4600CA6F7D /* Trolley.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Trolley.cpp; sourceTree = "<group>"; };
+		F0783EE51A21CD4600CA6F7D /* Trolley.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trolley.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -399,6 +411,12 @@
 		F04EB7E71A20D8AF008EC8B6 /* passenger */ = {
 			isa = PBXGroup;
 			children = (
+				F0783EE01A21CD4600CA6F7D /* Man.cpp */,
+				F0783EE11A21CD4600CA6F7D /* Man.h */,
+				F0783EE21A21CD4600CA6F7D /* Steward.cpp */,
+				F0783EE31A21CD4600CA6F7D /* Steward.h */,
+				F0783EE41A21CD4600CA6F7D /* Trolley.cpp */,
+				F0783EE51A21CD4600CA6F7D /* Trolley.h */,
 				F04EB7E81A20D8AF008EC8B6 /* Passenger.cpp */,
 				F04EB7E91A20D8AF008EC8B6 /* Passenger.h */,
 			);
@@ -555,10 +573,13 @@
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				F04EB7EA1A20D8AF008EC8B6 /* Passenger.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				F0783EE81A21CD4600CA6F7D /* Steward.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				45D80FB81A1F25CB00864B2C /* Helpers.cpp in Sources */,
 				45D15AE31A2062E60024FDBE /* Sky.cpp in Sources */,
+				F0783EE61A21CD4600CA6F7D /* Man.cpp in Sources */,
 				45C794871A1F396000E97905 /* SceneGame.cpp in Sources */,
+				F0783EEA1A21CD4600CA6F7D /* Trolley.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,6 +588,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F04EB7EB1A20D8AF008EC8B6 /* Passenger.cpp in Sources */,
+				F0783EE71A21CD4600CA6F7D /* Man.cpp in Sources */,
+				F0783EE91A21CD4600CA6F7D /* Steward.cpp in Sources */,
 				45D15AE41A2062E60024FDBE /* Sky.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				45C794A01A1F3C8F00E97905 /* Airplane.cpp in Sources */,
@@ -575,6 +598,7 @@
 				45D80FB91A1F25CB00864B2C /* Helpers.cpp in Sources */,
 				45C7948A1A1F396000E97905 /* SceneMenu.cpp in Sources */,
 				45C794861A1F396000E97905 /* SceneFinish.cpp in Sources */,
+				F0783EEB1A21CD4600CA6F7D /* Trolley.cpp in Sources */,
 				45C794881A1F396000E97905 /* SceneGame.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -29,7 +29,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLViewImpl::create("My Game");
+        glview = GLViewImpl::create("Wonky Monkey");
         director->setOpenGLView(glview);
     }
 
@@ -63,7 +63,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 
     auto scene = SceneGame::createWithPhysics();
-    //auto scene = SceneMenu::createScene();
     director->runWithScene(scene);
 
     return true;

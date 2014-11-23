@@ -40,10 +40,9 @@ bool SceneGame::initWithPhysics()
 	this->addChild(sky);
 
 	airplan = Airplane::create();
-//	helpers::setOnCenter(airplan);
-    helpers::setDesignPosEx(airplan, 1366, 0);
+    airplan->setPositionX(-3000);
+    
 	this->addChild(airplan);
-
 
 
 	ui::Button* btnUp = ui::Button::create("menu/play.png");
@@ -60,7 +59,10 @@ bool SceneGame::initWithPhysics()
     btnDown->setPressedActionEnabled(true);
     this->addChild(btnDown);
 
-
+    m_menu = SceneMenu::create();
+    m_menu->setDelegate(this);
+    addChild(m_menu);
+    
 	scheduleUpdate();
     
 	return true;
@@ -87,4 +89,13 @@ void SceneGame::update(float dt)
 	airplaneVector *= 30;
 	sky->setVector(airplaneVector);
 }
+
+void SceneGame::showPlane() {
+    Vec2 pos = helpers::setDesignPosEx(airplan, 1366, 0);
+    airplan->setPositionX(-3000);
+    
+    MoveTo* move = MoveTo::create(2.0, pos);
+    airplan->runAction(move);
+}
+
 
