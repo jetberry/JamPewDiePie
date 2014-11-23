@@ -35,6 +35,7 @@ bool Passenger::init()
 	angryFlag = false;
 	seatDown();
 	movingSpeed = MOVING_SPEED;
+	dirty = false;
 	setAngry(true);
 
 	return true;
@@ -130,8 +131,7 @@ void Passenger::updateSeat(float dt)
 
 void Passenger::updateMovingAnim()
 {
-	setPicture(pictureDir + "go", getUpdateCounter() % 14);
-	//this->setFlippedX(getDirection() == DIRECTION_RIGHT);
+	setPicture(pictureDir + (dirty ? "dirty_go" : "go"), getUpdateCounter() % 14);
 }
 
 void Passenger::updateSittingAnim()
@@ -250,6 +250,7 @@ void Passenger::doBarf()
 	if (state != SEAT)
 		return;
 
+	dirty = true;
 	state = BARF;
 	nextActionTime = getUpdateCounter() + 120;
 }

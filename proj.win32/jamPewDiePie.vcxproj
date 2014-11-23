@@ -140,6 +140,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
   <ItemGroup>
     <ClCompile Include="..\Classes\airplane\Airplane.cpp" />
     <ClCompile Include="..\Classes\airplane\Character.cpp" />
+    <ClCompile Include="..\Classes\airplane\HandLuggageSpaces.cpp" />
     <ClCompile Include="..\Classes\airplane\Toilet.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Helpers.cpp" />
@@ -159,6 +160,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
   <ItemGroup>
     <ClInclude Include="..\Classes\airplane\Airplane.h" />
     <ClInclude Include="..\Classes\airplane\Character.h" />
+    <ClInclude Include="..\Classes\airplane\HandLuggageSpaces.h" />
     <ClInclude Include="..\Classes\airplane\Toilet.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\Helpers.h" />

@@ -37,6 +37,7 @@ private:
 	Toilet* toilet;
 	Trolley* trolley;
 	bool angryFlag;
+	bool dirty;
 
 	int nextActionTime;
 
