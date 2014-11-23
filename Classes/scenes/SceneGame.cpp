@@ -1,6 +1,5 @@
 #include "SceneGame.h"
 #include "../Helpers.h"
-#include "../airplane/Airplane.h"
 #include "../airplane/Character.h"
 
 
@@ -27,8 +26,10 @@ bool SceneGame::initWithPhysics()
 	{
 		return false;
 	}
+    
+    _airplaneState = AirplaneStateNone;
 
-	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+//	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Point::UNIT_Y * -1000);
     this->getPhysicsWorld()->setAutoStep(true);
 
@@ -40,11 +41,10 @@ bool SceneGame::initWithPhysics()
 	this->addChild(sky);
 
 	airplan = Airplane::create();
-//	helpers::setOnCenter(airplan);
     helpers::setDesignPosEx(airplan, 1366, 0);
+//    helpers::setDesignPosEx(airplan, 1566, 0);
 	this->addChild(airplan);
-
-
+    _airplanePosition = airplan->getPosition();
 
 	ui::Button* btnUp = ui::Button::create("menu/play.png");
     btnUp->setRotation(-90);
@@ -59,6 +59,12 @@ bool SceneGame::initWithPhysics()
     btnDown->addTouchEventListener(CC_CALLBACK_2(SceneGame::onDown, this));
     btnDown->setPressedActionEnabled(true);
     this->addChild(btnDown);
+    
+    ui::Button* btnShake = ui::Button::create("menu/shake.png");
+    btnShake->setPosition(Vec2(1400, 200));
+    btnShake->addTouchEventListener(CC_CALLBACK_2(SceneGame::onShake, this));
+    btnShake->setPressedActionEnabled(true);
+    this->addChild(btnShake);
 
 
 	scheduleUpdate();
@@ -68,18 +74,71 @@ bool SceneGame::initWithPhysics()
 
 void SceneGame::onUp(Ref *pSender, ui::Widget::TouchEventType type)
 {
-    if(airplan->getRotation() > - 15)
-        airplan->setRotation(airplan->getRotation() - 1);
+    if(type == ui::Widget::TouchEventType::BEGAN){
+        _airplaneState = AirplaneStateUp;
+    }else if(type ==  ui::Widget::TouchEventType::ENDED ||
+             type ==  ui::Widget::TouchEventType::CANCELED){
+        _airplaneState = AirplaneStateNone;
+    }
 }
 
 void SceneGame::onDown(Ref *pSender, ui::Widget::TouchEventType type)
 {
-    if(airplan->getRotation() <  15)
-        airplan->setRotation(airplan->getRotation() + 1);
+    if(type == ui::Widget::TouchEventType::BEGAN){
+        _airplaneState = AirplaneStateDown;
+    }else if(type ==  ui::Widget::TouchEventType::ENDED||
+             type ==  ui::Widget::TouchEventType::CANCELED){
+        _airplaneState = AirplaneStateNone;
+    }
 }
+
+void SceneGame::onShake(Ref *pSender, ui::Widget::TouchEventType type)
+{
+    if(type == ui::Widget::TouchEventType::BEGAN){
+        airplan->stopAllActions();
+        float _time = 0.08f;
+        
+        MoveBy* moveUp = MoveBy::create(_time * 2, Vec2(0,200));
+        CallFunc* chageGravityUp = CallFunc::create(CC_CALLBACK_0(SceneGame::gravityShakeUp, this));
+
+        MoveBy* moveDown = MoveBy::create(_time, Vec2(0,-200));
+        CallFunc* chageGravityDown = CallFunc::create(CC_CALLBACK_0(SceneGame::gravityShakeDown, this));
+        Sequence* squence = Sequence::create(moveUp,chageGravityUp,moveDown,chageGravityDown, NULL);
+        
+        Repeat* repeat = Repeat::create(squence, 10);
+        
+        MoveTo* moveTo = MoveTo::create(_time, _airplanePosition);
+        CallFunc* chageGravityOff = CallFunc::create(CC_CALLBACK_0(SceneGame::gravityShakeOff, this));
+        Sequence* squenceAll = Sequence::create(repeat,moveTo,chageGravityOff,NULL);
+
+        airplan->runAction(squenceAll);
+    }
+}
+
+void SceneGame::gravityShakeUp(){
+    this->getPhysicsWorld()->setGravity(Point::UNIT_Y * 20000);
+}
+
+void SceneGame::gravityShakeDown(){
+    this->getPhysicsWorld()->setGravity(Point::UNIT_Y * -35000);
+}
+
+void SceneGame::gravityShakeOff(){
+    this->getPhysicsWorld()->setGravity(Point::UNIT_Y * -1000);
+}
+
 
 void SceneGame::update(float dt)
 {
+    if(_airplaneState == AirplaneStateUp){
+        if(airplan->getRotation() > - 15)
+            airplan->setRotation(airplan->getRotation() - 0.5f);
+    }else if(_airplaneState == AirplaneStateDown){
+        if(airplan->getRotation() <  15)
+            airplan->setRotation(airplan->getRotation() + 0.5f);
+    }else if(_airplaneState == AirplaneStateShake){
+        
+    }
 	Scene::update(dt);
 
 	Vec2 airplaneVector = Vec2::forAngle(CC_DEGREES_TO_RADIANS(airplan->getRotation()));

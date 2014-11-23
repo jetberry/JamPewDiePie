@@ -12,6 +12,8 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		4598924D1A21C499002972C0 /* json in Resources */ = {isa = PBXBuildFile; fileRef = 4598924C1A21C499002972C0 /* json */; };
+		4598924E1A21C499002972C0 /* json in Resources */ = {isa = PBXBuildFile; fileRef = 4598924C1A21C499002972C0 /* json */; };
 		45C794851A1F396000E97905 /* SceneFinish.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C7947F1A1F396000E97905 /* SceneFinish.cpp */; };
 		45C794861A1F396000E97905 /* SceneFinish.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C7947F1A1F396000E97905 /* SceneFinish.cpp */; };
 		45C794871A1F396000E97905 /* SceneGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C794811A1F396000E97905 /* SceneGame.cpp */; };
@@ -116,6 +118,7 @@
 		1D6058910D05DD3D006BFB54 /* jamPewDiePie iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "jamPewDiePie iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4598924C1A21C499002972C0 /* json */ = {isa = PBXFileReference; lastKnownFileType = folder; path = json; sourceTree = "<group>"; };
 		45C7947F1A1F396000E97905 /* SceneFinish.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneFinish.cpp; sourceTree = "<group>"; };
 		45C794801A1F396000E97905 /* SceneFinish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneFinish.h; sourceTree = "<group>"; };
 		45C794811A1F396000E97905 /* SceneGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneGame.cpp; sourceTree = "<group>"; };
@@ -325,6 +328,7 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4598924C1A21C499002972C0 /* json */,
 				F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */,
 				45C794B31A1FE17800E97905 /* hd */,
 				45C794B41A1FE17800E97905 /* ipadhd */,
@@ -505,6 +509,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4598924D1A21C499002972C0 /* json in Resources */,
 				45C794B71A1FE17800E97905 /* ipadhd in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				F04EB7E51A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf in Resources */,
@@ -533,6 +538,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4598924E1A21C499002972C0 /* json in Resources */,
 				45C794B81A1FE17800E97905 /* ipadhd in Resources */,
 				45C794B61A1FE17800E97905 /* hd in Resources */,
 				F04EB7E61A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf in Resources */,
