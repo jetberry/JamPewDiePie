@@ -59,6 +59,7 @@ private:
     int _power;
     cocos2d::Label* _labelScore;
     cocos2d::Label* _labelPower;
+    Sprite* _spriteEnergy;
     
     cocos2d::Vec2 _airplanePosition;
     
