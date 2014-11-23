@@ -114,6 +114,7 @@ void Passenger::updateSeat(float dt)
 		return;
 	}
 
+	//toilet->occupy();
 	moveToToilet();
 }
 
@@ -131,7 +132,7 @@ void Passenger::updateSittingAnim()
 		return;
 	}
 
-	setPicture(pictureDir + "angry_seating", (getUpdateCounter() / 5) % 15);
+	setPicture(pictureDir + "angry_seating", (getUpdateCounter() / 4) % 15);
 }
 
 void Passenger::updateMovingToToilet(float dt)
@@ -226,6 +227,9 @@ void Passenger::checkTrolleyCollision()
 
 	float trolleyPos = trolley->getPositionX();
 	float trolleyWidth = trolley->getContentSize().width;
+
+	if (trolleyPos < -250)
+		return;
 
 	float delta = trolleyPos - getPositionX();
 	float distance = abs(delta);
