@@ -16,7 +16,6 @@ bool Pilot::init()
     setPicture("airplane/people/pilot/0001.png");
     createBody();
     state = ANIMATION;
-    this->setFlippedX(getDirection() == DIRECTION_LEFT);
     
     _frequencyAnimation = 5;
     
@@ -42,6 +41,4 @@ void Pilot::updateAnim(){
             currentFrame = currentFrame - (currentFrame % 10) * 2 - 1;
         setPicture("airplane/people/pilot", currentFrame);
     }
-    
-    this->setFlippedX(getDirection() == DIRECTION_LEFT);
 }

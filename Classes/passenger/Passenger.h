@@ -8,9 +8,8 @@ class Passenger : public Man
 {
 public:
 
-	CREATE_FUNC(Passenger);
+	static Passenger* create(const std::string& pictureDir, cocos2d::Vec2 pos);
 
-	void setSeatPosition(cocos2d::Vec2 pos);
 	void assignToilet(Toilet* toilet);
 	void assignTrolley(Trolley* trolley);
 
@@ -31,6 +30,7 @@ private:
 		TOILET_EXITING
 	};
 
+	std::string pictureDir;
 	cocos2d::Vec2 seatPos;
 	States state;
 	Toilet* toilet;
