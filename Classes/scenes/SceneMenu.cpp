@@ -65,7 +65,7 @@ void SceneMenu::menuPlayCallback(Ref * sender, Control::EventType controlEvent)
             EaseBackOut* back = EaseBackOut::create(move);
             m_buttonPlay->stopAllActions();
             m_buttonPlay->runAction(back);
-            m_labelTutorial->runAction(FadeTo::create(0.1, 1));
+            m_labelTutorial->runAction(FadeTo::create(0.1, 255));
             break;
         }
         case 2: {
