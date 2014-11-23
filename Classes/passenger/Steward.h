@@ -17,7 +17,7 @@ private:
 	enum Const
 	{
 		LEFT_POS = 0,
-		RIGHT_POS = 800,
+		RIGHT_POS = 700,
 		KITHEN_POS = -500
 	};
 
