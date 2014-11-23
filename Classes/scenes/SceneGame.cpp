@@ -206,6 +206,8 @@ void SceneGame::onDown(Ref *pSender, ui::Widget::TouchEventType type)
 }
 
 void SceneGame::onShake(Ref *pSender, ui::Widget::TouchEventType type) {
+    airplan->dropMasks();
+    return;
     _power -= 15;
     onChangePower(nullptr);
     
@@ -407,14 +409,20 @@ void SceneGame::showPlane() {
     airplan = Airplane::create();
     this->addChild(airplan);
     helpers::setDesignPosEx(airplan, 1650, 0);
-    _airplanePosition = airplan->getPosition();
     airplan->makeChain();
     
     _labelScore->runAction(FadeTo::create(0.2, 255));
     _labelPower->runAction(FadeTo::create(0.2, 255));
     _spriteEnergy->runAction(FadeTo::create(0.2, 255));
     
-    Vec2 pos = helpers::setDesignPosEx(airplan, 1650, 0);
+    
+    auto pDirector = Director::getInstance();
+    auto glview = pDirector->getOpenGLView();
+    Size screenSize = glview->getFrameSize();
+    int width = screenSize.width / CC_CONTENT_SCALE_FACTOR();
+    int delta = width - 2048;
+    Vec2 pos = helpers::setDesignPosEx(airplan, 1650 - delta, 0);
+    _airplanePosition = pos;
     airplan->setPositionX(-3000);
     
     MoveTo* move = MoveTo::create(2.0, pos);
