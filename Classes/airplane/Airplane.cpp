@@ -90,7 +90,7 @@ bool Airplane::init()
 	auto* alarm = Sprite::create("airplane/alarm.png");
 	alarm->setPosition(Vec2(1300, 150));
 	this->addChild(alarm);
-	RotateBy* rotateBy = RotateBy::create(0.5, 360);
+	RotateBy* rotateBy = RotateBy::create(0.7, 360);
 	alarm->runAction(RepeatForever::create(rotateBy));
 
 	loadBaggage();
