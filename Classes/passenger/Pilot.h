@@ -32,6 +32,10 @@ private:
     
     void updateAnim();
     
+    bool _isAnimation;
+    
+    int _frameCounter;
+    
     int _frequencyAnimation;
     
     States state;

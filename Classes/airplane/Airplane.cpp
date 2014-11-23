@@ -110,7 +110,7 @@ bool Airplane::init()
 	auto* alarm = Sprite::create("airplane/alarm.png");
 	alarm->setPosition(Vec2(1300, 150));
 	this->addChild(alarm);
-	RotateBy* rotateBy = RotateBy::create(0.5, 360);
+	RotateBy* rotateBy = RotateBy::create(0.7, 360);
 	alarm->runAction(RepeatForever::create(rotateBy));
 
 	loadBaggage();
@@ -120,6 +120,13 @@ bool Airplane::init()
 
 void Airplane::loadBaggage()
 {
+    auto hillock = Node::create();
+    PhysicsBody* body = PhysicsBody::createCircle(30);
+    body->setDynamic(false);
+    hillock->setPhysicsBody(body);
+    hillock->setPosition(830,-302);
+    this->addChild(hillock);
+    
 	std::string content = FileUtils::getInstance()->getStringFromFile("json/luggage.json");
 
 	rapidjson::Document doc;
