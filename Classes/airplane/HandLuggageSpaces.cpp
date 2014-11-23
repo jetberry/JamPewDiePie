@@ -19,7 +19,7 @@ bool HandLuggageSpaces::init(){
         this->addChild(handLuggageSpace);
     }
     
-    scheduleOnce(CC_SCHEDULE_SELECTOR(HandLuggageSpaces::openHandLuggage),  rand() % 20 + 2);
+    schedule(CC_SCHEDULE_SELECTOR(HandLuggageSpaces::openHandLuggage),  rand() % 20 + 2);
     
     return true;
 }
@@ -29,6 +29,4 @@ void HandLuggageSpaces::openHandLuggage(float dt){
     Node* obj = getChildren().at(index);
     
     obj->runAction(ScaleTo::create(0.3f, 1, 0));
-    
-    scheduleOnce(CC_SCHEDULE_SELECTOR(HandLuggageSpaces::openHandLuggage), rand() % 20 + 3);
 }
