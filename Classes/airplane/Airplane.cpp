@@ -5,7 +5,7 @@
 #include "../passenger/Steward.h"
 #include "../passenger/Trolley.h"
 #include "json/document.h"
-
+#include "SceneGame.h"
 USING_NS_CC;
 
 bool Airplane::init()
@@ -25,8 +25,28 @@ bool Airplane::init()
     bottom->setPositionX(wall->getPositionX());
     bottom->setPositionY(-300/2 + 10);
     this->addChild(bottom);
-    
 
+    float x = 0;
+    float y = 0;
+    { // кабина пилота
+        auto innerRect = Rect(1410, 80, 534, 400);
+        auto wall = Node::create();
+        wall->setPhysicsBody(PhysicsBody::createEdgeBox(innerRect.size, PhysicsMaterial(0.1f, 1, 0.0f)));
+        wall->setPositionY(innerRect.getMinY());
+        wall->setPositionX(innerRect.getMinX());
+        x = innerRect.getMinX();
+        y = innerRect.getMinY() + 400;
+        this->addChild(wall);
+    }
+    { // толстый потолок
+        auto bottom = Node::create();
+        PhysicsBody* bodyBottom = PhysicsBody::createBox(Size(1334, 410), PhysicsMaterial(0.1f, 1, 0.0f));
+        bodyBottom->setDynamic(false);
+        bottom->setPhysicsBody(bodyBottom);
+        bottom->setPositionX(x);
+        bottom->setPositionY(y);
+        this->addChild(bottom);
+    }
 	auto sprite = Sprite::create("airplane/airplane.png");
 	sprite->setPosition(Vec2(888,0));
 	this->addChild(sprite, 0);
@@ -56,7 +76,7 @@ bool Airplane::init()
 
 
 	loadBaggage();
-
+    
 	return true;
 }
 
@@ -86,6 +106,83 @@ void Airplane::loadBaggage()
 	}
 }
 
+void Airplane::makeChain() {
+    
+    {
+        m_arrBananas = __Array::create();
+        m_arrBananas->retain();
+        
+        Vec2 start_banan = Vec2(1230, 290);
+        auto sprite = Sprite::create("airplane/alpha_pixel.png");
+        PhysicsMaterial material(0.1f, 0.15f, 0.1f);
+        PhysicsBody* body = PhysicsBody::createBox(sprite->getContentSize(), material);
+        body->setDynamic(false);
+        sprite->setPhysicsBody(body);
+        this->addChild(sprite);
+        sprite->setPosition(start_banan);
 
+        PhysicsBody* prev_body = body;
+        for ( int i = 1; i < 6; i++) {
+            auto sprite = Sprite::create("airplane/banana.png");
+            PhysicsMaterial material(0.1f, 0.15f, 0.1f);
+            PhysicsBody* body = PhysicsBody::createBox(sprite->getContentSize(), material);
+            sprite->setPhysicsBody(body);
+            body->setDynamic(true);
+            PhysicsJointLimit* joint = PhysicsJointLimit::construct(prev_body, body, Vec2(0.5, 0.5), Vec2(0.5, 0.5), 10, 50);
+            SceneGame* game = static_cast<SceneGame*>(getParent());
+            game->getPhysicsWorld()->addJoint(joint);
+            
+            prev_body = body;
+            this->addChild(sprite);
+            sprite->setPosition(start_banan.x, start_banan.y - 10 * i);
+            
+            m_arrBananas->addObject((Ref*)joint);
+        }
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////
+    {
+        m_arrBoobliks = __Array::create();
+        m_arrBoobliks->retain();
+        
+        Vec2 start_banan = Vec2(1400, 290);
+        auto sprite = Sprite::create("airplane/alpha_pixel.png");
+        PhysicsMaterial material(0.1f, 0.15f, 0.1f);
+        PhysicsBody* body = PhysicsBody::createBox(sprite->getContentSize(), material);
+        body->setDynamic(false);
+        sprite->setPhysicsBody(body);
+        this->addChild(sprite);
+        sprite->setPosition(start_banan);
+        
+        PhysicsBody* prev_body = body;
+        for ( int i = 1; i < 5; i++) {
+            auto sprite = Sprite::create("airplane/booblik.png");
+            PhysicsMaterial material(0.1f, 0.15f, 0.1f);
+            PhysicsBody* body = PhysicsBody::createBox(sprite->getContentSize(), material);
+            sprite->setPhysicsBody(body);
+            body->setDynamic(true);
+            PhysicsJointLimit* joint = PhysicsJointLimit::construct(prev_body, body, Vec2(0.5, 0.5), Vec2(0.5, 0.5), 10, 50);
+            SceneGame* game = static_cast<SceneGame*>(getParent());
+            game->getPhysicsWorld()->addJoint(joint);
+            
+            prev_body = body;
+            this->addChild(sprite);
+            sprite->setPosition(start_banan.x, start_banan.y - 10 * i);
+            m_arrBananas->addObject((Ref*)joint);
+        }
+    }
+}
 
+void Airplane::dropSomething() {
+    PhysicsJointLimit* joint = nullptr;
+    if (rand() % 2 == 0) { // уронить баранку
+        joint = (PhysicsJointLimit*)m_arrBoobliks->getLastObject();
+    } else { // уронить банан
+        joint = (PhysicsJointLimit*)m_arrBananas->getLastObject();
+
+    }
+    if (joint) {
+        SceneGame* game = static_cast<SceneGame*>(getParent());
+        game->getPhysicsWorld()->removeJoint(joint);
+    }
+}
 

@@ -49,6 +49,7 @@ bool SceneGame::initWithPhysics()
 	this->addChild(airplan);
     helpers::setDesignPosEx(airplan, 1650, 0);
     _airplanePosition = airplan->getPosition();
+    airplan->makeChain();
     
     airplan->setPositionX(-3000);
     
@@ -75,13 +76,12 @@ bool SceneGame::initWithPhysics()
     btnUp->setPositionY(-500);
     btnShake->setPositionY(-500);
     btnDown->setPositionY(-500);
-
-    _labelScore = Label::create();
+    
+    _labelScore = Label::createWithTTF("hello", "HelveticaNeue-Bold.ttf", 100);
     _labelScore->setPosition(Vec2(2200, 1436));
     _labelScore->setTextColor(Color4B::BLACK);
-    _labelScore->setSystemFontSize(100);
     onAddScore(nullptr);
-    
+    _labelScore->setOpacity(0);
     this->addChild(_labelScore);
     
     m_menu = SceneMenu::create();
@@ -143,9 +143,10 @@ void SceneGame::onShake(Ref *pSender, ui::Widget::TouchEventType type)
         Sequence* squenceAll = Sequence::create(DelayTime::create(2.2), repeat,moveTo,chageGravityOff,NULL);
 
         airplan->runAction(squenceAll);
-        
+
         tintDelay = 0.1;
-        runAction(Sequence::create(DelayTime::create(2.0), CallFunc::create(CC_CALLBACK_0(SceneGame::runTint, this)), nullptr));
+        airplan->runAction(Sequence::create(DelayTime::create(2.0), CallFunc::create(CC_CALLBACK_0(SceneGame::runTint, this)), nullptr));
+        airplan->runAction(Sequence::create(DelayTime::create(2.2), CallFunc::create(CC_CALLBACK_0(SceneGame::playScream, this)), nullptr));
     }
 }
 
@@ -159,9 +160,20 @@ void SceneGame::gravityShakeDown(){
 
 void SceneGame::gravityShakeOff(){
     this->getPhysicsWorld()->setGravity(Point::UNIT_Y * -1000);
+    SoundManager::getInstance()->pauseSound(sound_scream_1);
+    SoundManager::getInstance()->pauseSound(sound_scream_2);
     SoundManager::getInstance()->resumeSound(sound_best_loop);
     tintDelay = 7.0;
     runTint();
+    airplan->dropSomething();
+}
+
+void SceneGame::playScream() {
+    if (rand() % 2 == 0) {
+        SoundManager::getInstance()->playSound(sound_scream_1, false, 1.0);
+    } else {
+        SoundManager::getInstance()->playSound(sound_scream_2, false, 1.0);
+    }
 }
 
 void SceneGame::onAddScore(Ref* obj){
@@ -189,6 +201,7 @@ void SceneGame::update(float dt)
 }
 
 void SceneGame::showPlane() {
+    _labelScore->runAction(FadeTo::create(0.2, 255));
     Vec2 pos = helpers::setDesignPosEx(airplan, 1650, 0);
     airplan->setPositionX(-3000);
     
@@ -226,3 +239,7 @@ void SceneGame::runTint() {
     background->stopAllActions();
     background->runAction(RepeatForever::create(Sequence::create(tint_1, tint_2, tint_3, tint_4, tint_5, tint_6, tint_7, tint_8, NULL)));
 }
+
+
+
+
