@@ -267,6 +267,21 @@ void Airplane::updateSensor(){
 
 void Airplane::removeJoints() {
     for (int i = 0; i < 15; i++) {
-        dropSomething();
+        if (m_arrBoobliks && m_arrBoobliks->count() > 0) {
+            PhysicsJointLimit* joint = (PhysicsJointLimit*)m_arrBoobliks->getLastObject();
+            m_arrBoobliks->removeLastObject();
+            if (joint) {
+                SceneGame* game = static_cast<SceneGame*>(getParent());
+                game->getPhysicsWorld()->removeJoint(joint);
+            }
+        }
+        if (m_arrBananas && m_arrBananas->count() > 0) {
+            PhysicsJointLimit* joint = (PhysicsJointLimit*)m_arrBananas->getLastObject();
+            m_arrBananas->removeLastObject();
+            if (joint) {
+                SceneGame* game = static_cast<SceneGame*>(getParent());
+                game->getPhysicsWorld()->removeJoint(joint);
+            }
+        }
     }
 }
