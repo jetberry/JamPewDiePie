@@ -15,4 +15,5 @@ protected:
 
 	int timeToDead;
 
+    bool isDead;
 };

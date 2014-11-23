@@ -1,4 +1,5 @@
 #include "Nerd.h"
+#include "../UserGameData.h"
 
 USING_NS_CC;
 
@@ -7,6 +8,7 @@ bool Nerd::init()
 	if (!Sprite::init())
 		return false;
 
+    isDead = false;
 	scheduleUpdate();
 	setZOrder(-5);
 
@@ -25,6 +27,8 @@ void Nerd::update(float dt)
 		timeToDead--;
 		return;
 	}
-
+    if (!isDead) UserGameData::getInstance()->addScore(200);
+    isDead = true;
+    
 	this->setTexture("airplane/people/passengers/0003/dead.png");
 }

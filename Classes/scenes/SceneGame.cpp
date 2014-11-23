@@ -256,16 +256,22 @@ void SceneGame::checkActions() {
             planeMoves.at(planeMoves.size() - 3)->getValue() == 2 &&
             planeMoves.at(planeMoves.size() - 4)->getValue() == 1) {
             airplan->dropMasks();
+            _power += 20;
+            onChangePower(nullptr);
         } else if (planeMoves.at(planeMoves.size() - 1)->getValue() == 1 && // попинс
                    planeMoves.at(planeMoves.size() - 2)->getValue() == 1 &&
                    planeMoves.at(planeMoves.size() - 3)->getValue() == 2 &&
                    planeMoves.at(planeMoves.size() - 4)->getValue() == 2) {
             runFewPopins(2);
+            _power += 20;
+            onChangePower(nullptr);
         } else if (planeMoves.at(planeMoves.size() - 1)->getValue() == 3 && // куча попинсов
                    planeMoves.at(planeMoves.size() - 2)->getValue() == 2 &&
                    planeMoves.at(planeMoves.size() - 3)->getValue() == 2 &&
                    planeMoves.at(planeMoves.size() - 4)->getValue() == 1) {
             runFewPopins(8);
+            _power += 100;
+            onChangePower(nullptr);
         } else {
             
         }
