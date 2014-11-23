@@ -21,9 +21,15 @@ public:
     
     int getScore();
     
+    void setAngle(float);
+    
+    float getAngle();
+    
     void resetData();
     
 private:
+    
+    int _angle;
     
     int _score;
 };
