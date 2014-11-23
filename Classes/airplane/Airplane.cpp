@@ -11,6 +11,11 @@
 
 USING_NS_CC;
 
+Airplane::~Airplane() {
+    m_arrBananas->release();
+    m_arrBoobliks->release();
+}
+
 bool Airplane::init()
 {
 	// wall
@@ -83,7 +88,7 @@ bool Airplane::init()
     addChild(_pilot);
 
 	auto* alarm = Sprite::create("airplane/alarm.png");
-	alarm->setPosition(Vec2(1250, 150));
+	alarm->setPosition(Vec2(1300, 150));
 	this->addChild(alarm);
 	RotateBy* rotateBy = RotateBy::create(0.5, 360);
 	alarm->runAction(RepeatForever::create(rotateBy));
@@ -192,7 +197,7 @@ void Airplane::makeChain() {
             prev_body = body;
             this->addChild(sprite);
             sprite->setPosition(start_banan.x, start_banan.y - 10 * i);
-            m_arrBananas->addObject((Ref*)joint);
+            m_arrBoobliks->addObject((Ref*)joint);
         }
     }
 }
@@ -200,12 +205,12 @@ void Airplane::makeChain() {
 void Airplane::dropSomething() {
     PhysicsJointLimit* joint = nullptr;
     if (rand() % 2 == 0) { // уронить баранку
-        if (m_arrBoobliks->count() > 0) {
+        if (m_arrBoobliks && m_arrBoobliks->count() > 0) {
             joint = (PhysicsJointLimit*)m_arrBoobliks->getLastObject();
             m_arrBoobliks->removeLastObject();
         }
     } else { // уронить банан
-        if (m_arrBananas->count() > 0) {
+        if (m_arrBananas && m_arrBananas->count() > 0) {
             joint = (PhysicsJointLimit*)m_arrBananas->getLastObject();
             m_arrBananas->removeLastObject();
         }
@@ -231,3 +236,8 @@ void Airplane::updateSensor(){
     _coutnUpdate++;
 }
 
+void Airplane::removeJoints() {
+    for (int i = 0; i < 15; i++) {
+        dropSomething();
+    }
+}

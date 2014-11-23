@@ -30,7 +30,7 @@ bool SceneGame::initWithPhysics()
     airplan = nullptr;
     NotificationCenter::getInstance()->addObserver(this, CC_CALLFUNCO_SELECTOR(SceneGame::onAddScore), "MSG_UPDATE_SCORE", nullptr);
 
-	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+//	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Point::UNIT_Y * -1000);
     this->getPhysicsWorld()->setAutoStep(true);
 
@@ -44,7 +44,7 @@ bool SceneGame::initWithPhysics()
 	this->addChild(sky);
     
     btnShake = ui::Button::create("gamebuttons/button_shake.png", "gamebuttons/button_shake_h.png");
-    btnShake->setPosition(Vec2(Director::getInstance()->getWinSize().width - btnShake->getContentSize().width,
+    btnShake->setPosition(Vec2(Director::getInstance()->getOpenGLView()->getDesignResolutionSize().width - btnShake->getContentSize().width - 50,
                                btnShake->getContentSize().height / 2));
     btnShake->addTouchEventListener(CC_CALLBACK_2(SceneGame::onShake, this));
     btnShake->setPressedActionEnabled(true);
@@ -120,6 +120,15 @@ void SceneGame::onDown(Ref *pSender, ui::Widget::TouchEventType type)
 
 void SceneGame::onShake(Ref *pSender, ui::Widget::TouchEventType type)
 {
+//    // code for RESTART !!!!!!!!!!!!!!!!!!!!!!!
+//    if (!airplan) return;
+//    airplan->removeJoints();
+//    airplan->removeFromParent();
+//    airplan = nullptr;
+//    auto scene = SceneGame::createWithPhysics();
+//    Director::getInstance()->replaceScene(scene);
+//    return;
+    
     if(type == ui::Widget::TouchEventType::BEGAN){
         UserGameData::getInstance()->addScore(500);
         
@@ -164,16 +173,19 @@ void SceneGame::gravityShakeOff(){
     SoundManager::getInstance()->pauseSound(sound_scream_1);
     SoundManager::getInstance()->pauseSound(sound_scream_2);
     SoundManager::getInstance()->resumeSound(sound_best_loop);
-    tintDelay = 7.0;
+    tintDelay = 8.0;
     runTint();
     airplan->dropSomething();
 }
 
 void SceneGame::playScream() {
-    if (rand() % 2 == 0) {
+    int t = rand() % 3;
+    if (t == 0) {
         SoundManager::getInstance()->playSound(sound_scream_1, false, 1.0);
-    } else {
+    } else if (t == 1) {
         SoundManager::getInstance()->playSound(sound_scream_2, false, 1.0);
+    } else {
+        SoundManager::getInstance()->playSound(sound_haha, false, 1.0);
     }
 }
 

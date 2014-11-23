@@ -9,6 +9,7 @@ public:
 
 	CREATE_FUNC(Airplane);
 
+    ~Airplane();
 	virtual bool init();
     
     void setAraplaneIsMoved(bool flag);
@@ -18,6 +19,8 @@ public:
     void dropSomething();
     
     void updateAirplane(float delta);
+
+    void removeJoints();
 
 private:
 
