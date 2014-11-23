@@ -32,7 +32,7 @@ bool SceneMenu::init()
                                Director::getInstance()->getWinSize().height - m_spriteTitle->getContentSize().height / 3 * 2);
     addChild(m_spriteTitle);
     
-    m_labelTutorial = Label::createWithTTF("hello", "UpheavalPro.ttf", 50);
+    m_labelTutorial = Label::createWithTTF("hello", "UpheavalPro.ttf", 70);
     m_labelTutorial->setPosition(Vec2(200, 200));
     m_labelTutorial->setColor(Color3B::BLACK);
     addChild(m_labelTutorial);
@@ -169,10 +169,10 @@ void SceneMenu::changeTutorialText() {
             tutorial = __String::createWithFormat("you should watch at them\nand make some actions");
             break;
         case 5:
-            tutorial = __String::createWithFormat("remember!\ndifferent combinations\ngenerate different actions!");
+            tutorial = __String::createWithFormat("remember!\ndifferent\ncombinations\ngenerate different\nactions!");
             break;
         case 6:
-            tutorial = __String::createWithFormat("you have to see them all!\nhave a fun game!");
+            tutorial = __String::createWithFormat("you have to see\nthem all!\nhave a fun game!");
             break;
             
         default:
