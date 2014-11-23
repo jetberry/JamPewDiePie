@@ -20,7 +20,7 @@ protected:
 	enum Const
 	{
 		TOILET_POS = 100,
-		MOVING_SPEED = 10,
+		DEFAULT_MOVING_SPEED = 10,
 		WALKING_ANIMATION_SPEED = 5
 	};
 
@@ -35,6 +35,8 @@ protected:
 	void movingToTarget();
 	int getUpdateCounter() const;
 	Direction getDirection() const;
+
+	float movingSpeed;
 
 private:
 

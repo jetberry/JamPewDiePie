@@ -18,28 +18,34 @@ bool Steward::init()
 		return false;
 
 	setPosition(Vec2(RIGHT_POS, 1));
-	goKitchen();
+
+
+	stayAtKitchen();
 	handleTrolley = false;
 
-	setPicture("airplane/people/steward", 0);
+	setPicture("airplane/people/steward/go", 0);
 	createBody();
 
 	return true;
+}
+
+void Steward::stayAtKitchen()
+{
+	nextAction = (rand() % 5 + 3) * 60;
+	state = STAY_AT_KITCHEN;
 }
 
 void Steward::updateTrolley()
 {
 	if (trolley && handleTrolley)
 	{
-		trolley->setPositionX(this->getPositionX() - 160);
-		this->setFlippedX(false);
+		trolley->setPositionX(this->getPositionX() + 160);
+		this->setFlippedX(true);
 	}
 }
 
 void Steward::update(float dt)
 {
-	//setPicture("airplane/people/steward", 0);
-	//return;
 	switch (state)
 	{
 	case MOVING_TO_LEFT:
@@ -50,6 +56,9 @@ void Steward::update(float dt)
 		break;
 	case GOTO_KITCHEN:
 		updateGotoKitchen(dt);
+		break;
+	case STAY_AT_KITCHEN:
+		updateStateInKitchen(dt);
 		break;
 	}
 
@@ -101,7 +110,7 @@ void Steward::updateMovingToRight(float dt)
 
 void Steward::updateMovingAnim()
 {
-	setPicture("airplane/people/steward", getUpdateCounter() % 14);
+	setPicture("airplane/people/steward/go", getUpdateCounter() % 15);
 	this->setFlippedX(getDirection() == DIRECTION_RIGHT);
 }
 
@@ -115,5 +124,13 @@ void Steward::updateGotoKitchen(float dt)
 	}
 
 	handleTrolley = !handleTrolley;
+	stayAtKitchen();
+}
+
+void Steward::updateStateInKitchen(float dt)
+{
+	if (getUpdateCounter() < nextAction)
+		return;
+
 	moveToRight();
 }

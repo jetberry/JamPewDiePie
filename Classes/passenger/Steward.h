@@ -18,11 +18,12 @@ private:
 	{
 		LEFT_POS = 0,
 		RIGHT_POS = 800,
-		KITHEN_POS = -100
+		KITHEN_POS = -500
 	};
 
 	enum States
 	{
+		STAY_AT_KITCHEN,
 		GOTO_KITCHEN,
 		MOVING_TO_LEFT,
 		MOVING_TO_RIGHT,
@@ -31,6 +32,7 @@ private:
 	States state;
 	Trolley* trolley;
 	bool handleTrolley;
+	int nextAction;
 
 	Steward();
 
@@ -42,6 +44,7 @@ private:
 	void moveToLeft();
 	void moveToRight();
 	void goKitchen();
+	void stayAtKitchen();
 
 
 	// Обработка действий в update().
@@ -49,4 +52,5 @@ private:
 	void updateMovingToRight(float dt);
 	void updateMovingAnim();
 	void updateGotoKitchen(float dt);
+	void updateStateInKitchen(float dt);
 };
