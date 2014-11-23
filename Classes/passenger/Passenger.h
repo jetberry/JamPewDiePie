@@ -35,6 +35,7 @@ private:
 	States state;
 	Toilet* toilet;
 	Trolley* trolley;
+	bool angryFlag;
 
 	int nextActionTime;
 
@@ -48,9 +49,11 @@ private:
 	void moveToToilet();
 	void moveToSeat();
 	void seatDown();
+	void setAngry(bool value);
 
 	void updateSeat(float dt);
 	void updateMovingAnim();
+	void updateSittingAnim();
 	void updateMovingToToilet(float dt);
 	void updateMovingToSeat(float dt);
 	void updateEnterToToilet(float dt);

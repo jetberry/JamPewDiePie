@@ -32,8 +32,10 @@ bool Passenger::init()
 	toilet = nullptr;
 	trolley = nullptr;
 	nextActionTime = 0;
+	angryFlag = false;
 	seatDown();
 	movingSpeed = MOVING_SPEED;
+	setAngry(true);
 
 	return true;
 }
@@ -101,6 +103,8 @@ void Passenger::seatDown()
 
 void Passenger::updateSeat(float dt)
 {
+	updateSittingAnim();
+
 	if (getUpdateCounter() < nextActionTime)
 		return;
 
@@ -117,6 +121,17 @@ void Passenger::updateMovingAnim()
 {
 	setPicture(pictureDir + "go", getUpdateCounter() % 14);
 	//this->setFlippedX(getDirection() == DIRECTION_RIGHT);
+}
+
+void Passenger::updateSittingAnim()
+{
+	if (!angryFlag)
+	{
+		setPicture(pictureDir + "sitting/0000.png");
+		return;
+	}
+
+	setPicture(pictureDir + "angry_seating", (getUpdateCounter() / 5) % 15);
 }
 
 void Passenger::updateMovingToToilet(float dt)
@@ -197,6 +212,11 @@ void Passenger::updateToiletExiting(float dt)
 	toilet->closeDoor();
 	toilet->free();
 	moveToSeat();
+}
+
+void Passenger::setAngry(bool value)
+{
+	angryFlag = value;
 }
 
 void Passenger::checkTrolleyCollision()
