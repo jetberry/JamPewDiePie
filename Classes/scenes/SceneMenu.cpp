@@ -169,10 +169,10 @@ void SceneMenu::changeTutorialText() {
             tutorial = __String::createWithFormat("you should watch at them\nand make some actions");
             break;
         case 5:
-            tutorial = __String::createWithFormat("like shake the plane\njust tap and move!");
+            tutorial = __String::createWithFormat("remember!\ndifferent combinations\ngenerate different actions!");
             break;
         case 6:
-            tutorial = __String::createWithFormat("have a fun game!");
+            tutorial = __String::createWithFormat("you have to see them all!\nhave a fun game!");
             break;
             
         default:
