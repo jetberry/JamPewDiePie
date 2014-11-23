@@ -3,6 +3,7 @@
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
 #include "../sky/Sky.h"
+#include "SceneMenu.h"
 #include "../airplane/Airplane.h"
 
 class SceneGame : public cocos2d::Scene
@@ -12,7 +13,8 @@ public:
 	static SceneGame* createWithPhysics();
 
 	virtual bool initWithPhysics();
-
+    
+    void showPlane();
 private:
     
     enum AirplaneState{
@@ -44,4 +46,6 @@ private:
     cocos2d::Label* _labelScore;
     
     cocos2d::Vec2 _airplanePosition;
+
+    SceneMenu* m_menu;
 };

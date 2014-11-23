@@ -43,11 +43,12 @@ bool SceneGame::initWithPhysics()
 	this->addChild(sky);
 
 	airplan = Airplane::create();
-    helpers::setDesignPosEx(airplan, 1366, 0);
-//    helpers::setDesignPosEx(airplan, 1566, 0);
 	this->addChild(airplan);
+    helpers::setDesignPosEx(airplan, 1366, 0);
     _airplanePosition = airplan->getPosition();
-
+    
+    airplan->setPositionX(-3000);
+    
 	ui::Button* btnUp = ui::Button::create("menu/play.png");
     btnUp->setRotation(-90);
 	btnUp->setPosition(Vec2(1800, 200));
@@ -68,6 +69,7 @@ bool SceneGame::initWithPhysics()
     btnShake->setPressedActionEnabled(true);
     this->addChild(btnShake);
 
+
     _labelScore = Label::create();
     _labelScore->setPosition(Vec2(2200, 1436));
     _labelScore->setTextColor(Color4B::BLACK);
@@ -76,7 +78,10 @@ bool SceneGame::initWithPhysics()
     
     this->addChild(_labelScore);
     
-
+    m_menu = SceneMenu::create();
+    m_menu->setDelegate(this);
+    addChild(m_menu);
+    
 	scheduleUpdate();
     
 	return true;
@@ -163,4 +168,13 @@ void SceneGame::update(float dt)
 	airplaneVector *= 30;
 	sky->setVector(airplaneVector);
 }
+
+void SceneGame::showPlane() {
+    Vec2 pos = helpers::setDesignPosEx(airplan, 1366, 0);
+    airplan->setPositionX(-3000);
+    
+    MoveTo* move = MoveTo::create(2.0, pos);
+    airplan->runAction(move);
+}
+
 

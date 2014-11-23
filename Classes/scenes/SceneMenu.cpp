@@ -1,5 +1,6 @@
 #include "SceneMenu.h"
 #include "../Helpers.h"
+#include "SceneGame.h"
 
 USING_NS_CC;
 
@@ -18,12 +19,12 @@ bool SceneMenu::init()
 		return false;
 	}
 
-	auto background = LayerColor::create(Color4B(255, 255, 255, 255));
-	this->addChild(background, 0);
+//	auto background = LayerColor::create(Color4B(255, 255, 255, 255));
+//	this->addChild(background, 0);
 
-	auto sprite = Sprite::create("menu/airplane.png");
-	helpers::setDesignPos(sprite, 766, 49);
-	this->addChild(sprite, 0);
+//	auto sprite = Sprite::create("menu/airplane.png");
+//	helpers::setDesignPos(sprite, 766, 49);
+//	this->addChild(sprite, 0);
 
     
     m_labelTutorial = Label::createWithTTF("hello", "HelveticaNeue-Bold.ttf", 50);
@@ -126,6 +127,18 @@ void SceneMenu::menuPlayCallback(Ref * sender, Control::EventType controlEvent)
             }
             break;
         }
+        case 6: {
+            m_buttonPlay->stopAllActions();
+            {
+                MoveTo* move = MoveTo::create(0.25, Vec2(Vec2(m_buttonPlay->getPositionX(),
+                                                              -Director::getInstance()->getWinSize().height / 2)));
+                EaseBackOut* back = EaseBackOut::create(move);
+                m_buttonPlay->runAction(back);
+            }
+            m_labelTutorial->runAction(FadeTo::create(0.1, 0));
+            m_delegate->showPlane();
+            break;
+        }
         default:
             break;
     }
@@ -157,6 +170,9 @@ void SceneMenu::changeTutorialText() {
     if (tutorial) m_labelTutorial->setString(tutorial->getCString());
 }
 
+void SceneMenu::setDelegate(SceneGame* delegate) {
+    m_delegate = delegate;
+}
 
 
 
