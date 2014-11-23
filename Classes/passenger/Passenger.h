@@ -20,7 +20,7 @@ private:
     
 	enum Const
 	{
-		MOVING_SPEED = 6
+		MOVING_SPEED = 4
 	};
 
 	enum States

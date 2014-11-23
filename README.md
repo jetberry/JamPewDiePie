@@ -1,6 +1,4 @@
 JamPewDiePie
 ============
 
-Indies VS PewDiePie game jam
-Itchy Trigger Finger Niggas
-Yeahh!
+Indies VS PewDiePie game jam.
