@@ -98,7 +98,7 @@ void SceneGame::onShake(Ref *pSender, ui::Widget::TouchEventType type)
         airplan->stopAllActions();
         float _time = 0.08f;
         
-        MoveBy* moveUp = MoveBy::create(_time * 2, Vec2(0,200));
+        MoveBy* moveUp = MoveBy::create(_time, Vec2(0,200));
         CallFunc* chageGravityUp = CallFunc::create(CC_CALLBACK_0(SceneGame::gravityShakeUp, this));
 
         MoveBy* moveDown = MoveBy::create(_time, Vec2(0,-200));
@@ -116,7 +116,7 @@ void SceneGame::onShake(Ref *pSender, ui::Widget::TouchEventType type)
 }
 
 void SceneGame::gravityShakeUp(){
-    this->getPhysicsWorld()->setGravity(Point::UNIT_Y * 20000);
+    this->getPhysicsWorld()->setGravity(Point::UNIT_Y * 35000);
 }
 
 void SceneGame::gravityShakeDown(){

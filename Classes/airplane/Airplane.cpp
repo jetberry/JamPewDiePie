@@ -31,12 +31,6 @@ bool Airplane::init()
 	sprite->setPosition(Vec2(888,0));
 	this->addChild(sprite, 0);
 
-	//Character* character = Character::create("airplane/passenger_01.png");
-	//helpers::setDesignPosEx(character, 1500, 750);
-	 //this->addChild(character);
- //   character->createBody();
- //   character->setBottom(bottom->getPhysicsBody());
-
 	Passenger* passenger = Passenger::create();
 	passenger->setSeatPosition(Vec2(1042, 4));
 	this->addChild(passenger);
