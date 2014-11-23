@@ -29,6 +29,7 @@ private:
     void onShake(Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
     
     void onAddScore(Ref* obj);
+    void onChangePower(Ref* obj);
     
     void setState(AirplaneState state);
     
@@ -44,6 +45,9 @@ private:
     void createPopins();
     void runFewPopins(int count);
     
+    void restart(Ref * sender, Control::EventType controlEvent);
+    
+    void showFinish();
     Airplane* airplan;
     Sky* sky;
     
@@ -51,7 +55,10 @@ private:
     
     int _shakeCount;
     
+    bool _isGameOver;
+    int _power;
     cocos2d::Label* _labelScore;
+    cocos2d::Label* _labelPower;
     
     cocos2d::Vec2 _airplanePosition;
     
@@ -63,6 +70,9 @@ private:
     ui::Button* btnUp;
     ui::Button* btnDown;
     ui::Button* btnShake;
+    
+    
+    ControlButton* m_buttonRestart;
     
     LayerColor* background;
     float tintDelay;

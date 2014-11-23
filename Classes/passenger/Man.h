@@ -19,7 +19,7 @@ protected:
 
 	enum Const
 	{
-		TOILET_POS = 100,
+		TOILET_POS = 115,
 		DEFAULT_MOVING_SPEED = 10,
 		WALKING_ANIMATION_SPEED = 5
 	};

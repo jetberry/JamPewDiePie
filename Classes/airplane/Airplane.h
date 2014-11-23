@@ -28,13 +28,13 @@ private:
     
     void creatHandLuggageSpaces();
     
-    void creatChair(cocos2d::Vec2 position);
+    void createChair(cocos2d::Vec2 position);
     
     void updateSensor();
 
     cocos2d::Sprite* _sensor;
     
-    int _coutnUpdate;
+    int _coutnUpdate = 0;
 
     Pilot* _pilot;
 

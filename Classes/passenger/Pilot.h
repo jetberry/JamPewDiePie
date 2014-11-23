@@ -40,7 +40,7 @@ private:
     
     bool _isAnimation;
     
-    int _frameCounter;
+    int _frameCounter = 0;
     
     int _frequencyAnimation;
     

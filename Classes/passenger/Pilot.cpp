@@ -19,7 +19,6 @@ bool Pilot::init()
     setPicture("airplane/people/pilot/0001.png");
     createBody();
     state = ANIMATION;
-    this->setFlippedX(getDirection() == DIRECTION_LEFT);
     
     _frequencyAnimation = 5;
     
@@ -45,19 +44,18 @@ void Pilot::setAraplaneIsMoved(bool flag){
 }
 
 void Pilot::updateAnim(){
-    if(_isAnimation){
-    if (!(getUpdateCounter() % _frequencyAnimation)){
-        int currentFrame = _frameCounter;
-        if(currentFrame >= 10)
-            currentFrame = currentFrame - (currentFrame % 10) * 2 - 1;
-        setPicture("airplane/people/pilot", currentFrame);
-        
-        _frameCounter++;
-        if(_frameCounter >= 20)
-            _isAnimation = false;
-    }
-    }
-    this->setFlippedX(getDirection() == DIRECTION_LEFT);
+	if (_isAnimation){
+		if (!(getUpdateCounter() % _frequencyAnimation)){
+			int currentFrame = _frameCounter;
+			if (currentFrame >= 10)
+				currentFrame = currentFrame - (currentFrame % 10) * 2 - 1;
+			setPicture("airplane/people/pilot", currentFrame);
+
+			_frameCounter++;
+			if (_frameCounter >= 20)
+				_isAnimation = false;
+		}
+	}
 }
 
 bool Pilot::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unusedEvent){

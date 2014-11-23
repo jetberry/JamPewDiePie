@@ -8,9 +8,8 @@ class Passenger : public Man
 {
 public:
 
-	CREATE_FUNC(Passenger);
+	static Passenger* create(const std::string& pictureDir, cocos2d::Vec2 pos);
 
-	void setSeatPosition(cocos2d::Vec2 pos);
 	void assignToilet(Toilet* toilet);
 	void assignTrolley(Trolley* trolley);
 
@@ -31,10 +30,12 @@ private:
 		TOILET_EXITING
 	};
 
+	std::string pictureDir;
 	cocos2d::Vec2 seatPos;
 	States state;
 	Toilet* toilet;
 	Trolley* trolley;
+	bool angryFlag;
 
 	int nextActionTime;
 
@@ -48,9 +49,11 @@ private:
 	void moveToToilet();
 	void moveToSeat();
 	void seatDown();
+	void setAngry(bool value);
 
 	void updateSeat(float dt);
 	void updateMovingAnim();
+	void updateSittingAnim();
 	void updateMovingToToilet(float dt);
 	void updateMovingToSeat(float dt);
 	void updateEnterToToilet(float dt);
