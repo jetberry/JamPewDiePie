@@ -6,7 +6,7 @@
 #include "../passenger/Trolley.h"
 #include "Toilet.h"
 #include "json/document.h"
-#include "SceneGame.h"
+#include "../scenes/SceneGame.h"
 USING_NS_CC;
 
 bool Airplane::init()

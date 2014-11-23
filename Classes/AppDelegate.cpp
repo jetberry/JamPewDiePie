@@ -2,7 +2,7 @@
 #include "scenes/SceneMenu.h"
 #include "scenes/SceneFinish.h"
 #include "scenes/SceneGame.h"
-#include "SoundManager.h"
+#include "SoundManager/SoundManager.h"
 
 USING_NS_CC;
 
