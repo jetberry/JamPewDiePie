@@ -1,5 +1,6 @@
 ﻿#include "Passenger.h"
 #include "Helpers.h"
+#include "SoundManager.h"
 
 USING_NS_CC;
 
@@ -123,6 +124,8 @@ void Passenger::updateMovingToSeat(float dt)
 
 void Passenger::updateEnterToToilet(float dt)
 {
+    SoundManager::getInstance()->playSound(sound_toilet_open, false, 14.0);
+    
 	// Ждем пока дверь откроется.
 	if (!toilet->isOpen())
 		return;
@@ -132,8 +135,9 @@ void Passenger::updateEnterToToilet(float dt)
 	setZOrder(8);
 	toilet->closeDoor();
 	state = TOILET_SEATING;
-	nextActionTime = getUpdateCounter() + 120;
-
+	nextActionTime = getUpdateCounter() + 140;
+    
+    SoundManager::getInstance()->playSound(sound_toilet, false, 14.0);
 	//moveToSeat();
 }
 
