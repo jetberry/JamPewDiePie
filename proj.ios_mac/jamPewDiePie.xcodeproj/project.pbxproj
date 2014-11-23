@@ -84,6 +84,8 @@
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
 		F04EB7E51A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */; };
 		F04EB7E61A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */; };
+		F0783EEE1A21EA6700CA6F7D /* sound in Resources */ = {isa = PBXBuildFile; fileRef = F0783EED1A21EA6700CA6F7D /* sound */; };
+		F0783EEF1A21EA6700CA6F7D /* sound in Resources */ = {isa = PBXBuildFile; fileRef = F0783EED1A21EA6700CA6F7D /* sound */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,6 +195,7 @@
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeue-Bold.ttf"; sourceTree = "<group>"; };
+		F0783EED1A21EA6700CA6F7D /* sound */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sound; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -355,6 +358,7 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F0783EED1A21EA6700CA6F7D /* sound */,
 				4598924C1A21C499002972C0 /* json */,
 				F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */,
 				45C794B31A1FE17800E97905 /* hd */,
@@ -530,6 +534,7 @@
 				4598924D1A21C499002972C0 /* json in Resources */,
 				45C794B71A1FE17800E97905 /* ipadhd in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
+				F0783EEE1A21EA6700CA6F7D /* sound in Resources */,
 				F04EB7E51A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
@@ -556,6 +561,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0783EEF1A21EA6700CA6F7D /* sound in Resources */,
 				4598924E1A21C499002972C0 /* json in Resources */,
 				45C794B81A1FE17800E97905 /* ipadhd in Resources */,
 				45C794B61A1FE17800E97905 /* hd in Resources */,
