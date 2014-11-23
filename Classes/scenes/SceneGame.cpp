@@ -457,7 +457,7 @@ void SceneGame::showPlane() {
     
     airplan = Airplane::create();
     this->addChild(airplan);
-    helpers::setDesignPosEx(airplan, 1650, 0);
+//    helpers::setDesignPosEx(airplan, 1650, 0);
     airplan->makeChain();
     
     _labelScore->runAction(FadeTo::create(0.2, 255));
@@ -468,10 +468,16 @@ void SceneGame::showPlane() {
     auto pDirector = Director::getInstance();
     auto glview = pDirector->getOpenGLView();
     Size screenSize = glview->getFrameSize();
-    int width = screenSize.width / CC_CONTENT_SCALE_FACTOR();
-    int delta = (width - 2048) / 2;
-    Vec2 pos = helpers::setDesignPosEx(airplan, 1650 - delta, 0);
+    float sf = pDirector->getContentScaleFactor();
+    int width = screenSize.width / sf;
+    float sc = 1536 / (screenSize.height / sf);
+    int delta = (2732 - width * sc) / 2;
+    helpers::setOnCenter(airplan);
+    Vec2 pos = airplan->getPosition();
+    pos.x = delta;
+    airplan->setPosition(pos);
     _airplanePosition = pos;
+    
     airplan->setPositionX(-3000);
     
     MoveTo* move = MoveTo::create(2.0, pos);
