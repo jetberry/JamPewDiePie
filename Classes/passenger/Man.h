@@ -37,8 +37,12 @@ protected:
 	Direction getDirection() const;
 
 	float movingSpeed;
+	bool shakeState;
 
 private:
+
+	void onShakeOn(Ref* obj);
+	void onShakeOff(Ref* obj);
 
 	// Счетчик update-ов, с момента инициализации человека.
 	int updateCounter;

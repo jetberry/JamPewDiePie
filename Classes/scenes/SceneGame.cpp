@@ -250,6 +250,8 @@ void SceneGame::gravityShakeOff(){
     tintDelay = 8.0;
     runTint();
     airplan->dropSomething();
+
+	NotificationCenter::getInstance()->postNotification("shake-off");
 }
 
 void SceneGame::playScream() {
@@ -442,6 +444,10 @@ void SceneGame::showPlane() {
 }
 
 void SceneGame::setState(AirplaneState state){
+
+	if (state == AirplaneStateShake)
+		NotificationCenter::getInstance()->postNotification("shake-on");
+
     if(state == AirplaneStateNone){
         airplan->setAraplaneIsMoved(false);
     }else{
