@@ -4,6 +4,7 @@
 #include "ui/CocosGUI.h"
 #include "../sky/Sky.h"
 #include "SceneMenu.h"
+#include "../airplane/Airplane.h"
 
 class SceneGame : public cocos2d::Scene
 {
@@ -17,12 +18,31 @@ public:
     
     void showPlane();
 private:
+    
+    enum AirplaneState{
+        AirplaneStateNone,
+        AirplaneStateUp,
+        AirplaneStateDown,
+        AirplaneStateShake,
+    };
 
-	cocos2d::Node* airplan;
+	Airplane* airplan;
 	Sky* sky;
+    
+    AirplaneState _airplaneState;
+    
+    int _shakeCount;
+    
+    cocos2d::Vec2 _airplanePosition;
 
 	void onUp(Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
     void onDown(Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+    void onShake(Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+    
+    void gravityShakeUp();
+    void gravityShakeDown();
+    void gravityShakeOff();
+    
 	void update(float dt);
     
     SceneMenu* m_menu;

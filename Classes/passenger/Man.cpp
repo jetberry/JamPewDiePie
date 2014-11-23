@@ -71,3 +71,18 @@ int Man::getUpdateCounter() const
 {
 	return updateCounter;
 }
+
+Man::Direction Man::getDirection() const
+{
+	float x = this->getPositionX();
+	float delta = target - x;
+	float direction = helpers::sgn(delta);
+
+	if (abs(delta) < MOVING_SPEED)
+		return DIRECTION_UNKNOW;
+
+	if (direction < 0)
+		return DIRECTION_LEFT;
+
+	return DIRECTION_RIGHT;
+}

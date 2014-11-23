@@ -135,6 +135,7 @@ void SceneMenu::menuPlayCallback(Ref * sender, Control::EventType controlEvent)
                 EaseBackOut* back = EaseBackOut::create(move);
                 m_buttonPlay->runAction(back);
             }
+            m_labelTutorial->runAction(FadeTo::create(0.1, 0));
             m_delegate->showPlane();
             break;
         }
