@@ -27,7 +27,8 @@ private:
 		MOVING_TO_SEAT,
 		ENTER_TO_TOILET,
 		TOILET_SEATING,
-		TOILET_EXITING
+		TOILET_EXITING,
+		BARF
 	};
 
 	std::string pictureDir;
@@ -36,6 +37,7 @@ private:
 	Toilet* toilet;
 	Trolley* trolley;
 	bool angryFlag;
+	bool dirty;
 
 	int nextActionTime;
 
@@ -50,14 +52,18 @@ private:
 	void moveToSeat();
 	void seatDown();
 	void setAngry(bool value);
+	void doBarf();
 
 	void updateSeat(float dt);
 	void updateMovingAnim();
 	void updateSittingAnim();
+	void updateBarfAnim();
 	void updateMovingToToilet(float dt);
 	void updateMovingToSeat(float dt);
 	void updateEnterToToilet(float dt);
 	void updateToiletSeating(float dt);
 	void updateToiletExiting(float dt);
+	void updateBarf(float dt);
+	
 	
 };

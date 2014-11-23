@@ -16,6 +16,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 				   ../../Classes/airplane/Airplane.cpp \
 				   ../../Classes/airplane/Character.cpp \
 				   ../../Classes/airplane/Toilet.cpp \
+				   ../../Classes/airplane/HandLuggageSpaces.cpp \
 				   ../../Classes/scenes/SceneFinish.cpp \
 				   ../../Classes/scenes/SceneMenu.cpp \
 				   ../../Classes/scenes/SceneGame.cpp \

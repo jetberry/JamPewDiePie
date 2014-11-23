@@ -26,7 +26,6 @@
 		459892681A21F107002972C0 /* UserGameData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 459892651A21F107002972C0 /* UserGameData.cpp */; };
 		459892811A222D19002972C0 /* Pilot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4598927F1A222D19002972C0 /* Pilot.cpp */; };
 		459892821A222D1F002972C0 /* Pilot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4598927F1A222D19002972C0 /* Pilot.cpp */; };
-		459892871A228337002972C0 /* HandLuggageSpaces.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 459892851A228337002972C0 /* HandLuggageSpaces.cpp */; };
 		45C794851A1F396000E97905 /* SceneFinish.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C7947F1A1F396000E97905 /* SceneFinish.cpp */; };
 		45C794861A1F396000E97905 /* SceneFinish.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C7947F1A1F396000E97905 /* SceneFinish.cpp */; };
 		45C794871A1F396000E97905 /* SceneGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C794811A1F396000E97905 /* SceneGame.cpp */; };
@@ -83,14 +82,16 @@
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
-		F04EB7E51A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */; };
-		F04EB7E61A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */; };
 		F05F97CE1A2247FE00D28F07 /* Airplane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97C71A2247FE00D28F07 /* Airplane.cpp */; };
 		F05F97CF1A2247FE00D28F07 /* Airplane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97C71A2247FE00D28F07 /* Airplane.cpp */; };
 		F05F97D01A2247FE00D28F07 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97CA1A2247FE00D28F07 /* Character.cpp */; };
 		F05F97D11A2247FE00D28F07 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97CA1A2247FE00D28F07 /* Character.cpp */; };
 		F05F97D21A2247FE00D28F07 /* Toilet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97CC1A2247FE00D28F07 /* Toilet.cpp */; };
 		F05F97D31A2247FE00D28F07 /* Toilet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97CC1A2247FE00D28F07 /* Toilet.cpp */; };
+		F05F97D81A228A4A00D28F07 /* UpheavalPro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F05F97D71A228A4A00D28F07 /* UpheavalPro.ttf */; };
+		F05F97D91A228A4A00D28F07 /* UpheavalPro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F05F97D71A228A4A00D28F07 /* UpheavalPro.ttf */; };
+		F05F97DD1A228C3600D28F07 /* HandLuggageSpaces.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97DB1A228C3600D28F07 /* HandLuggageSpaces.cpp */; };
+		F05F97DE1A228C3600D28F07 /* HandLuggageSpaces.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97DB1A228C3600D28F07 /* HandLuggageSpaces.cpp */; };
 		F0783EEE1A21EA6700CA6F7D /* sound in Resources */ = {isa = PBXBuildFile; fileRef = F0783EED1A21EA6700CA6F7D /* sound */; };
 		F0783EEF1A21EA6700CA6F7D /* sound in Resources */ = {isa = PBXBuildFile; fileRef = F0783EED1A21EA6700CA6F7D /* sound */; };
 		F0783EF31A21ECF700CA6F7D /* SoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0783EF11A21ECF700CA6F7D /* SoundManager.cpp */; };
@@ -148,8 +149,6 @@
 		459892661A21F107002972C0 /* UserGameData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserGameData.h; sourceTree = "<group>"; };
 		4598927F1A222D19002972C0 /* Pilot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pilot.cpp; sourceTree = "<group>"; };
 		459892801A222D19002972C0 /* Pilot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pilot.h; sourceTree = "<group>"; };
-		459892851A228337002972C0 /* HandLuggageSpaces.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HandLuggageSpaces.cpp; sourceTree = "<group>"; };
-		459892861A228337002972C0 /* HandLuggageSpaces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandLuggageSpaces.h; sourceTree = "<group>"; };
 		45C7947F1A1F396000E97905 /* SceneFinish.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneFinish.cpp; sourceTree = "<group>"; };
 		45C794801A1F396000E97905 /* SceneFinish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneFinish.h; sourceTree = "<group>"; };
 		45C794811A1F396000E97905 /* SceneGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneGame.cpp; sourceTree = "<group>"; };
@@ -205,7 +204,6 @@
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
-		F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeue-Bold.ttf"; sourceTree = "<group>"; };
 		F05F97C71A2247FE00D28F07 /* Airplane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Airplane.cpp; sourceTree = "<group>"; };
 		F05F97C81A2247FE00D28F07 /* Airplane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Airplane.h; sourceTree = "<group>"; };
 		F05F97C91A2247FE00D28F07 /* Alarm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alarm.h; sourceTree = "<group>"; };
@@ -213,6 +211,9 @@
 		F05F97CB1A2247FE00D28F07 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
 		F05F97CC1A2247FE00D28F07 /* Toilet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Toilet.cpp; sourceTree = "<group>"; };
 		F05F97CD1A2247FE00D28F07 /* Toilet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Toilet.h; sourceTree = "<group>"; };
+		F05F97D71A228A4A00D28F07 /* UpheavalPro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = UpheavalPro.ttf; sourceTree = "<group>"; };
+		F05F97DB1A228C3600D28F07 /* HandLuggageSpaces.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HandLuggageSpaces.cpp; sourceTree = "<group>"; };
+		F05F97DC1A228C3600D28F07 /* HandLuggageSpaces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandLuggageSpaces.h; sourceTree = "<group>"; };
 		F0783EED1A21EA6700CA6F7D /* sound */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sound; sourceTree = "<group>"; };
 		F0783EF11A21ECF700CA6F7D /* SoundManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundManager.cpp; sourceTree = "<group>"; };
 		F0783EF21A21ECF700CA6F7D /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManager.h; sourceTree = "<group>"; };
@@ -347,6 +348,8 @@
 		459892711A2220BB002972C0 /* airplane */ = {
 			isa = PBXGroup;
 			children = (
+				F05F97DB1A228C3600D28F07 /* HandLuggageSpaces.cpp */,
+				F05F97DC1A228C3600D28F07 /* HandLuggageSpaces.h */,
 				F05F97C71A2247FE00D28F07 /* Airplane.cpp */,
 				F05F97C81A2247FE00D28F07 /* Airplane.h */,
 				F05F97C91A2247FE00D28F07 /* Alarm.h */,
@@ -354,8 +357,6 @@
 				F05F97CB1A2247FE00D28F07 /* Character.h */,
 				F05F97CC1A2247FE00D28F07 /* Toilet.cpp */,
 				F05F97CD1A2247FE00D28F07 /* Toilet.h */,
-				459892851A228337002972C0 /* HandLuggageSpaces.cpp */,
-				459892861A228337002972C0 /* HandLuggageSpaces.h */,
 			);
 			path = airplane;
 			sourceTree = "<group>";
@@ -385,9 +386,9 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F05F97D71A228A4A00D28F07 /* UpheavalPro.ttf */,
 				F0783EED1A21EA6700CA6F7D /* sound */,
 				4598924C1A21C499002972C0 /* json */,
-				F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */,
 				45C794B31A1FE17800E97905 /* hd */,
 				45C794B41A1FE17800E97905 /* ipadhd */,
 			);
@@ -574,10 +575,10 @@
 				45C794B71A1FE17800E97905 /* ipadhd in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				F0783EEE1A21EA6700CA6F7D /* sound in Resources */,
-				F04EB7E51A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
+				F05F97D81A228A4A00D28F07 /* UpheavalPro.ttf in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
@@ -602,9 +603,9 @@
 			files = (
 				F0783EEF1A21EA6700CA6F7D /* sound in Resources */,
 				4598924E1A21C499002972C0 /* json in Resources */,
+				F05F97D91A228A4A00D28F07 /* UpheavalPro.ttf in Resources */,
 				45C794B81A1FE17800E97905 /* ipadhd in Resources */,
 				45C794B61A1FE17800E97905 /* hd in Resources */,
-				F04EB7E61A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -628,10 +629,10 @@
 				4598925F1A21DF1E002972C0 /* Passenger.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				459892611A21DF1E002972C0 /* Steward.cpp in Sources */,
-				459892871A228337002972C0 /* HandLuggageSpaces.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				45D80FB81A1F25CB00864B2C /* Helpers.cpp in Sources */,
+				F05F97DD1A228C3600D28F07 /* HandLuggageSpaces.cpp in Sources */,
 				45D15AE31A2062E60024FDBE /* Sky.cpp in Sources */,
 				45C794871A1F396000E97905 /* SceneGame.cpp in Sources */,
 				F05F97CE1A2247FE00D28F07 /* Airplane.cpp in Sources */,
@@ -659,6 +660,7 @@
 				F05F97CF1A2247FE00D28F07 /* Airplane.cpp in Sources */,
 				F0783EF41A21ECF700CA6F7D /* SoundManager.cpp in Sources */,
 				459892641A21DF1E002972C0 /* Trolley.cpp in Sources */,
+				F05F97DE1A228C3600D28F07 /* HandLuggageSpaces.cpp in Sources */,
 				45C794881A1F396000E97905 /* SceneGame.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

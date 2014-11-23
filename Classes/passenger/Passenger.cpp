@@ -35,6 +35,7 @@ bool Passenger::init()
 	angryFlag = false;
 	seatDown();
 	movingSpeed = MOVING_SPEED;
+	dirty = false;
 	setAngry(true);
 
 	return true;
@@ -62,8 +63,12 @@ void Passenger::update(float dt)
 	case TOILET_EXITING:
 		updateToiletExiting(dt);
 		break;
+	case BARF:
+		updateBarf(dt);
+		break;
 	}
 
+	setAngry(shakeState);
 	Man::update(dt);
 }
 
@@ -108,6 +113,12 @@ void Passenger::updateSeat(float dt)
 	if (getUpdateCounter() < nextActionTime)
 		return;
 
+	if (rand() % 2)
+	{
+		doBarf();
+		return;
+	}
+
 	if (toilet && !toilet->isFree())
 	{
 		nextActionTime = getUpdateCounter() + (((rand() % 10) + 5) * 60);
@@ -120,8 +131,7 @@ void Passenger::updateSeat(float dt)
 
 void Passenger::updateMovingAnim()
 {
-	setPicture(pictureDir + "go", getUpdateCounter() % 14);
-	//this->setFlippedX(getDirection() == DIRECTION_RIGHT);
+	setPicture(pictureDir + (dirty ? "dirty_go" : "go"), getUpdateCounter() % 14);
 }
 
 void Passenger::updateSittingAnim()
@@ -133,6 +143,11 @@ void Passenger::updateSittingAnim()
 	}
 
 	setPicture(pictureDir + "angry_seating", (getUpdateCounter() / 4) % 15);
+}
+
+void Passenger::updateBarfAnim()
+{
+	setPicture(pictureDir + "barf_sitting", (getUpdateCounter() / 4) % 15);
 }
 
 void Passenger::updateMovingToToilet(float dt)
@@ -203,6 +218,16 @@ void Passenger::updateToiletSeating(float dt)
 	state = TOILET_EXITING;
 }
 
+void Passenger::updateBarf(float dt)
+{
+	updateBarfAnim();
+
+	if (getUpdateCounter() < nextActionTime)
+		return;
+
+	seatDown();
+}
+
 void Passenger::updateToiletExiting(float dt)
 {
 	// Ждем пока дверь откроется.
@@ -218,6 +243,16 @@ void Passenger::updateToiletExiting(float dt)
 void Passenger::setAngry(bool value)
 {
 	angryFlag = value;
+}
+
+void Passenger::doBarf()
+{
+	if (state != SEAT)
+		return;
+
+	dirty = true;
+	state = BARF;
+	nextActionTime = getUpdateCounter() + 120;
 }
 
 void Passenger::checkTrolleyCollision()

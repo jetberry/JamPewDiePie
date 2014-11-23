@@ -69,6 +69,9 @@
     <ClCompile Include="..\Classes\passenger\Pilot.cpp">
       <Filter>passenger</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\airplane\HandLuggageSpaces.cpp">
+      <Filter>airplane</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -115,6 +118,9 @@
     <ClInclude Include="..\Classes\UserGameData.h" />
     <ClInclude Include="..\Classes\passenger\Pilot.h">
       <Filter>passenger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\airplane\HandLuggageSpaces.h">
+      <Filter>airplane</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

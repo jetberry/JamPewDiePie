@@ -4,6 +4,16 @@
 
 USING_NS_CC;
 
+void Man::onShakeOn(Ref* obj)
+{
+	shakeState = true;
+}
+
+void Man::onShakeOff(Ref* obj)
+{
+	shakeState = false;
+}
+
 bool Man::init()
 {
 	if (!Sprite::init())
@@ -15,6 +25,10 @@ bool Man::init()
 	updateCounter = 0;
 	movingSpeed = DEFAULT_MOVING_SPEED;
 	setZOrder(10);
+
+	shakeState = false;
+	NotificationCenter::getInstance()->addObserver(this, CC_CALLFUNCO_SELECTOR(Man::onShakeOn), "shake-on", nullptr);
+	NotificationCenter::getInstance()->addObserver(this, CC_CALLFUNCO_SELECTOR(Man::onShakeOff), "shake-off", nullptr);
 
 	return true;
 }
