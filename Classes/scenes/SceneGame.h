@@ -9,8 +9,6 @@ class SceneGame : public cocos2d::Scene
 {
 public:
 
-	CREATE_FUNC(SceneGame);
-
 	static SceneGame* createWithPhysics();
 
 	virtual bool initWithPhysics();
@@ -24,22 +22,26 @@ private:
         AirplaneStateShake,
     };
 
-	Airplane* airplan;
-	Sky* sky;
-    
-    AirplaneState _airplaneState;
-    
-    int _shakeCount;
-    
-    cocos2d::Vec2 _airplanePosition;
-
 	void onUp(Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
     void onDown(Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
     void onShake(Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+    
+    void onAddScore(Ref* obj);
     
     void gravityShakeUp();
     void gravityShakeDown();
     void gravityShakeOff();
     
 	void update(float dt);
+    
+    Airplane* airplan;
+    Sky* sky;
+    
+    AirplaneState _airplaneState;
+    
+    int _shakeCount;
+    
+    cocos2d::Label* _labelScore;
+    
+    cocos2d::Vec2 _airplanePosition;
 };
