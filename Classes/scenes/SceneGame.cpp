@@ -1,7 +1,7 @@
 #include "SceneGame.h"
 #include "../Helpers.h"
 #include "../airplane/Character.h"
-
+#include "SoundManager.h"
 
 USING_NS_CC;
 
@@ -80,9 +80,11 @@ void SceneGame::onUp(Ref *pSender, ui::Widget::TouchEventType type)
 {
     if(type == ui::Widget::TouchEventType::BEGAN){
         _airplaneState = AirplaneStateUp;
+        SoundManager::getInstance()->playSound(sound_power_up, false, 0.5);
     }else if(type ==  ui::Widget::TouchEventType::ENDED ||
              type ==  ui::Widget::TouchEventType::CANCELED){
         _airplaneState = AirplaneStateNone;
+        SoundManager::getInstance()->pauseSound(sound_power_up);
     }
 }
 
@@ -90,9 +92,11 @@ void SceneGame::onDown(Ref *pSender, ui::Widget::TouchEventType type)
 {
     if(type == ui::Widget::TouchEventType::BEGAN){
         _airplaneState = AirplaneStateDown;
+        SoundManager::getInstance()->playSound(sound_power_down, false, 0.5);
     }else if(type ==  ui::Widget::TouchEventType::ENDED||
              type ==  ui::Widget::TouchEventType::CANCELED){
         _airplaneState = AirplaneStateNone;
+        SoundManager::getInstance()->pauseSound(sound_power_down);
     }
 }
 

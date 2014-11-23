@@ -1,6 +1,7 @@
 #include "SceneMenu.h"
 #include "../Helpers.h"
 #include "SceneGame.h"
+#include "SoundManager.h"
 
 USING_NS_CC;
 
@@ -49,6 +50,8 @@ bool SceneMenu::init()
     m_clickCount = 1;
     changeTutorialText();
     m_clickCount = 1;
+    
+    SoundManager::getInstance()->playSound(sound_best_loop, true, 0.4);
     
 	return true;
 }
@@ -137,6 +140,7 @@ void SceneMenu::menuPlayCallback(Ref * sender, Control::EventType controlEvent)
             }
             m_labelTutorial->runAction(FadeTo::create(0.1, 0));
             m_delegate->showPlane();
+            SoundManager::getInstance()->playSound(sound_noise_loop, true, 0.4);
             break;
         }
         default:

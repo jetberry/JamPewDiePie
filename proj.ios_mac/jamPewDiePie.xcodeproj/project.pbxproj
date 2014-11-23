@@ -86,6 +86,8 @@
 		F04EB7E61A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */; };
 		F0783EEE1A21EA6700CA6F7D /* sound in Resources */ = {isa = PBXBuildFile; fileRef = F0783EED1A21EA6700CA6F7D /* sound */; };
 		F0783EEF1A21EA6700CA6F7D /* sound in Resources */ = {isa = PBXBuildFile; fileRef = F0783EED1A21EA6700CA6F7D /* sound */; };
+		F0783EF31A21ECF700CA6F7D /* SoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0783EF11A21ECF700CA6F7D /* SoundManager.cpp */; };
+		F0783EF41A21ECF700CA6F7D /* SoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0783EF11A21ECF700CA6F7D /* SoundManager.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,6 +198,8 @@
 		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeue-Bold.ttf"; sourceTree = "<group>"; };
 		F0783EED1A21EA6700CA6F7D /* sound */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sound; sourceTree = "<group>"; };
+		F0783EF11A21ECF700CA6F7D /* SoundManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundManager.cpp; sourceTree = "<group>"; };
+		F0783EF21A21ECF700CA6F7D /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManager.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -371,6 +375,7 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F0783EF01A21ECF700CA6F7D /* SoundManager */,
 				459892541A21DF1E002972C0 /* passenger */,
 				45D15AE01A2062E60024FDBE /* sky */,
 				45C7949C1A1F3C8F00E97905 /* airplane */,
@@ -430,6 +435,15 @@
 			name = Icons;
 			path = ios;
 			sourceTree = SOURCE_ROOT;
+		};
+		F0783EF01A21ECF700CA6F7D /* SoundManager */ = {
+			isa = PBXGroup;
+			children = (
+				F0783EF11A21ECF700CA6F7D /* SoundManager.cpp */,
+				F0783EF21A21ECF700CA6F7D /* SoundManager.h */,
+			);
+			path = SoundManager;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -582,6 +596,7 @@
 				45C7949F1A1F3C8F00E97905 /* Airplane.cpp in Sources */,
 				45C794891A1F396000E97905 /* SceneMenu.cpp in Sources */,
 				45C794A31A1F3CF400E97905 /* Character.cpp in Sources */,
+				F0783EF31A21ECF700CA6F7D /* SoundManager.cpp in Sources */,
 				45C794851A1F396000E97905 /* SceneFinish.cpp in Sources */,
 				4598925F1A21DF1E002972C0 /* Passenger.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
@@ -610,6 +625,7 @@
 				45C7948A1A1F396000E97905 /* SceneMenu.cpp in Sources */,
 				45C794861A1F396000E97905 /* SceneFinish.cpp in Sources */,
 				4598925E1A21DF1E002972C0 /* Man.cpp in Sources */,
+				F0783EF41A21ECF700CA6F7D /* SoundManager.cpp in Sources */,
 				459892641A21DF1E002972C0 /* Trolley.cpp in Sources */,
 				45C794881A1F396000E97905 /* SceneGame.cpp in Sources */,
 			);
