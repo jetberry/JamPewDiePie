@@ -45,31 +45,34 @@ bool SceneGame::initWithPhysics()
 
 	airplan = Airplane::create();
 	this->addChild(airplan);
-    helpers::setDesignPosEx(airplan, 1366, 0);
+    helpers::setDesignPosEx(airplan, 1650, 0);
     _airplanePosition = airplan->getPosition();
     
     airplan->setPositionX(-3000);
     
-	ui::Button* btnUp = ui::Button::create("menu/play.png");
+	btnUp = ui::Button::create("menu/play.png");
     btnUp->setRotation(-90);
 	btnUp->setPosition(Vec2(1800, 200));
 	btnUp->addTouchEventListener(CC_CALLBACK_2(SceneGame::onUp, this));
 	btnUp->setPressedActionEnabled(true);
 	this->addChild(btnUp);
     
-    ui::Button* btnDown = ui::Button::create("menu/play.png");
+    btnDown = ui::Button::create("menu/play.png");
     btnDown->setRotation(90);
     btnDown->setPosition(Vec2(2200, 200));
     btnDown->addTouchEventListener(CC_CALLBACK_2(SceneGame::onDown, this));
     btnDown->setPressedActionEnabled(true);
     this->addChild(btnDown);
     
-    ui::Button* btnShake = ui::Button::create("menu/shake.png");
+    btnShake = ui::Button::create("menu/shake.png");
     btnShake->setPosition(Vec2(1400, 200));
     btnShake->addTouchEventListener(CC_CALLBACK_2(SceneGame::onShake, this));
     btnShake->setPressedActionEnabled(true);
     this->addChild(btnShake);
-
+    
+    btnUp->setPositionY(-500);
+    btnShake->setPositionY(-500);
+    btnDown->setPositionY(-500);
 
     _labelScore = Label::create();
     _labelScore->setPosition(Vec2(2200, 1436));
@@ -117,22 +120,25 @@ void SceneGame::onShake(Ref *pSender, ui::Widget::TouchEventType type)
     if(type == ui::Widget::TouchEventType::BEGAN){
         UserGameData::getInstance()->addScore(500);
         
+        SoundManager::getInstance()->pauseSound(sound_best_loop);
+        SoundManager::getInstance()->playSound(sound_harkem_shake, false, 0.8);
+        
         airplan->stopAllActions();
         airplan->setPosition(_airplanePosition);
-        float _time = 0.08f;
+        float _time = 0.09f;
         
         MoveBy* moveUp = MoveBy::create(_time, Vec2(0,200));
         CallFunc* chageGravityUp = CallFunc::create(CC_CALLBACK_0(SceneGame::gravityShakeUp, this));
 
         MoveBy* moveDown = MoveBy::create(_time, Vec2(0,-200));
         CallFunc* chageGravityDown = CallFunc::create(CC_CALLBACK_0(SceneGame::gravityShakeDown, this));
-        Sequence* squence = Sequence::create(moveUp,chageGravityUp,moveDown,chageGravityDown, NULL);
+        Sequence* squence = Sequence::create(moveUp, chageGravityUp, moveDown, chageGravityDown, NULL);
         
-        Repeat* repeat = Repeat::create(squence, 10);
+        Repeat* repeat = Repeat::create(squence, 20);
         
         MoveTo* moveTo = MoveTo::create(_time, _airplanePosition);
         CallFunc* chageGravityOff = CallFunc::create(CC_CALLBACK_0(SceneGame::gravityShakeOff, this));
-        Sequence* squenceAll = Sequence::create(repeat,moveTo,chageGravityOff,NULL);
+        Sequence* squenceAll = Sequence::create(DelayTime::create(2.2), repeat,moveTo,chageGravityOff,NULL);
 
         airplan->runAction(squenceAll);
     }
@@ -148,6 +154,7 @@ void SceneGame::gravityShakeDown(){
 
 void SceneGame::gravityShakeOff(){
     this->getPhysicsWorld()->setGravity(Point::UNIT_Y * -1000);
+    SoundManager::getInstance()->resumeSound(sound_best_loop);
 }
 
 void SceneGame::onAddScore(Ref* obj){
@@ -175,11 +182,27 @@ void SceneGame::update(float dt)
 }
 
 void SceneGame::showPlane() {
-    Vec2 pos = helpers::setDesignPosEx(airplan, 1366, 0);
+    Vec2 pos = helpers::setDesignPosEx(airplan, 1650, 0);
     airplan->setPositionX(-3000);
     
     MoveTo* move = MoveTo::create(2.0, pos);
     airplan->runAction(move);
+    
+    {
+        MoveTo* move = MoveTo::create(0.25, Vec2(1800, 200));
+        EaseBackOut* back = EaseBackOut::create(move);
+        btnUp->runAction(Sequence::create(DelayTime::create(0.1), back, nullptr));
+    }
+    {
+        MoveTo* move = MoveTo::create(0.25, Vec2(2200, 200));
+        EaseBackOut* back = EaseBackOut::create(move);
+        btnDown->runAction(Sequence::create(DelayTime::create(0.2), back, nullptr));
+    }
+    {
+        MoveTo* move = MoveTo::create(0.25, Vec2(1400, 200));
+        EaseBackOut* back = EaseBackOut::create(move);
+        btnShake->runAction(back);
+    }
 }
 
 

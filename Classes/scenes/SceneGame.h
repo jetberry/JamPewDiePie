@@ -48,4 +48,8 @@ private:
     cocos2d::Vec2 _airplanePosition;
 
     SceneMenu* m_menu;
+    
+    ui::Button* btnUp;
+    ui::Button* btnDown;
+    ui::Button* btnShake;
 };

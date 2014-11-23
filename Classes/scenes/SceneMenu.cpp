@@ -46,7 +46,8 @@ bool SceneMenu::init()
     
     m_labelTutorial->setPosition(m_buttonPlay->getPosition() + m_buttonPlay->getContentSize() / 2);
     m_labelTutorial->setHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
-
+    m_labelTutorial->setOpacity(0);
+    
     m_clickCount = 1;
     changeTutorialText();
     m_clickCount = 1;
@@ -64,6 +65,7 @@ void SceneMenu::menuPlayCallback(Ref * sender, Control::EventType controlEvent)
             EaseBackOut* back = EaseBackOut::create(move);
             m_buttonPlay->stopAllActions();
             m_buttonPlay->runAction(back);
+            m_labelTutorial->runAction(FadeTo::create(0.1, 1));
             break;
         }
         case 2: {
