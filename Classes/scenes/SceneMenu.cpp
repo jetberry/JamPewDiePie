@@ -31,7 +31,7 @@ bool SceneMenu::init()
     m_labelTutorial->setColor(Color3B::BLACK);
     addChild(m_labelTutorial);
     
-    ui::Scale9Sprite* scale = Scale9Sprite::create("menu/play.png");
+    ui::Scale9Sprite* scale = ui::Scale9Sprite::create("menu/play.png");
     m_buttonPlay = ControlButton::create(scale);
     m_buttonPlay->addTargetWithActionForControlEvents(this, cccontrol_selector(SceneMenu::menuPlayCallback), cocos2d::extension::Control::EventType::TOUCH_DOWN);
     m_buttonPlay->setPreferredSize(Size(300, 300));

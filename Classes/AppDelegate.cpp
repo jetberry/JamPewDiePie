@@ -43,10 +43,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	Size screenSize = glview->getFrameSize();
 
-	// 540 x 960
-
 	//screenSize.height = 540;
-
 	//CCLOG("glview->getFrameSize(): %f, %f\n", screenSize.width, screenSize.height);
 
 	std::vector<std::string> searchPaths;
@@ -66,7 +63,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 
     auto scene = SceneGame::createWithPhysics();
-//    auto scene = SceneMenu::createScene();
+    //auto scene = SceneMenu::createScene();
     director->runWithScene(scene);
 
     return true;

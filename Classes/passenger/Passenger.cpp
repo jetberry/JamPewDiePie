@@ -5,13 +5,8 @@ USING_NS_CC;
 
 bool Passenger::init()
 {
-	if (!Sprite::init())
+	if (!Man::init())
 		return false;
-
-	scheduleUpdate();
-
-	currentPicture = PICTURE_NONE;
-	updateCounter = 0;
 	
 	seatDown();
 
@@ -32,37 +27,33 @@ void Passenger::update(float dt)
 		updateMovingToSeat(dt);
 		break;
 	}
-	updateCounter++;
-}
 
-bool Passenger::isOnTarget() const
-{
-	return (abs(target - this->getPositionX()) < 0.5);
+	Man::update(dt);
 }
 
 void Passenger::moveToToilet()
 {
 	state = MOVING_TO_TOILET;
-	target = TOILET_POS;
+	setTarget(TOILET_POS);
 }
 
 void Passenger::moveToSeat()
 {
 	state = MOVING_TO_SEAT;
-	target = seatPos.x;
+	setTarget(seatPos.x);
 }
 
 void Passenger::seatDown()
 {
-	setPicture(PICTURE_SEAT);
+	setPicture("airplane/passengers/seat.png");
 	state = SEAT;
-	seatTime = updateCounter;
-	setFlipX(false);
+	seatTime = getUpdateCounter();
+	this->setFlippedX(false);
 }
 
 void Passenger::updateSeat(float dt)
 {
-	if (updateCounter - seatTime < 60)
+	if (getUpdateCounter() - seatTime < 60)
 		return;
 
 	if (!(rand() % 60))
@@ -71,11 +62,20 @@ void Passenger::updateSeat(float dt)
 	}
 }
 
+void Passenger::updateMovingAnim()
+{
+	if ((getUpdateCounter() / WALKING_ANIMATION_SPEED) % 2)
+		setPicture("airplane/passengers/stand0.png");
+	else
+		setPicture("airplane/passengers/stand1.png");
+}
+
 void Passenger::updateMovingToToilet(float dt)
 {
 	if (!isOnTarget())
 	{
 		movingToTarget();
+		updateMovingAnim();
 		return;
 	}
 	
@@ -87,32 +87,11 @@ void Passenger::updateMovingToSeat(float dt)
 	if (!isOnTarget())
 	{
 		movingToTarget();
+		updateMovingAnim();
 		return;
 	}
 
 	seatDown();
-}
-
-void Passenger::movingToTarget()
-{
-	float x = this->getPositionX();
-	float delta = target - x;
-	float direction = helpers::sgn(delta);
-
-	if ((updateCounter / WALKING_ANIMATION_SPEED) % 2)
-		setPicture(PICTURE_WALK_0);
-	else
-		setPicture(PICTURE_WALK_1);
-
-
-	setFlipX(direction < 0);
-
-	if (abs(delta) < MOVING_SPEED)
-		x = target;
-	else
-		x += direction * MOVING_SPEED;
-
-	this->setPositionX(x);
 }
 
 void Passenger::setSeatPosition(cocos2d::Vec2 pos)
@@ -120,26 +99,4 @@ void Passenger::setSeatPosition(cocos2d::Vec2 pos)
 	setPosition(pos);
 	this->seatPos = pos;
 	state = SEAT;
-}
-
-void Passenger::setPicture(Pictures picture)
-{
-	if (currentPicture != picture)
-	{
-		currentPicture = picture;
-		switch (picture)
-		{
-		case PICTURE_NONE:
-			break;
-		case PICTURE_SEAT:
-			this->setTexture("airplane/passengers/seat.png");
-			break;
-		case PICTURE_WALK_0:
-			this->setTexture("airplane/passengers/stand0.png");
-			break;
-		case PICTURE_WALK_1:
-			this->setTexture("airplane/passengers/stand1.png");
-			break;
-		}
-	}
 }

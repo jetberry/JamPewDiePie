@@ -47,6 +47,15 @@
     <ClCompile Include="..\Classes\passenger\Passenger.cpp">
       <Filter>passenger</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\passenger\Steward.cpp">
+      <Filter>passenger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\passenger\Man.cpp">
+      <Filter>passenger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\passenger\Trolley.cpp">
+      <Filter>passenger</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -73,6 +82,15 @@
       <Filter>sky</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\passenger\Passenger.h">
+      <Filter>passenger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\passenger\Steward.h">
+      <Filter>passenger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\passenger\Man.h">
+      <Filter>passenger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\passenger\Trolley.h">
       <Filter>passenger</Filter>
     </ClInclude>
   </ItemGroup>

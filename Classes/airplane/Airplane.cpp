@@ -2,6 +2,8 @@
 #include "Helpers.h"
 #include "Character.h"
 #include "../passenger/Passenger.h"
+#include "../passenger/Steward.h"
+#include "../passenger/Trolley.h"
 #include "json/document.h"
 
 USING_NS_CC;
@@ -39,9 +41,25 @@ bool Airplane::init()
 	passenger->setSeatPosition(Vec2(1042, 4));
 	this->addChild(passenger);
 
+	Steward* steward = Steward::create();
+	this->addChild(steward);
+
+	Trolley* trolley = Trolley::create();
+	this->addChild(trolley);
+	steward->assignTrolley(trolley);
+
+
 	auto* part0 = Sprite::create("airplane/passengers/part.png");
 	part0->setPosition(Vec2(1042, -28));
 	this->addChild(part0);
+
+
+	auto* alarm = Sprite::create("airplane/alarm.png");
+	alarm->setPosition(Vec2(1250, 150));
+	this->addChild(alarm);
+	RotateBy* rotateBy = RotateBy::create(0.5, 360);
+	alarm->runAction(RepeatForever::create(rotateBy));
+
 
 	loadBaggage();
 
@@ -66,7 +84,7 @@ void Airplane::loadBaggage()
 
 		CCLOG("create luggage: %f, %f, %s", x, y, file.c_str());
 		auto l = Sprite::create(file);
-		PhysicsMaterial material(0.1, 0.15f, 0.1f);
+		PhysicsMaterial material(0.1f, 0.15f, 0.1f);
 		PhysicsBody* body = PhysicsBody::createBox(l->getContentSize(), material);
 		l->setPhysicsBody(body);
 		l->setPosition(x, y);

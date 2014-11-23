@@ -1,10 +1,8 @@
 #pragma once
 
-#include "cocos2d.h"
-#include "cocos-ext.h"
-#include "chipmunk.h"
+#include "Man.h"
 
-class Passenger : public cocos2d::Sprite
+class Passenger : public Man
 {
 public:
 
@@ -14,20 +12,6 @@ public:
 
 private:
 
-	enum Pictures
-	{
-		PICTURE_NONE,
-		PICTURE_SEAT,
-		PICTURE_WALK_0,
-		PICTURE_WALK_1
-	};
-
-	enum Const
-	{
-		TOILET_POS = 100,
-		MOVING_SPEED = 10,
-		WALKING_ANIMATION_SPEED = 5
-	};
 
 	enum States
 	{
@@ -38,21 +22,17 @@ private:
 
 	cocos2d::Vec2 seatPos;
 	States state;
-	Pictures currentPicture;
-	int updateCounter;
+
 	int seatTime;
-	float target;
 
 	virtual bool init() override;
 	virtual void update(float dt) override;
 
-	void setPicture(Pictures picture);
-	bool isOnTarget() const;
 	void moveToToilet();
 	void moveToSeat();
 	void seatDown();
 	void updateSeat(float dt);
+	void updateMovingAnim();
 	void updateMovingToToilet(float dt);
 	void updateMovingToSeat(float dt);
-	void movingToTarget();
 };
