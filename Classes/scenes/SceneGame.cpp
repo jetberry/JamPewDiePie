@@ -84,7 +84,7 @@ bool SceneGame::initWithPhysics()
     
     _labelScore = Label::createWithTTF("hello", "UpheavalPro.ttf", 100);
     _labelScore->setPosition(Vec2(2200, 1436));
-    _labelScore->setTextColor(Color4B::BLACK);
+    _labelScore->setTextColor(Color4B::WHITE);
     onAddScore(nullptr);
     _labelScore->setOpacity(0);
     this->addChild(_labelScore);
@@ -97,7 +97,7 @@ bool SceneGame::initWithPhysics()
     
     _labelPower = Label::createWithTTF("hello", "UpheavalPro.ttf", 100);
     _labelPower->setPosition(Vec2(500, 1436));
-    _labelPower->setTextColor(Color4B::BLACK);
+    _labelPower->setTextColor(Color4B::WHITE);
     _labelPower->setOpacity(0);
     this->addChild(_labelPower);
     
@@ -178,6 +178,8 @@ void SceneGame::runFewPopins(int count) {
 void SceneGame::onUp(Ref *pSender, ui::Widget::TouchEventType type)
 {
     if(type == ui::Widget::TouchEventType::BEGAN){
+        planeMoves.pushBack(__Integer::create(1));
+        checkActions();
         setState(AirplaneStateUp);
         SoundManager::getInstance()->playSound(sound_power_up, false, 0.5);
         _power -= 2;
@@ -193,6 +195,8 @@ void SceneGame::onUp(Ref *pSender, ui::Widget::TouchEventType type)
 void SceneGame::onDown(Ref *pSender, ui::Widget::TouchEventType type)
 {
     if(type == ui::Widget::TouchEventType::BEGAN){
+        planeMoves.pushBack(__Integer::create(2));
+        checkActions();
         setState(AirplaneStateDown);
         SoundManager::getInstance()->playSound(sound_power_down, false, 0.5);
         _power -= 2;
@@ -206,12 +210,12 @@ void SceneGame::onDown(Ref *pSender, ui::Widget::TouchEventType type)
 }
 
 void SceneGame::onShake(Ref *pSender, ui::Widget::TouchEventType type) {
-    airplan->dropMasks();
-    return;
     _power -= 15;
     onChangePower(nullptr);
     
     if(type == ui::Widget::TouchEventType::BEGAN){
+        planeMoves.pushBack(__Integer::create(3));
+        checkActions();
         setState(AirplaneStateShake);
         
         UserGameData::getInstance()->addScore(500);
@@ -244,6 +248,29 @@ void SceneGame::onShake(Ref *pSender, ui::Widget::TouchEventType type) {
     }
 }
 
+void SceneGame::checkActions() {
+    if (planeMoves.size() > 4) { // проверить на попинс и маски
+        if (planeMoves.at(planeMoves.size() - 1)->getValue() == 2 && // маски
+            planeMoves.at(planeMoves.size() - 2)->getValue() == 1 &&
+            planeMoves.at(planeMoves.size() - 3)->getValue() == 2 &&
+            planeMoves.at(planeMoves.size() - 4)->getValue() == 1) {
+            airplan->dropMasks();
+        } else if (planeMoves.at(planeMoves.size() - 1)->getValue() == 1 && // попинс
+                   planeMoves.at(planeMoves.size() - 2)->getValue() == 1 &&
+                   planeMoves.at(planeMoves.size() - 3)->getValue() == 2 &&
+                   planeMoves.at(planeMoves.size() - 4)->getValue() == 2) {
+            runFewPopins(2);
+        } else if (planeMoves.at(planeMoves.size() - 1)->getValue() == 3 && // куча попинсов
+                   planeMoves.at(planeMoves.size() - 2)->getValue() == 2 &&
+                   planeMoves.at(planeMoves.size() - 3)->getValue() == 2 &&
+                   planeMoves.at(planeMoves.size() - 4)->getValue() == 1) {
+            runFewPopins(8);
+        } else {
+            
+        }
+    }
+}
+
 void SceneGame::gravityShakeUp(){
     this->getPhysicsWorld()->setGravity(Point::UNIT_Y * 35000);
 }
@@ -260,7 +287,8 @@ void SceneGame::gravityShakeOff(){
     tintDelay = 8.0;
     runTint();
     airplan->dropSomething();
-
+    airplan->deattachOneMask();
+    
 	NotificationCenter::getInstance()->postNotification("shake-off");
 }
 
@@ -420,7 +448,7 @@ void SceneGame::showPlane() {
     auto glview = pDirector->getOpenGLView();
     Size screenSize = glview->getFrameSize();
     int width = screenSize.width / CC_CONTENT_SCALE_FACTOR();
-    int delta = width - 2048;
+    int delta = (width - 2048) / 2;
     Vec2 pos = helpers::setDesignPosEx(airplan, 1650 - delta, 0);
     _airplanePosition = pos;
     airplan->setPositionX(-3000);

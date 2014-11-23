@@ -16,10 +16,15 @@ USING_NS_CC;
 Airplane::~Airplane() {
     m_arrBananas->release();
     m_arrBoobliks->release();
+    m_arrMasks->release();
 }
 
 bool Airplane::init()
 {
+    m_arrBoobliks = nullptr;
+    m_arrBananas = nullptr;
+    m_arrMasks = nullptr;
+    isMasks = false;
 	// wall
 	auto innerRect = Rect(667 - 192, 528, 1334, 556);
 	auto wall = Node::create();
@@ -59,7 +64,7 @@ bool Airplane::init()
     }
     { // толстый пол
         auto bottom = Node::create();
-        PhysicsBody* bodyBottom = PhysicsBody::createBox(Size(1204, 410), PhysicsMaterial(0.1f, 1, 0.0f));
+        PhysicsBody* bodyBottom = PhysicsBody::createBox(Size(3204, 410), PhysicsMaterial(0.1f, 1, 0.0f));
         bodyBottom->setDynamic(false);
         bottom->setPhysicsBody(bodyBottom);
         bottom->setPositionX(x + 100);
@@ -288,6 +293,14 @@ void Airplane::removeJoints() {
                 game->getPhysicsWorld()->removeJoint(joint);
             }
         }
+        if (m_arrMasks && m_arrMasks->count() > 0) {
+            PhysicsJointLimit* joint = (PhysicsJointLimit*)m_arrMasks->getLastObject();
+            m_arrMasks->removeLastObject();
+            if (joint) {
+                SceneGame* game = static_cast<SceneGame*>(getParent());
+                game->getPhysicsWorld()->removeJoint(joint);
+            }
+        }
     }
 }
 
@@ -299,10 +312,99 @@ void Airplane::creatHandLuggageSpaces(){
 }
 
 void Airplane::dropMasks() {
+    if (isMasks) return;
+    isMasks = true;
     m_arrMasks = __Array::create();
     m_arrMasks->retain();
     {
-        Vec2 start_banan = Vec2(230, 290);
+        Vec2 start_banan = Vec2(430, 230);
+        auto sprite = Sprite::create("airplane/alpha_pixel.png");
+        PhysicsMaterial material(0.1f, 0.15f, 0.1f);
+        PhysicsBody* body = PhysicsBody::createBox(sprite->getContentSize(), material);
+        body->setDynamic(false);
+        sprite->setPhysicsBody(body);
+        this->addChild(sprite);
+        sprite->setPosition(start_banan);
+        
+        PhysicsBody* prev_body = body;
+        {
+            auto sprite = Sprite::create("airplane/mask/0006.png");
+            PhysicsMaterial material(0.1f, 0.15f, 0.1f);
+            PhysicsBody* body = PhysicsBody::createBox(sprite->getContentSize(), material);
+            sprite->setPhysicsBody(body);
+            body->setDynamic(true);
+            PhysicsJointLimit* joint = PhysicsJointLimit::construct(prev_body, body, Vec2(0.0, 0.0), Vec2(0.0, 0.0), 10, 60);
+            SceneGame* game = static_cast<SceneGame*>(getParent());
+            game->getPhysicsWorld()->addJoint(joint);
+            
+            prev_body = body;
+            this->addChild(sprite);
+            sprite->setPosition(start_banan.x, start_banan.y - 10 * 1);
+            m_arrMasks->addObject((Ref*)joint);
+        }
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    {
+        Vec2 start_banan = Vec2(620, 230);
+        auto sprite = Sprite::create("airplane/alpha_pixel.png");
+        PhysicsMaterial material(0.1f, 0.15f, 0.1f);
+        PhysicsBody* body = PhysicsBody::createBox(sprite->getContentSize(), material);
+        body->setDynamic(false);
+
+        sprite->setPhysicsBody(body);
+        this->addChild(sprite);
+        sprite->setPosition(start_banan);
+        
+        PhysicsBody* prev_body = body;
+        {
+            auto sprite = Sprite::create("airplane/mask/0006.png");
+            PhysicsMaterial material(0.1f, 0.15f, 0.1f);
+            PhysicsBody* body = PhysicsBody::createBox(sprite->getContentSize(), material);
+            sprite->setPhysicsBody(body);
+            body->setDynamic(true);
+            PhysicsJointLimit* joint = PhysicsJointLimit::construct(prev_body, body, Vec2(30, 30), Vec2(30, 30), 10, 60);
+            SceneGame* game = static_cast<SceneGame*>(getParent());
+            game->getPhysicsWorld()->addJoint(joint);
+            
+            prev_body = body;
+            this->addChild(sprite);
+            sprite->setPosition(start_banan.x, start_banan.y - 10 * 1);
+            
+            m_arrMasks->addObject((Ref*)joint);
+        }
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    {
+        Vec2 start_banan = Vec2(850, 230);
+        auto sprite = Sprite::create("airplane/alpha_pixel.png");
+        PhysicsMaterial material(0.1f, 0.15f, 0.1f);
+        PhysicsBody* body = PhysicsBody::createBox(sprite->getContentSize(), material);
+        body->setDynamic(false);
+        sprite->setPhysicsBody(body);
+        this->addChild(sprite);
+        sprite->setPosition(start_banan);
+        
+        PhysicsBody* prev_body = body;
+        {
+            auto sprite = Sprite::create("airplane/mask/0006.png");
+            PhysicsMaterial material(0.1f, 0.15f, 0.1f);
+            PhysicsBody* body = PhysicsBody::createBox(sprite->getContentSize(), material);
+            sprite->setPhysicsBody(body);
+            body->setDynamic(true);
+            PhysicsJointLimit* joint = PhysicsJointLimit::construct(prev_body, body, Vec2(0.5, 0.5), Vec2(0.5, 0.5), 10, 60);
+            SceneGame* game = static_cast<SceneGame*>(getParent());
+            game->getPhysicsWorld()->addJoint(joint);
+            
+            prev_body = body;
+            this->addChild(sprite);
+            sprite->setPosition(start_banan.x, start_banan.y - 10 * 1);
+            
+            m_arrMasks->addObject((Ref*)joint);
+        }
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    {
+        Vec2 start_banan = Vec2(1050, 230);
         auto sprite = Sprite::create("airplane/alpha_pixel.png");
         PhysicsMaterial material(0.1f, 0.15f, 0.1f);
         PhysicsBody* body = PhysicsBody::createBox(sprite->getContentSize(), material);
@@ -332,5 +434,13 @@ void Airplane::dropMasks() {
 }
 
 void Airplane::deattachOneMask() {
-    
+    PhysicsJointLimit* joint = nullptr;
+    if (m_arrMasks && m_arrMasks->count() > 0) {
+        joint = (PhysicsJointLimit*)m_arrMasks->getLastObject();
+        m_arrMasks->removeLastObject();
+        if (joint) {
+            SceneGame* game = static_cast<SceneGame*>(getParent());
+            game->getPhysicsWorld()->removeJoint(joint);
+        }
+    }
 }
