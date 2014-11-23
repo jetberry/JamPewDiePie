@@ -308,6 +308,8 @@ void SceneGame::onChangePower(Ref* obj){
         airplan->runAction(move);
         runAction(Sequence::create(DelayTime::create(5.0), CallFunc::create(CC_CALLBACK_0(SceneGame::showFinish, this)), nullptr));
         
+        m_menu->showTitle(true);
+        
         // проиграть звук быдыщ
         SoundManager::getInstance()->playSound(sound_plane_crash, false, 1.0);
     }
@@ -437,6 +439,8 @@ void SceneGame::showPlane() {
     setState(AirplaneStateNone);
     tintDelay = 7.0;
     runTint();
+    
+    m_menu->showTitle(false);
 }
 
 void SceneGame::setState(AirplaneState state){

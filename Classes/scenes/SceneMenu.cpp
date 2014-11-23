@@ -185,7 +185,13 @@ void SceneMenu::setDelegate(SceneGame* delegate) {
     m_delegate = delegate;
 }
 
-
+void SceneMenu::showTitle(bool is_show) {
+    if (is_show) {
+        m_spriteTitle->runAction(FadeTo::create(4.0, 255));
+    } else {
+        m_spriteTitle->runAction(FadeTo::create(1.0, 0));
+    }
+}
 
 
 
