@@ -19,6 +19,7 @@ bool Steward::init()
 
 	stayAtKitchen();
 	handleTrolley = false;
+	movingSpeed = MOVING_SPEED;
 
 	setPicture("airplane/people/steward/go", 0);
 	createBody();
@@ -28,7 +29,7 @@ bool Steward::init()
 
 void Steward::stayAtKitchen()
 {
-	nextAction = (rand() % 5 + 3) * 60;
+	nextAction = (rand() % 6 + 10) * 60;
 	setPosition(Vec2(KITHEN_POS, 40));
 	state = STAY_AT_KITCHEN;
 }

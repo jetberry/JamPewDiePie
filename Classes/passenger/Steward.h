@@ -13,9 +13,10 @@ public:
 	void assignTrolley(Trolley* trolley);
 
 private:
-
+	
 	enum Const
 	{
+		MOVING_SPEED = 6,
 		LEFT_POS = 0,
 		RIGHT_POS = 700,
 		KITHEN_POS = -500
