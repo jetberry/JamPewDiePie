@@ -1,6 +1,6 @@
 ﻿#include "Passenger.h"
 #include "Helpers.h"
-#include "SoundManager.h"
+#include "../SoundManager/SoundManager.h"
 
 USING_NS_CC;
 
