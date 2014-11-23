@@ -7,6 +7,7 @@ using namespace cocos2d;
 using namespace extension;
 using namespace ui;
 
+class SceneGame;
 class SceneMenu : public cocos2d::Layer
 {
 public:
@@ -16,6 +17,7 @@ public:
 
 	CREATE_FUNC(SceneMenu);
 
+    void setDelegate(SceneGame* delegate);
 private:
     void menuPlayCallback(Ref * sender, Control::EventType controlEvent);
     void changeTutorialText();
@@ -23,5 +25,7 @@ private:
     int m_clickCount;
     ControlButton* m_buttonPlay;
     Label* m_labelTutorial;
+    
+    SceneGame* m_delegate;
 };
 
