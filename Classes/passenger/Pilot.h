@@ -10,6 +10,7 @@
 #define __jamPewDiePie__Pilot__
 
 #include "Man.h"
+#include "cocos2d.h"
 
 class Pilot : public Man
 {
@@ -19,6 +20,9 @@ public:
     
     void setAraplaneIsMoved(bool flag);
     
+    virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unusedEvent);
+
+    
 private:
 
     enum States
@@ -26,6 +30,8 @@ private:
         NONE,
         ANIMATION
     };
+    
+    bool hitTest(const cocos2d::Vec2 &pt);
     
     virtual void update(float dt) override;
     virtual bool init() override;

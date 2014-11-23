@@ -26,6 +26,8 @@ private:
 
 	void loadBaggage();
     
+    void creatHandLuggageSpaces();
+    
     void creatChair(cocos2d::Vec2 position);
     
     void updateSensor();
