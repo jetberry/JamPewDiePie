@@ -82,14 +82,14 @@
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
-		F04EB7E51A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */; };
-		F04EB7E61A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */; };
 		F05F97CE1A2247FE00D28F07 /* Airplane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97C71A2247FE00D28F07 /* Airplane.cpp */; };
 		F05F97CF1A2247FE00D28F07 /* Airplane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97C71A2247FE00D28F07 /* Airplane.cpp */; };
 		F05F97D01A2247FE00D28F07 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97CA1A2247FE00D28F07 /* Character.cpp */; };
 		F05F97D11A2247FE00D28F07 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97CA1A2247FE00D28F07 /* Character.cpp */; };
 		F05F97D21A2247FE00D28F07 /* Toilet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97CC1A2247FE00D28F07 /* Toilet.cpp */; };
 		F05F97D31A2247FE00D28F07 /* Toilet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97CC1A2247FE00D28F07 /* Toilet.cpp */; };
+		F05F97D81A228A4A00D28F07 /* UpheavalPro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F05F97D71A228A4A00D28F07 /* UpheavalPro.ttf */; };
+		F05F97D91A228A4A00D28F07 /* UpheavalPro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F05F97D71A228A4A00D28F07 /* UpheavalPro.ttf */; };
 		F0783EEE1A21EA6700CA6F7D /* sound in Resources */ = {isa = PBXBuildFile; fileRef = F0783EED1A21EA6700CA6F7D /* sound */; };
 		F0783EEF1A21EA6700CA6F7D /* sound in Resources */ = {isa = PBXBuildFile; fileRef = F0783EED1A21EA6700CA6F7D /* sound */; };
 		F0783EF31A21ECF700CA6F7D /* SoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0783EF11A21ECF700CA6F7D /* SoundManager.cpp */; };
@@ -202,7 +202,6 @@
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
-		F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeue-Bold.ttf"; sourceTree = "<group>"; };
 		F05F97C71A2247FE00D28F07 /* Airplane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Airplane.cpp; sourceTree = "<group>"; };
 		F05F97C81A2247FE00D28F07 /* Airplane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Airplane.h; sourceTree = "<group>"; };
 		F05F97C91A2247FE00D28F07 /* Alarm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alarm.h; sourceTree = "<group>"; };
@@ -210,6 +209,7 @@
 		F05F97CB1A2247FE00D28F07 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
 		F05F97CC1A2247FE00D28F07 /* Toilet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Toilet.cpp; sourceTree = "<group>"; };
 		F05F97CD1A2247FE00D28F07 /* Toilet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Toilet.h; sourceTree = "<group>"; };
+		F05F97D71A228A4A00D28F07 /* UpheavalPro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = UpheavalPro.ttf; sourceTree = "<group>"; };
 		F0783EED1A21EA6700CA6F7D /* sound */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sound; sourceTree = "<group>"; };
 		F0783EF11A21ECF700CA6F7D /* SoundManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundManager.cpp; sourceTree = "<group>"; };
 		F0783EF21A21ECF700CA6F7D /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManager.h; sourceTree = "<group>"; };
@@ -380,9 +380,9 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F05F97D71A228A4A00D28F07 /* UpheavalPro.ttf */,
 				F0783EED1A21EA6700CA6F7D /* sound */,
 				4598924C1A21C499002972C0 /* json */,
-				F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */,
 				45C794B31A1FE17800E97905 /* hd */,
 				45C794B41A1FE17800E97905 /* ipadhd */,
 			);
@@ -569,10 +569,10 @@
 				45C794B71A1FE17800E97905 /* ipadhd in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				F0783EEE1A21EA6700CA6F7D /* sound in Resources */,
-				F04EB7E51A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
+				F05F97D81A228A4A00D28F07 /* UpheavalPro.ttf in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
@@ -597,9 +597,9 @@
 			files = (
 				F0783EEF1A21EA6700CA6F7D /* sound in Resources */,
 				4598924E1A21C499002972C0 /* json in Resources */,
+				F05F97D91A228A4A00D28F07 /* UpheavalPro.ttf in Resources */,
 				45C794B81A1FE17800E97905 /* ipadhd in Resources */,
 				45C794B61A1FE17800E97905 /* hd in Resources */,
-				F04EB7E61A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
