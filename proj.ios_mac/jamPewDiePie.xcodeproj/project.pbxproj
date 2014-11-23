@@ -24,9 +24,6 @@
 		459892641A21DF1E002972C0 /* Trolley.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4598925B1A21DF1E002972C0 /* Trolley.cpp */; };
 		459892671A21F107002972C0 /* UserGameData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 459892651A21F107002972C0 /* UserGameData.cpp */; };
 		459892681A21F107002972C0 /* UserGameData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 459892651A21F107002972C0 /* UserGameData.cpp */; };
-		459892791A2220BB002972C0 /* Airplane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 459892721A2220BB002972C0 /* Airplane.cpp */; };
-		4598927A1A2220BB002972C0 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 459892751A2220BB002972C0 /* Character.cpp */; };
-		4598927B1A2220BB002972C0 /* Toilet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 459892771A2220BB002972C0 /* Toilet.cpp */; };
 		459892811A222D19002972C0 /* Pilot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4598927F1A222D19002972C0 /* Pilot.cpp */; };
 		459892821A222D1F002972C0 /* Pilot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4598927F1A222D19002972C0 /* Pilot.cpp */; };
 		45C794851A1F396000E97905 /* SceneFinish.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C7947F1A1F396000E97905 /* SceneFinish.cpp */; };
@@ -87,6 +84,12 @@
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
 		F04EB7E51A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */; };
 		F04EB7E61A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */; };
+		F05F97CE1A2247FE00D28F07 /* Airplane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97C71A2247FE00D28F07 /* Airplane.cpp */; };
+		F05F97CF1A2247FE00D28F07 /* Airplane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97C71A2247FE00D28F07 /* Airplane.cpp */; };
+		F05F97D01A2247FE00D28F07 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97CA1A2247FE00D28F07 /* Character.cpp */; };
+		F05F97D11A2247FE00D28F07 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97CA1A2247FE00D28F07 /* Character.cpp */; };
+		F05F97D21A2247FE00D28F07 /* Toilet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97CC1A2247FE00D28F07 /* Toilet.cpp */; };
+		F05F97D31A2247FE00D28F07 /* Toilet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F05F97CC1A2247FE00D28F07 /* Toilet.cpp */; };
 		F0783EEE1A21EA6700CA6F7D /* sound in Resources */ = {isa = PBXBuildFile; fileRef = F0783EED1A21EA6700CA6F7D /* sound */; };
 		F0783EEF1A21EA6700CA6F7D /* sound in Resources */ = {isa = PBXBuildFile; fileRef = F0783EED1A21EA6700CA6F7D /* sound */; };
 		F0783EF31A21ECF700CA6F7D /* SoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0783EF11A21ECF700CA6F7D /* SoundManager.cpp */; };
@@ -142,13 +145,6 @@
 		4598925C1A21DF1E002972C0 /* Trolley.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trolley.h; sourceTree = "<group>"; };
 		459892651A21F107002972C0 /* UserGameData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UserGameData.cpp; sourceTree = "<group>"; };
 		459892661A21F107002972C0 /* UserGameData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserGameData.h; sourceTree = "<group>"; };
-		459892721A2220BB002972C0 /* Airplane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Airplane.cpp; sourceTree = "<group>"; };
-		459892731A2220BB002972C0 /* Airplane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Airplane.h; sourceTree = "<group>"; };
-		459892741A2220BB002972C0 /* Alarm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alarm.h; sourceTree = "<group>"; };
-		459892751A2220BB002972C0 /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
-		459892761A2220BB002972C0 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
-		459892771A2220BB002972C0 /* Toilet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Toilet.cpp; sourceTree = "<group>"; };
-		459892781A2220BB002972C0 /* Toilet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Toilet.h; sourceTree = "<group>"; };
 		4598927F1A222D19002972C0 /* Pilot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pilot.cpp; sourceTree = "<group>"; };
 		459892801A222D19002972C0 /* Pilot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pilot.h; sourceTree = "<group>"; };
 		45C7947F1A1F396000E97905 /* SceneFinish.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneFinish.cpp; sourceTree = "<group>"; };
@@ -207,6 +203,13 @@
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		F04EB7E41A20B2CC008EC8B6 /* HelveticaNeue-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeue-Bold.ttf"; sourceTree = "<group>"; };
+		F05F97C71A2247FE00D28F07 /* Airplane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Airplane.cpp; sourceTree = "<group>"; };
+		F05F97C81A2247FE00D28F07 /* Airplane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Airplane.h; sourceTree = "<group>"; };
+		F05F97C91A2247FE00D28F07 /* Alarm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alarm.h; sourceTree = "<group>"; };
+		F05F97CA1A2247FE00D28F07 /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
+		F05F97CB1A2247FE00D28F07 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
+		F05F97CC1A2247FE00D28F07 /* Toilet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Toilet.cpp; sourceTree = "<group>"; };
+		F05F97CD1A2247FE00D28F07 /* Toilet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Toilet.h; sourceTree = "<group>"; };
 		F0783EED1A21EA6700CA6F7D /* sound */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sound; sourceTree = "<group>"; };
 		F0783EF11A21ECF700CA6F7D /* SoundManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundManager.cpp; sourceTree = "<group>"; };
 		F0783EF21A21ECF700CA6F7D /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManager.h; sourceTree = "<group>"; };
@@ -341,13 +344,13 @@
 		459892711A2220BB002972C0 /* airplane */ = {
 			isa = PBXGroup;
 			children = (
-				459892721A2220BB002972C0 /* Airplane.cpp */,
-				459892731A2220BB002972C0 /* Airplane.h */,
-				459892741A2220BB002972C0 /* Alarm.h */,
-				459892751A2220BB002972C0 /* Character.cpp */,
-				459892761A2220BB002972C0 /* Character.h */,
-				459892771A2220BB002972C0 /* Toilet.cpp */,
-				459892781A2220BB002972C0 /* Toilet.h */,
+				F05F97C71A2247FE00D28F07 /* Airplane.cpp */,
+				F05F97C81A2247FE00D28F07 /* Airplane.h */,
+				F05F97C91A2247FE00D28F07 /* Alarm.h */,
+				F05F97CA1A2247FE00D28F07 /* Character.cpp */,
+				F05F97CB1A2247FE00D28F07 /* Character.h */,
+				F05F97CC1A2247FE00D28F07 /* Toilet.cpp */,
+				F05F97CD1A2247FE00D28F07 /* Toilet.h */,
 			);
 			path = airplane;
 			sourceTree = "<group>";
@@ -608,24 +611,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F05F97D21A2247FE00D28F07 /* Toilet.cpp in Sources */,
 				4598925D1A21DF1E002972C0 /* Man.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				459892811A222D19002972C0 /* Pilot.cpp in Sources */,
-				4598927B1A2220BB002972C0 /* Toilet.cpp in Sources */,
+				F05F97D01A2247FE00D28F07 /* Character.cpp in Sources */,
 				45C794891A1F396000E97905 /* SceneMenu.cpp in Sources */,
-				4598927A1A2220BB002972C0 /* Character.cpp in Sources */,
 				459892671A21F107002972C0 /* UserGameData.cpp in Sources */,
 				F0783EF31A21ECF700CA6F7D /* SoundManager.cpp in Sources */,
 				45C794851A1F396000E97905 /* SceneFinish.cpp in Sources */,
 				4598925F1A21DF1E002972C0 /* Passenger.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				459892611A21DF1E002972C0 /* Steward.cpp in Sources */,
-				459892791A2220BB002972C0 /* Airplane.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				45D80FB81A1F25CB00864B2C /* Helpers.cpp in Sources */,
 				45D15AE31A2062E60024FDBE /* Sky.cpp in Sources */,
 				45C794871A1F396000E97905 /* SceneGame.cpp in Sources */,
+				F05F97CE1A2247FE00D28F07 /* Airplane.cpp in Sources */,
 				459892631A21DF1E002972C0 /* Trolley.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -645,6 +648,9 @@
 				45C7948A1A1F396000E97905 /* SceneMenu.cpp in Sources */,
 				45C794861A1F396000E97905 /* SceneFinish.cpp in Sources */,
 				4598925E1A21DF1E002972C0 /* Man.cpp in Sources */,
+				F05F97D31A2247FE00D28F07 /* Toilet.cpp in Sources */,
+				F05F97D11A2247FE00D28F07 /* Character.cpp in Sources */,
+				F05F97CF1A2247FE00D28F07 /* Airplane.cpp in Sources */,
 				F0783EF41A21ECF700CA6F7D /* SoundManager.cpp in Sources */,
 				459892641A21DF1E002972C0 /* Trolley.cpp in Sources */,
 				45C794881A1F396000E97905 /* SceneGame.cpp in Sources */,

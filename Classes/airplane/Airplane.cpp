@@ -48,11 +48,29 @@ bool Airplane::init()
     }
     { // толстый потолок
         auto bottom = Node::create();
-        PhysicsBody* bodyBottom = PhysicsBody::createBox(Size(1334, 410), PhysicsMaterial(0.1f, 1, 0.0f));
+        PhysicsBody* bodyBottom = PhysicsBody::createBox(Size(604, 410), PhysicsMaterial(0.1f, 1, 0.0f));
         bodyBottom->setDynamic(false);
         bottom->setPhysicsBody(bodyBottom);
-        bottom->setPositionX(x);
+        bottom->setPositionX(x + 30);
+        bottom->setPositionY(y - 800);
+        this->addChild(bottom);
+    }
+    { // толстый пол
+        auto bottom = Node::create();
+        PhysicsBody* bodyBottom = PhysicsBody::createBox(Size(1204, 410), PhysicsMaterial(0.1f, 1, 0.0f));
+        bodyBottom->setDynamic(false);
+        bottom->setPhysicsBody(bodyBottom);
+        bottom->setPositionX(x + 100);
         bottom->setPositionY(y);
+        this->addChild(bottom);
+    }
+    { // толстая левая стенка пилота
+        auto bottom = Node::create();
+        PhysicsBody* bodyBottom = PhysicsBody::createBox(Size(50, 480), PhysicsMaterial(0.1f, 1, 0.0f));
+        bodyBottom->setDynamic(false);
+        bottom->setPhysicsBody(bodyBottom);
+        bottom->setPositionX(x - 280);
+        bottom->setPositionY(y - 400);
         this->addChild(bottom);
     }
 	auto sprite = Sprite::create("airplane/airplane.png");
@@ -94,7 +112,7 @@ bool Airplane::init()
 	auto* alarm = Sprite::create("airplane/alarm.png");
 	alarm->setPosition(Vec2(1300, 150));
 	this->addChild(alarm);
-	RotateBy* rotateBy = RotateBy::create(0.5, 360);
+	RotateBy* rotateBy = RotateBy::create(0.7, 360);
 	alarm->runAction(RepeatForever::create(rotateBy));
 
 	loadBaggage();
@@ -104,6 +122,13 @@ bool Airplane::init()
 
 void Airplane::loadBaggage()
 {
+    auto hillock = Node::create();
+    PhysicsBody* body = PhysicsBody::createCircle(30);
+    body->setDynamic(false);
+    hillock->setPhysicsBody(body);
+    hillock->setPosition(830,-302);
+    this->addChild(hillock);
+    
 	std::string content = FileUtils::getInstance()->getStringFromFile("json/luggage.json");
 
 	rapidjson::Document doc;

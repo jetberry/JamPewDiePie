@@ -9,7 +9,7 @@
 class SceneGame : public cocos2d::Scene
 {
 public:
-
+    ~SceneGame();
 	static SceneGame* createWithPhysics();
 
 	virtual bool initWithPhysics();
@@ -41,6 +41,9 @@ private:
     void runTint();
     void playScream();
     
+    void createPopins();
+    void runFewPopins(int count);
+    
     Airplane* airplan;
     Sky* sky;
     
@@ -63,4 +66,7 @@ private:
     
     LayerColor* background;
     float tintDelay;
+    
+    __Array* m_popins;
+    Vector<SpriteFrame*> animFrames;
 };
