@@ -120,6 +120,13 @@ bool Airplane::init()
 
 void Airplane::loadBaggage()
 {
+    auto hillock = Node::create();
+    PhysicsBody* body = PhysicsBody::createCircle(30);
+    body->setDynamic(false);
+    hillock->setPhysicsBody(body);
+    hillock->setPosition(700,-302);
+    this->addChild(hillock);
+    
 	std::string content = FileUtils::getInstance()->getStringFromFile("json/luggage.json");
 
 	rapidjson::Document doc;
