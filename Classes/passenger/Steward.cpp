@@ -17,9 +17,6 @@ bool Steward::init()
 	if (!Man::init())
 		return false;
 
-	setPosition(Vec2(RIGHT_POS, 1));
-
-
 	stayAtKitchen();
 	handleTrolley = false;
 
@@ -32,6 +29,7 @@ bool Steward::init()
 void Steward::stayAtKitchen()
 {
 	nextAction = (rand() % 5 + 3) * 60;
+	setPosition(Vec2(KITHEN_POS, 40));
 	state = STAY_AT_KITCHEN;
 }
 
@@ -40,7 +38,7 @@ void Steward::updateTrolley()
 	if (trolley && handleTrolley)
 	{
 		trolley->setPositionX(this->getPositionX() + 160);
-		this->setFlippedX(true);
+		this->setFlippedX(false);
 	}
 }
 
@@ -111,7 +109,7 @@ void Steward::updateMovingToRight(float dt)
 void Steward::updateMovingAnim()
 {
 	setPicture("airplane/people/steward/go", getUpdateCounter() % 15);
-	this->setFlippedX(getDirection() == DIRECTION_RIGHT);
+	this->setFlippedX(getDirection() == DIRECTION_LEFT);
 }
 
 void Steward::updateGotoKitchen(float dt)

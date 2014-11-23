@@ -37,6 +37,7 @@ def get_png_file_list(dir):
 
 
 def scale_file(file, factor):
+    print file
     image = Image.open(file)
     new_size = (image.size[0] / factor, image.size[1] / factor)
     image.resize(new_size, Image.NEAREST).save(file)

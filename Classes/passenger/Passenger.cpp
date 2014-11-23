@@ -4,12 +4,30 @@
 
 USING_NS_CC;
 
+Passenger* Passenger::create(const std::string& pictureDir, cocos2d::Vec2 pos)
+{
+	Passenger *passenger = new (std::nothrow) Passenger();
+	if (passenger)
+	{
+		passenger->pictureDir = pictureDir;
+		if (passenger->init())
+		{
+			passenger->seatPos = pos;
+			passenger->setPosition(pos);
+			passenger->autorelease();
+			return passenger;
+		}
+	}
+	CC_SAFE_DELETE(passenger);
+	return nullptr;
+}
+
+
 bool Passenger::init()
 {
 	if (!Man::init())
 		return false;
 	
-	setPicture("airplane/passengers/stand0.png");
 	createBody();
 	toilet = nullptr;
 	trolley = nullptr;
@@ -75,7 +93,7 @@ void Passenger::moveToSeat()
 void Passenger::seatDown()
 {
     setZOrder(-5);
-	setPicture("airplane/passengers/seat.png");
+	setPicture(pictureDir + "sitting/0000.png");
 	state = SEAT;
 	nextActionTime = getUpdateCounter() + (((rand() % 10) + 5) * 60);
 	this->setFlippedX(false);
@@ -86,18 +104,19 @@ void Passenger::updateSeat(float dt)
 	if (getUpdateCounter() < nextActionTime)
 		return;
 
-	if (!(rand() % 60))
+	if (toilet && !toilet->isFree())
 	{
-		moveToToilet();
+		nextActionTime = getUpdateCounter() + (((rand() % 10) + 5) * 60);
+		return;
 	}
+
+	moveToToilet();
 }
 
 void Passenger::updateMovingAnim()
 {
-	if ((getUpdateCounter() / WALKING_ANIMATION_SPEED) % 2)
-		setPicture("airplane/passengers/stand0.png");
-	else
-		setPicture("airplane/passengers/stand1.png");
+	setPicture(pictureDir + "go", getUpdateCounter() % 14);
+	//this->setFlippedX(getDirection() == DIRECTION_RIGHT);
 }
 
 void Passenger::updateMovingToToilet(float dt)
@@ -150,13 +169,6 @@ void Passenger::updateEnterToToilet(float dt)
     
     SoundManager::getInstance()->playSound(sound_toilet, false, 0.4);
 	//moveToSeat();
-}
-
-void Passenger::setSeatPosition(cocos2d::Vec2 pos)
-{
-	setPosition(pos);
-	this->seatPos = pos;
-	state = SEAT;
 }
 
 void Passenger::assignToilet(Toilet* toilet)

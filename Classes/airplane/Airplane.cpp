@@ -95,12 +95,14 @@ bool Airplane::init()
 
 	for (int i = 0; i < 4; i++)
 	{
-		Passenger* passenger = Passenger::create();
-		passenger->setSeatPosition(Vec2(350 + i * 230, 4));
+		std::stringstream ss;
+		ss << "airplane/people/passengers/" << std::setfill('0') << std::setw(4) << (i % 3) << "/";
+
+		Passenger* passenger = Passenger::create(ss.str(), Vec2(340 + i * 230, 40));
 		passenger->assignToilet(toilet);
 		passenger->assignTrolley(trolley);
 		this->addChild(passenger);
-        creatChair(passenger->getPosition());
+        createChair(passenger->getPosition() + Vec2(25, -75));
 	}
 
     _pilot = Pilot::create();
@@ -156,10 +158,10 @@ void Airplane::setAraplaneIsMoved(bool flag){
     _pilot->setAraplaneIsMoved(flag);
 }
 
-void Airplane::creatChair(Vec2 passengetPosition){
+void Airplane::createChair(Vec2 passengetPosition){
     auto* chair = Sprite::create("airplane/chair.png");
-    passengetPosition.y -= 28;
     chair->setPosition(passengetPosition);
+	chair->setColor(Color3B(255, 255, 255));
     this->addChild(chair,1);
 }
     
