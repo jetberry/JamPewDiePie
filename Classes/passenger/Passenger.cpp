@@ -137,7 +137,7 @@ void Passenger::updateEnterToToilet(float dt)
 	state = TOILET_SEATING;
 	nextActionTime = getUpdateCounter() + 140;
     
-    SoundManager::getInstance()->playSound(sound_toilet, false, 14.0);
+    SoundManager::getInstance()->playSound(sound_toilet, false, 0.4);
 	//moveToSeat();
 }
 

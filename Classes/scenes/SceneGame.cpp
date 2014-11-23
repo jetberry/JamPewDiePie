@@ -46,7 +46,8 @@ bool SceneGame::initWithPhysics()
 	this->addChild(sky);
     
     btnShake = ui::Button::create("gamebuttons/button_shake.png", "gamebuttons/button_shake_h.png");
-    btnShake->setPosition(Vec2(Director::getInstance()->getWinSize().width - btnShake->getContentSize().width, 200));
+    btnShake->setPosition(Vec2(Director::getInstance()->getWinSize().width - btnShake->getContentSize().width,
+                               btnShake->getContentSize().height / 2));
     btnShake->addTouchEventListener(CC_CALLBACK_2(SceneGame::onShake, this));
     btnShake->setPressedActionEnabled(true);
     btnShake->setZoomScale(false);
@@ -54,7 +55,8 @@ bool SceneGame::initWithPhysics()
     this->addChild(btnShake);
 
     btnDown = ui::Button::create("gamebuttons/button_up.png", "gamebuttons/button_up_h.png");
-    btnDown->setPosition(Vec2(btnShake->getPositionX() - btnShake->getContentSize().width, 200));
+    btnDown->setPosition(Vec2(btnShake->getPositionX() - btnShake->getContentSize().width,
+                              btnDown->getContentSize().height / 2));
     btnDown->addTouchEventListener(CC_CALLBACK_2(SceneGame::onDown, this));
     btnDown->setPressedActionEnabled(true);
     btnDown->setZoomScale(false);
@@ -63,7 +65,8 @@ bool SceneGame::initWithPhysics()
     btnDown->setFlippedY(true);
     
 	btnUp = ui::Button::create("gamebuttons/button_up.png", "gamebuttons/button_up_h.png");
-	btnUp->setPosition(Vec2(btnDown->getPositionX() - btnShake->getContentSize().width, 200));
+	btnUp->setPosition(Vec2(btnDown->getPositionX() - btnShake->getContentSize().width,
+                            btnUp->getContentSize().height / 2));
 	btnUp->addTouchEventListener(CC_CALLBACK_2(SceneGame::onUp, this));
 	btnUp->setPressedActionEnabled(true);
     btnUp->setZoomScale(false);
@@ -214,17 +217,17 @@ void SceneGame::showPlane() {
     airplan->runAction(move);
     
     {
-        MoveTo* move = MoveTo::create(0.25, Vec2(btnUp->getPositionX(), 200));
+        MoveTo* move = MoveTo::create(0.25, Vec2(btnUp->getPositionX(), btnUp->getContentSize().height / 2));
         EaseBackOut* back = EaseBackOut::create(move);
         btnUp->runAction(Sequence::create(DelayTime::create(0.3), back, nullptr));
     }
     {
-        MoveTo* move = MoveTo::create(0.25, Vec2(btnDown->getPositionX(), 200));
+        MoveTo* move = MoveTo::create(0.25, Vec2(btnDown->getPositionX(), btnDown->getContentSize().height / 2));
         EaseBackOut* back = EaseBackOut::create(move);
         btnDown->runAction(Sequence::create(DelayTime::create(0.15), back, nullptr));
     }
     {
-        MoveTo* move = MoveTo::create(0.25, Vec2(btnShake->getPositionX(), 200));
+        MoveTo* move = MoveTo::create(0.25, Vec2(btnShake->getPositionX(), btnShake->getContentSize().height / 2));
         EaseBackOut* back = EaseBackOut::create(move);
         btnShake->runAction(back);
     }
