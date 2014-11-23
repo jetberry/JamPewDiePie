@@ -32,7 +32,7 @@ bool SceneMenu::init()
                                Director::getInstance()->getWinSize().height - m_spriteTitle->getContentSize().height / 3 * 2);
     addChild(m_spriteTitle);
     
-    m_labelTutorial = Label::createWithTTF("hello", "HelveticaNeue-Bold.ttf", 50);
+    m_labelTutorial = Label::createWithTTF("hello", "UpheavalPro.ttf", 50);
     m_labelTutorial->setPosition(Vec2(200, 200));
     m_labelTutorial->setColor(Color3B::BLACK);
     addChild(m_labelTutorial);

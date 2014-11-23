@@ -82,7 +82,7 @@ bool SceneGame::initWithPhysics()
     btnShake->setPositionY(-500);
     btnDown->setPositionY(-500);
     
-    _labelScore = Label::createWithTTF("hello", "HelveticaNeue-Bold.ttf", 100);
+    _labelScore = Label::createWithTTF("hello", "UpheavalPro.ttf", 100);
     _labelScore->setPosition(Vec2(2200, 1436));
     _labelScore->setTextColor(Color4B::BLACK);
     onAddScore(nullptr);
@@ -95,7 +95,7 @@ bool SceneGame::initWithPhysics()
     _spriteEnergy->setOpacity(0);
     _spriteEnergy->setScale(0.5);
     
-    _labelPower = Label::createWithTTF("hello", "HelveticaNeue-Bold.ttf", 100);
+    _labelPower = Label::createWithTTF("hello", "UpheavalPro.ttf", 100);
     _labelPower->setPosition(Vec2(500, 1436));
     _labelPower->setTextColor(Color4B::BLACK);
     _labelPower->setOpacity(0);
