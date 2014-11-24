@@ -22,7 +22,7 @@ bool Nerd::init()
 
 void Nerd::update(float dt)
 {
-	if (timeToDead) {
+	if (timeToDead > 0) {
 		timeToDead -= dt;
 		return;
 	}
