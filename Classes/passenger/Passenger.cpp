@@ -29,8 +29,6 @@ bool Passenger::init()
 	if (!Man::init())
 		return false;
     
-    _isBlond = false;
-    
     max_from_angry = 500;
     count_tap = 5;
 	createBody();
@@ -51,10 +49,6 @@ bool Passenger::init()
     Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
     
 	return true;
-}
-
-void Passenger::isBlond(){
-    _isBlond = true;
 }
 
 void Passenger::update(float dt)
@@ -103,8 +97,6 @@ void Passenger::enterToToilet()
 void Passenger::moveToToilet()
 {
     setZOrder(10);
-    if(_isBlond)
-        setPositionY(getPositionY()-32);
 	state = MOVING_TO_TOILET;
 	setTarget(TOILET_POS);
 }
@@ -119,8 +111,6 @@ void Passenger::seatDown()
 {
     setZOrder(2);
 	setPicture(pictureDir + "sitting/0000.png");
-    if(_isBlond && state == MOVING_TO_SEAT)
-        setPositionY(getPositionY()+32);
 	state = SEAT;
 	nextActionTime = getUpdateCounter() + (((rand() % 10) + 5) * 60);
 	this->setFlippedX(false);

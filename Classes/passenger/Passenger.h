@@ -76,6 +76,4 @@ private:
 	void updateBarf(float dt);
 	
     bool angryFlagSound;
-    
-    bool _isBlond;
 };
