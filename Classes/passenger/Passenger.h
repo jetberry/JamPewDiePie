@@ -75,5 +75,7 @@ private:
 	void updateToiletExiting(float dt);
 	void updateBarf(float dt);
 	
+    bool angryFlagSound;
+    
     bool _isBlond;
 };
