@@ -66,6 +66,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto scene = SceneGame::createWithPhysics();
     director->runWithScene(scene);
 
+	srand(time(0));
+
     return true;
 }
 
