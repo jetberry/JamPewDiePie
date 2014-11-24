@@ -28,6 +28,7 @@ private:
 		GOTO_KITCHEN,
 		MOVING_TO_LEFT,
 		MOVING_TO_RIGHT,
+        STAY_AT_RIGHT,
 	};
 
 	States state;
@@ -46,6 +47,7 @@ private:
 	void moveToRight();
 	void goKitchen();
 	void stayAtKitchen();
+    void stayAtRight();
 
 
 	// Обработка действий в update().
@@ -54,4 +56,5 @@ private:
 	void updateMovingAnim();
 	void updateGotoKitchen(float dt);
 	void updateStateInKitchen(float dt);
+    void updateStateAtRight(float dt);
 };

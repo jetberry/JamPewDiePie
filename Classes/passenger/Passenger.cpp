@@ -29,6 +29,7 @@ bool Passenger::init()
 	if (!Man::init())
 		return false;
 	
+    max_from_angry = 500;
     count_tap = 5;
 	createBody();
 	toilet = nullptr;
@@ -206,6 +207,7 @@ void Passenger::updateEnterToToilet(float dt)
 	toilet->closeDoor();
 	state = TOILET_SEATING;
 	nextActionTime = getUpdateCounter() + 140;
+    setPositionY(getPositionY() + 15);
     
     SoundManager::getInstance()->playSound(sound_toilet, false, 0.4);
 	//moveToSeat();
@@ -222,6 +224,7 @@ void Passenger::updateToiletSeating(float dt)
 	if (getUpdateCounter() < nextActionTime)
 		return;
 
+    setPositionY(getPositionY() - 15);
 	// Выходим из туалета.
 	toilet->openDoor();
 	state = TOILET_EXITING;
@@ -252,8 +255,9 @@ void Passenger::updateToiletExiting(float dt)
 void Passenger::setAngry(bool value)
 {
 	angryFlag = value;
-    if (angryFlag) {
+    if (angryFlag && max_from_angry > 0) {
         UserGameData::getInstance()->addScore(1);
+        max_from_angry--;
     }
 }
 
