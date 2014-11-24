@@ -26,6 +26,10 @@ void Nerd::update(float dt)
 		timeToDead -= dt;
 		return;
 	}
+	if (UserGameData::getInstance()->getTotalAngle() < 50)
+		return;
+
+
     if (!isDead) UserGameData::getInstance()->addScore(200);
     isDead = true;
     

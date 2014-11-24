@@ -33,6 +33,7 @@ int UserGameData::getScore(){
 
 void UserGameData::resetData(){
     _score = 0;
+	_totalAngle = 0;
 }
 
 void UserGameData::setAngle(float angle){
@@ -40,7 +41,10 @@ void UserGameData::setAngle(float angle){
     cocos2d::NotificationCenter::getInstance()->postNotification("change-angle");
 }
 
-float UserGameData::getAngle(){
-    return _angle;
+float UserGameData::getAngle() const {
+	return _angle;
 }
 
+float UserGameData::getTotalAngle() const {
+	return _totalAngle;
+}
