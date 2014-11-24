@@ -13,6 +13,9 @@ public:
 	void assignToilet(Toilet* toilet);
 	void assignTrolley(Trolley* trolley);
     
+    // хак из-за не правильно картинки
+    void isBlond();
+    
 private:
     
     virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unusedEvent);
@@ -72,5 +75,5 @@ private:
 	void updateToiletExiting(float dt);
 	void updateBarf(float dt);
 	
-	
+    bool _isBlond;
 };
