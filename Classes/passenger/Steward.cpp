@@ -29,9 +29,14 @@ bool Steward::init()
 
 void Steward::stayAtKitchen()
 {
-	nextAction = (rand() % 6 + 10) * 60;
+	nextAction = getUpdateCounter() + (rand() % 6 + 10) * 60;
 	setPosition(Vec2(KITHEN_POS, 40));
 	state = STAY_AT_KITCHEN;
+}
+
+void Steward::stayAtRight(){
+    nextAction = getUpdateCounter() + (rand() % 5 + 1) * 60;
+    state = STAY_AT_RIGHT;
 }
 
 void Steward::updateTrolley()
@@ -59,6 +64,9 @@ void Steward::update(float dt)
 	case STAY_AT_KITCHEN:
 		updateStateInKitchen(dt);
 		break;
+    case STAY_AT_RIGHT:
+        updateStateAtRight(dt);
+        break;
 	}
 
 	updateTrolley();
@@ -104,7 +112,10 @@ void Steward::updateMovingToRight(float dt)
 		return;
 	}
 
-	goKitchen();
+    if(handleTrolley)
+        stayAtRight();
+    else
+        goKitchen();
 }
 
 void Steward::updateMovingAnim()
@@ -132,4 +143,12 @@ void Steward::updateStateInKitchen(float dt)
 		return;
 
 	moveToRight();
+}
+
+void Steward::updateStateAtRight(float dt)
+{
+    if (getUpdateCounter() < nextAction)
+        return;
+    
+    goKitchen();
 }

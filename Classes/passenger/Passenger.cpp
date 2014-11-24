@@ -205,6 +205,7 @@ void Passenger::updateEnterToToilet(float dt)
 	toilet->closeDoor();
 	state = TOILET_SEATING;
 	nextActionTime = getUpdateCounter() + 140;
+    setPositionY(getPositionY() + 15);
     
     SoundManager::getInstance()->playSound(sound_toilet, false, 0.4);
 	//moveToSeat();
@@ -221,6 +222,7 @@ void Passenger::updateToiletSeating(float dt)
 	if (getUpdateCounter() < nextActionTime)
 		return;
 
+    setPositionY(getPositionY() - 15);
 	// Выходим из туалета.
 	toilet->openDoor();
 	state = TOILET_EXITING;
