@@ -15,18 +15,18 @@ bool Nerd::init()
 	this->setTexture("airplane/people/passengers/0003/seating.png");
 	this->setPosition(Vec2(340, 40));
 
-	timeToDead = 20; //секунд
+	timeToDead = 3; //секунд
 
 	return true;
 }
 
 void Nerd::update(float dt)
 {
-	if (timeToDead) {
+	if (timeToDead > 0) {
 		timeToDead -= dt;
 		return;
 	}
-	if (UserGameData::getInstance()->getTotalAngle() < 50)
+	if (UserGameData::getInstance()->getTotalAngle() < 100)
 		return;
 
 

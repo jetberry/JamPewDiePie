@@ -37,6 +37,7 @@ void UserGameData::resetData(){
 }
 
 void UserGameData::setAngle(float angle){
+	_totalAngle += abs(_angle - angle);
     _angle = angle;
     cocos2d::NotificationCenter::getInstance()->postNotification("change-angle");
 }
