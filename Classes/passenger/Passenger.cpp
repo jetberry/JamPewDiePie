@@ -29,6 +29,7 @@ bool Passenger::init()
 	if (!Man::init())
 		return false;
 	
+    max_from_angry = 500;
     count_tap = 5;
 	createBody();
 	toilet = nullptr;
@@ -252,8 +253,9 @@ void Passenger::updateToiletExiting(float dt)
 void Passenger::setAngry(bool value)
 {
 	angryFlag = value;
-    if (angryFlag) {
+    if (angryFlag && max_from_angry > 0) {
         UserGameData::getInstance()->addScore(1);
+        max_from_angry--;
     }
 }
 

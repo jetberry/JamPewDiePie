@@ -47,6 +47,7 @@ private:
     int count_tap;
 	int barfCriticalLevel;
     
+    int max_from_angry;
 	virtual bool init() override;
 	virtual void update(float dt) override;
 
