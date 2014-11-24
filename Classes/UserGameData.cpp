@@ -34,3 +34,13 @@ int UserGameData::getScore(){
 void UserGameData::resetData(){
     _score = 0;
 }
+
+void UserGameData::setAngle(float angle){
+    _angle = angle;
+    cocos2d::NotificationCenter::getInstance()->postNotification("change-angle");
+}
+
+float UserGameData::getAngle(){
+    return _angle;
+}
+

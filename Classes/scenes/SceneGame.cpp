@@ -405,6 +405,7 @@ void SceneGame::update(float dt)
             if(airplan->getRotation() > - 15){
                 airplan->stopActionByTag(10);
                 airplan->setRotation(airplan->getRotation() - 0.5f);
+                UserGameData::getInstance()->setAngle(airplan->getRotation());
             }else{
                 setState(AirplaneStateNone);
             }
@@ -412,6 +413,7 @@ void SceneGame::update(float dt)
             if(airplan->getRotation() <  15){
                 airplan->stopActionByTag(10);
                 airplan->setRotation(airplan->getRotation() + 0.5f);
+                UserGameData::getInstance()->setAngle(airplan->getRotation());
             }else{
                 setState(AirplaneStateNone);
             }
