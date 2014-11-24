@@ -36,9 +36,11 @@ bool Passenger::init()
 	nextActionTime = 0;
 	angryFlag = false;
 	seatDown();
+	barfLevel = 0;
+	barfCriticalLevel = BARF_CRITICAL_LEVEL + 10 * (rand() % 10);
 	movingSpeed = MOVING_SPEED;
 	dirty = false;
-	setAngry(true);
+	setAngry(false);
 
     EventListenerTouchOneByOne* touchListener = EventListenerTouchOneByOne::create();
     CC_SAFE_RETAIN(touchListener);
@@ -121,7 +123,7 @@ void Passenger::updateSeat(float dt)
 	if (getUpdateCounter() < nextActionTime)
 		return;
 
-	if (rand() % 2)
+	if ((barfLevel > barfCriticalLevel) && (rand() % 2))
 	{
 		doBarf();
 		return;
