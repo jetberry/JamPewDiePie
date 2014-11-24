@@ -23,15 +23,17 @@ public:
     
     void setAngle(float);
     
-    float getAngle();
+    float getAngle() const;
+	float getTotalAngle() const;
     
     void resetData();
     
 private:
     
-    int _angle;
+	float _angle = 0.f;
+	float _totalAngle = 0.f;
     
-    int _score;
+    int _score = 0;
 };
 
 

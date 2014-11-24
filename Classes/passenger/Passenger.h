@@ -21,7 +21,7 @@ private:
 	enum Const
 	{
 		MOVING_SPEED = 4,
-		BARF_CRITICAL_LEVEL = 100
+		BARF_CRITICAL_LEVEL = 30
 	};
 
 	enum States
@@ -46,7 +46,6 @@ private:
 	int nextActionTime;
     int count_tap;
 	int barfCriticalLevel;
-	int barfLevel;
     
 	virtual bool init() override;
 	virtual void update(float dt) override;

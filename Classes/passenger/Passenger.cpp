@@ -36,8 +36,7 @@ bool Passenger::init()
 	nextActionTime = 0;
 	angryFlag = false;
 	seatDown();
-	barfLevel = 0;
-	barfCriticalLevel = BARF_CRITICAL_LEVEL + 10 * (rand() % 10);
+	barfCriticalLevel = BARF_CRITICAL_LEVEL + 10 * (rand() % 5);
 	movingSpeed = MOVING_SPEED;
 	dirty = false;
 	setAngry(false);
@@ -78,7 +77,7 @@ void Passenger::update(float dt)
 		break;
 	}
 
-	setAngry(shakeState);
+	setAngry(shakeState || (abs(UserGameData::getInstance()->getAngle()) > 10 ));
 	Man::update(dt);
 }
 
@@ -123,7 +122,7 @@ void Passenger::updateSeat(float dt)
 	if (getUpdateCounter() < nextActionTime)
 		return;
 
-	if ((barfLevel > barfCriticalLevel) && (rand() % 2))
+	if ((UserGameData::getInstance()->getTotalAngle() > barfCriticalLevel) && (rand() % 2))
 	{
 		doBarf();
 		return;
