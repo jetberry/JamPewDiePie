@@ -136,6 +136,8 @@ bool Airplane::init()
 		ss << "airplane/people/passengers/" << std::setfill('0') << std::setw(4) << (i % 3) << "/";
 
 		Passenger* passenger = Passenger::create(ss.str(), Vec2(340 + i * 230, 40));
+        if((i % 3) == 2)
+            passenger->isBlond();
 		passenger->assignToilet(toilet);
 		passenger->assignTrolley(trolley);
 		this->addChild(passenger);
