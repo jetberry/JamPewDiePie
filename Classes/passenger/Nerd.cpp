@@ -26,11 +26,11 @@ void Nerd::update(float dt)
 		timeToDead -= dt;
 		return;
 	}
-	if (UserGameData::getInstance()->getTotalAngle() < 100)
+	if (UserGameData::getInstance()->getTotalAngle() < 200)
 		return;
 
 
-    if (!isDead) UserGameData::getInstance()->addScore(200);
+    if (!isDead) UserGameData::getInstance()->addScore(300);
     isDead = true;
     
 	this->setTexture("airplane/people/passengers/0003/dead.png");
