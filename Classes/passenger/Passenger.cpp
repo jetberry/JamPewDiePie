@@ -161,7 +161,7 @@ void Passenger::updateSittingAnim()
 		setPicture(pictureDir + "sitting/0000.png");
 		return;
 	}
-
+    
 	setPicture(pictureDir + "angry_seating", (getUpdateCounter() / 4) % 15);
 }
 
@@ -264,10 +264,22 @@ void Passenger::updateToiletExiting(float dt)
 
 void Passenger::setAngry(bool value)
 {
-	angryFlag = value;
+    angryFlag = value;
+    
     if (angryFlag && max_from_angry > 0) {
         UserGameData::getInstance()->addScore(1);
         max_from_angry--;
+    }
+    if(!angryFlagSound && angryFlag){
+        angryFlagSound = true;
+        int r = rand() % 2;
+        if (r == 0) {
+            SoundManager::getInstance()->playSound(sound_scream_1, false, 0.1);
+        } else if (r == 1) {
+            SoundManager::getInstance()->playSound(sound_scream_2, false, 0.1);
+        }
+    }else if(!angryFlag && angryFlagSound){
+        angryFlagSound = false;
     }
 }
 
